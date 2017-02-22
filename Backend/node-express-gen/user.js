@@ -29,7 +29,7 @@ var pictureSchema = new Schema({
     timestamps: true
 });
 
-userSchema.pre(save, function(next) {
+userSchema.pre('save', function(next) {
     var user = this;
 
     // Only hash if pass is new / modified
