@@ -1,7 +1,7 @@
 # USAGE
 # python classify.py --images dataset/images --masks dataset/masks
 
-# All photos that are used for -p have to be .png 
+# All photos that are used for -p have to be .png
 
 # import the necessary packages
 from __future__ import print_function
@@ -17,6 +17,7 @@ import glob
 import cv2
 from PIL import Image
 from matplotlib import pyplot as plt
+import PIL.ImageOps
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -87,21 +88,36 @@ print(classification_report(testTarget, model.predict(testData),
 #masked = cv2.bitwise_and(image, image, mask = mask)
 
 # WAY2: Getting the mask of the image
+#maskedImage = cv2.imread(args["photo"])
+#imgray = cv2.cvtColor(maskedImage,cv2.COLOR_BGR2GRAY)
+#edges = cv2.Canny(imgray, 50, 150)
+#contourImage = cv2.Canny(imgray, 50, 150)
+#image, contours, hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+#cv2.drawContours(contourImage, contours, -1, (255,255,255), 3)
+
+# WAY3: Getting the Simple Threshold of the image/masking it
 maskedImage = cv2.imread(args["photo"])
-imgray = cv2.cvtColor(maskedImage,cv2.COLOR_BGR2GRAY)
-edges = cv2.Canny(imgray, 50, 150)
-contourImage = cv2.Canny(imgray, 50, 150)
-image, contours, hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-cv2.drawContours(contourImage, contours, -1, (255,255,255), 3)
+imgray = cv2.cvtColor(maskedImage, cv2.COLOR_BGR2GRAY)
+blurred = cv2.GaussianBlur(imgray, (5, 5), 0)
+(T, threshInv) = cv2.threshold(blurred, 155, 255, cv2.THRESH_BINARY_INV)
+#threshInv = Image.fromarray(threshInv)
+#threshInv = threshInv.convert('1')
+#threshInv = threshInv.convert('L')
+#inverted_image = PIL.ImageOps.invert(threshInv)
+#inverted_image = inverted_image.convert('1')
+#invert_numpy = cv2.imread(inverted_image + "/*.png")
+#print(invert_numpy)
+
+#inverted_image.show()
 
 # describe the image
-features = desc.describe(maskedImage, contourImage)
+features = desc.describe(maskedImage, threshInv)
 
 # predict what type of flower the image is
 flower = le.inverse_transform(model.predict([features]))[0]
 print("I think this flower is a {}".format(flower.upper()))
 
 # Show Mask of flower
-plt.subplot(122),plt.imshow(edges,cmap = 'gray')
-plt.title('Mask of Image'), plt.xticks([]), plt.yticks([])
-plt.show()
+#plt.subplot(122),plt.imshow(edges,cmap = 'gray')
+#plt.title('Mask of Image'), plt.xticks([]), plt.yticks([])
+#plt.show()
