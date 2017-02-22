@@ -9,6 +9,11 @@ var User = new Schema({
 	   type: Boolean,
 	   default: false
 	}
+	pictures: {
+		createdBy: mongoose.Schema.Types.ObjectID, 
+		ref: 'Pictures'
+	}, 
+	{ timestamps: true }
 });
 
 User.plugin(passportLocalMongoose);
