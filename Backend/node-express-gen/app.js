@@ -45,7 +45,7 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 
 // passport config
-var User = require('./models/user');
+var User = require('./user');
 app.use(passport.initialize());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
