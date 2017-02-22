@@ -53,7 +53,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+//app.use('/', index);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
