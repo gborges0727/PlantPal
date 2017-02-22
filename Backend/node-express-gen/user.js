@@ -20,7 +20,7 @@ var userSchema = new Schema({
 var pictureSchema = new Schema({
     picURL: String,
     classification: String,
-    image: BSON,
+    image: String,
     creator: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
