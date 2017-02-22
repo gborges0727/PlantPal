@@ -17,18 +17,6 @@ var User = new Schema({
     timestamps: true
 });
 
-var Pictures = new Schema({
-    picURL: String,
-    classification: String,
-    image: BSON,
-    creator: {
-        createdBy: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }
-}, {
-    timestamps: true
-});
-
 User.pre(save, function(next) {
     var user = this;
 
@@ -55,5 +43,4 @@ User.methods.comparePassword = function(input, cb) {
 
 User.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('Pictures', Pictures);
 module.exports = mongoose.model('User', User);
