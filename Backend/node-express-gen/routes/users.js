@@ -5,6 +5,7 @@ var User = require('../user');
 var Pictures = require('../pictures');
 var Verify = require('./verify');
 var config = require('../config');
+var operations = require('../mongoOperations')
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     res.send('respond with a resource');
