@@ -16,7 +16,8 @@ class LoginScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginScreenViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+            action: #selector(LoginScreenViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     
@@ -26,26 +27,54 @@ class LoginScreenViewController: UIViewController {
     }
     
     @IBAction func SubmitActionButton(_ sender: UIButton) {
+        // Checks for missing fields
         if (UserNameField.text!.isEmpty || PasswordField.text!.isEmpty) {
-            let alertController = UIAlertController(title: "Login Error", message: "Missing Username or Passowrd!", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Login Error",
+                message: "Missing Username or Passowrd!", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Okay.", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             present(alertController, animated: true, completion: nil)
-        } else {
+        }
+        
+        else {
             let infoDictionary = [
                 "name": UserNameField.text!,
                 "password": PasswordField.text!
             ]
+            
             // TODO: Send this http request
             if JSONSerialization.isValidJSONObject(infoDictionary) {
                 do {
-                    let jsonObject = try JSONSerialization.data(withJSONObject: infoDictionary, options: .prettyPrinted)
+                    let jsonObject = try JSONSerialization.data(withJSONObject: infoDictionary,
+                        options: .prettyPrinted)
+                    
+                    // Create Post request
+                    let url = URL(string: "https://plantpal.uconn.edu/signup:5050") // IS POSSIBLE TO CHANGE! :D
+                    var request = URLRequest(url: url!)
+                    request.httpMethod = "POST"
+                    
+                    // Append JSON object
+                    request.httpBody = jsonObject
+                    
+                    // Send request
+                    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                        guard let data = data, error == nil else {
+                            print(error?.localizedDescription ?? "No Data")
+                            return
+                        }
+                        let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                        if let responseJSON = responseJSON as? [String: Any] {
+                            print(responseJSON)
+                        }
+                    }
+                    task.resume() // Sends the request
                 } catch {
                     print(error.localizedDescription)
                 }
             }
             // Run the below only if http 201 is returned (authenticated)
-            let tabBarView = self.storyboard?.instantiateViewController(withIdentifier: "TabBar") as! TabBarViewController
+            let tabBarView = self.storyboard?.instantiateViewController(
+                withIdentifier: "TabBar") as! TabBarViewController
             self.present(tabBarView, animated: true, completion: nil)
         }
     }
