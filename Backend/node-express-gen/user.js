@@ -10,9 +10,11 @@ var User = new Schema({
         default: false
     },
     pictures: {
-        createdBy: mongoose.Schema.Types.ObjectID,
+        createdBy: mongoose.Schema.Types.ObjectId,
         ref: 'Pictures'
     }
+}, {
+    timestamps: true
 });
 
 var Pictures = new Schema({
@@ -20,9 +22,11 @@ var Pictures = new Schema({
     classification: String,
     image: BSON,
     creator: {
-        createdBy: mongoose.Schema.Types.ObjectID,
+        createdBy: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
+}, {
+    timestamps: true
 });
 
 User.pre(save, function(next) {
