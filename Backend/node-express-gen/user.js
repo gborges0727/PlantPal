@@ -9,10 +9,10 @@ var User = new Schema({
         type: Boolean,
         default: false
     },
-    pictures: [{
+    pictures: {
         createdBy: mongoose.Schema.Types.ObjectId,
         ref: 'Pictures'
-    }]
+    }
 }, {
     timestamps: true
 });
@@ -21,10 +21,10 @@ var Pictures = new Schema({
     picURL: String,
     classification: String,
     image: BSON,
-    creator: [{
+    creator: {
         createdBy: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }]
+    }
 }, {
     timestamps: true
 });
@@ -55,5 +55,5 @@ User.methods.comparePassword = function(input, cb) {
 
 User.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('Pictures', Pictures);
-module.exports = mongoose.model('User', User);
+var picturePerson = mongoose.model('Pictures', Pictures);
+var UserPerson = mongoose.model('User', User);
