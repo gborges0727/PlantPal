@@ -23,6 +23,14 @@ var users = require('./routes/users');
 
 var app = express();
 
+//Secure traffic only
+app.all('*', function(req, res, next){
+   if(req.secure) {
+	return next();
+   };
+   res.redirect('https://'+req.hostname+':'+app.get('secPort')+req.Url);
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -37,15 +45,15 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 
 // passport config
-var User = require('./models/user');
+var User = require('./user');
 app.use(passport.initialize());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
-passport.desearializeUser(User.deserializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+//app.use('/', index);
 app.use('/users', users);
 
 // catch 404 and forward to error handler

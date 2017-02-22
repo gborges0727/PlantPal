@@ -2,23 +2,34 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 
-var User = new Schema({
+var userSchema = new Schema({
     username: String,
     password: String,
     admin: {
         type: Boolean,
         default: false
-    }
-    pictures: {
-        createdBy: mongoose.Schema.Types.ObjectID,
-        ref: 'Pictures'
     },
-    {
-        timestamps: true
+    pictures: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Pictures'
     }
+}, {
+    timestamps: true
 });
 
-User.pre(save, function(next) {
+var pictureSchema = new Schema({
+    picURL: String,
+    classification: String,
+    image: String,
+    creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
+}, {
+    timestamps: true
+});
+
+userSchema.pre('save', function(next) {
     var user = this;
 
     // Only hash if pass is new / modified
@@ -35,13 +46,14 @@ User.pre(save, function(next) {
 });
 
 // Use the below to test a user inputed password for authentication! 
-User.methods.comparePassword = function(input, cb) {
+userSchema.methods.comparePassword = function(input, cb) {
     bcrypt.compare(input, this.password, function(err, isMatch) {
         if (err) return cb(err);
         cb(null, isMatch);
     });
 }
 
-User.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('User', User);
+module.exports = mongoose.model('Pictures', pictureSchema);
+module.exports = mongoose.model('User', userSchema);
