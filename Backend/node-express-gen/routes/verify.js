@@ -6,7 +6,7 @@ exports.getToken = function(user) {
 return jwt.sign(user, config.secretKey, {
     expiresIn: 3600
 });
-});
+};
 
 exports.verifyOrdinaryUser = function(req, res, next) {
 
