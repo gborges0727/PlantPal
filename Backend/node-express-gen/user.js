@@ -8,7 +8,7 @@ var User = new Schema({
     admin: {
         type: Boolean,
         default: false
-    }
+    },
     pictures: {
         createdBy: mongoose.Schema.Types.ObjectID,
         ref: 'Pictures'
