@@ -25,17 +25,20 @@ ap.add_argument("-i", "--images", required = True,
 	help = "path to the image dataset")
 ap.add_argument("-m", "--masks", required = True,
 	help = "path to the image masks")
-
 # Add a single photo to be recognized
 ap.add_argument("-p", "--photo", required = True,
 	help = "path to the single photo")
-#ap.add_argument("-n", "--photomask", required = True,
-#	help = "path to photo mask")
+
 args = vars(ap.parse_args())
 
 # grab the image and mask paths
 imagePaths = sorted(glob.glob(args["images"] + "/*.png"))
 maskPaths = sorted(glob.glob(args["masks"] + "/*.png"))
+
+# Printing original input image
+oImage = Image.open(args["photo"])
+oImage.show()
+print("\n Analyzing picture, now loading... \n")
 
 # initialize the list of data and class label targets
 data = []
@@ -100,15 +103,14 @@ maskedImage = cv2.imread(args["photo"])
 imgray = cv2.cvtColor(maskedImage, cv2.COLOR_BGR2GRAY)
 blurred = cv2.GaussianBlur(imgray, (5, 5), 0)
 (T, threshInv) = cv2.threshold(blurred, 155, 255, cv2.THRESH_BINARY_INV)
-#threshInv = Image.fromarray(threshInv)
-#threshInv = threshInv.convert('1')
-#threshInv = threshInv.convert('L')
-#inverted_image = PIL.ImageOps.invert(threshInv)
-#inverted_image = inverted_image.convert('1')
-#invert_numpy = cv2.imread(inverted_image + "/*.png")
-#print(invert_numpy)
 
-#inverted_image.show()
+# Showing a masked version of the input .png file
+mPreview = Image.fromarray(threshInv)
+mPreview = mPreview.convert('1')
+mPreview = mPreview.convert('L')
+inverted_image = PIL.ImageOps.invert(mPreview)
+inverted_image = inverted_image.convert('1')
+inverted_image.show()
 
 # describe the image
 features = desc.describe(maskedImage, threshInv)
@@ -116,8 +118,3 @@ features = desc.describe(maskedImage, threshInv)
 # predict what type of flower the image is
 flower = le.inverse_transform(model.predict([features]))[0]
 print("I think this flower is a {}".format(flower.upper()))
-
-# Show Mask of flower
-#plt.subplot(122),plt.imshow(edges,cmap = 'gray')
-#plt.title('Mask of Image'), plt.xticks([]), plt.yticks([])
-#plt.show()
