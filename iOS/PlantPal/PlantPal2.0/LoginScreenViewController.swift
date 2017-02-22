@@ -32,6 +32,19 @@ class LoginScreenViewController: UIViewController {
             alertController.addAction(defaultAction)
             present(alertController, animated: true, completion: nil)
         } else {
+            let infoDictionary = [
+                "name": UserNameField.text!,
+                "password": PasswordField.text!
+            ]
+            // TODO: Send this http request
+            if JSONSerialization.isValidJSONObject(infoDictionary) {
+                do {
+                    let jsonObject = try JSONSerialization.data(withJSONObject: infoDictionary, options: .prettyPrinted)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            // Run the below only if http 201 is returned (authenticated)
             let tabBarView = self.storyboard?.instantiateViewController(withIdentifier: "TabBar") as! TabBarViewController
             self.present(tabBarView, animated: true, completion: nil)
         }
