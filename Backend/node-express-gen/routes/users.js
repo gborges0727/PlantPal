@@ -1,21 +1,22 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-var User = require('../models/user');
+var User = require('../user');
+var Pictures = require('../pictures')
 var Verify = require('./verify');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+    res.send('respond with a resource');
 });
 router.post('/register', function(req, res) {
 	User.register(new User({ usernma : req.body.username }),
 	req.body.password, function(err, user) {
 	   if(err) {
-		return res.status(500).json({err:err});
+           return res.status(500).json({err:err});
 	   }
 	   
 	   passport.authenticate('local')(req,res, function (){
-		return res.status(200).json({status: 'Registration Successful!'});
+           return res.status(200).json({status: 'Registration Successful!'});
 	  });
    });
 });
@@ -52,7 +53,7 @@ router.post('/login', function(req, res, next){
 
 router.get('/logout', function(req, res){
 	req.logout();
-   res.status(200).json({
+    res.status(200).json({
 	status: 'Bye!'
    });
 });
