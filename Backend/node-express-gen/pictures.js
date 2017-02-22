@@ -8,9 +8,6 @@ var Pictures = new Schema({
     creator: {
         createdBy: mongoose.Schema.Types.ObjectID,
         ref: 'User'
-    },
-    {
-        timestamps: true
     }
 });
 

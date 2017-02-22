@@ -12,9 +12,6 @@ var User = new Schema({
     pictures: {
         createdBy: mongoose.Schema.Types.ObjectID,
         ref: 'Pictures'
-    },
-    {
-        timestamps: true
     }
 });
 
