@@ -21,7 +21,7 @@ function auth(req, res, next){
 	var auth = new Buffer(authHeader.split(' ')[1], 'base64').toString().split(':');
 	var user = auth[0];
 	var pass = auth[1];
-	// TODO: Hash password & insert here after creating dependency that will exist only on server!!!!!!
+	// TODO: Fix the below pls to handle users! :) 
 	if(user == 'plantpal' && pass == 'password_insert'){ 
 	   next(); // authorized
 	} else {
