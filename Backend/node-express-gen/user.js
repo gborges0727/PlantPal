@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 
-var User = new Schema({
+var userSchema = new Schema({
     username: String,
     password: String,
     admin: {
@@ -17,7 +17,7 @@ var User = new Schema({
     timestamps: true
 });
 
-var Pictures = new Schema({
+var pictureSchema = new Schema({
     picURL: String,
     classification: String,
     image: BSON,
@@ -55,5 +55,5 @@ User.methods.comparePassword = function(input, cb) {
 
 User.plugin(passportLocalMongoose);
 
-var picturePerson = mongoose.model('Pictures', Pictures);
-var UserPerson = mongoose.model('User', User);
+module.exports = mongoose.model('Pictures', pictureSchema);
+module.exports = mongoose.model('User', userSchema);
