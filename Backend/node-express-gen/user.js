@@ -29,7 +29,7 @@ var pictureSchema = new Schema({
     timestamps: true
 });
 
-User.pre(save, function(next) {
+userSchema.pre(save, function(next) {
     var user = this;
 
     // Only hash if pass is new / modified
@@ -46,14 +46,14 @@ User.pre(save, function(next) {
 });
 
 // Use the below to test a user inputed password for authentication! 
-User.methods.comparePassword = function(input, cb) {
+userSchema.methods.comparePassword = function(input, cb) {
     bcrypt.compare(input, this.password, function(err, isMatch) {
         if (err) return cb(err);
         cb(null, isMatch);
     });
 }
 
-User.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('Pictures', pictureSchema);
 module.exports = mongoose.model('User', userSchema);
