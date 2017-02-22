@@ -10,7 +10,7 @@ var userSchema = new Schema({
         default: false
     },
     pictures: {
-        createdBy: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Pictures'
     }
 }, {
@@ -22,7 +22,7 @@ var pictureSchema = new Schema({
     classification: String,
     image: BSON,
     creator: {
-        createdBy: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
 }, {
