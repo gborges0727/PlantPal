@@ -1,6 +1,8 @@
 # USAGE
 # python classify.py --images dataset/images --masks dataset/masks
 
+# All photos that are used for -p have to be .png 
+
 # import the necessary packages
 from __future__ import print_function
 from pyimagesearch.rgbhistogram import RGBHistogram
@@ -13,9 +15,8 @@ import numpy as np
 import argparse
 import glob
 import cv2
-
-# adding masked image
-
+from PIL import Image
+from matplotlib import pyplot as plt
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -34,12 +35,6 @@ args = vars(ap.parse_args())
 # grab the image and mask paths
 imagePaths = sorted(glob.glob(args["images"] + "/*.png"))
 maskPaths = sorted(glob.glob(args["masks"] + "/*.png"))
-
-# Grabbing individual photo's path
-photopath = sorted(glob.glob(args["photo"] + "/*.png"))
-#photomaskpath = sorted(glob.glob(args["photomask"] + "/*.png"))
-
-
 
 # initialize the list of data and class label targets
 data = []
@@ -74,41 +69,39 @@ target = le.fit_transform(target)
 # train the classifier
 model = RandomForestClassifier(n_estimators = 25, random_state = 84)
 
-model.fit(trainData, trainTarget)    # <------ Giving an error HERE
+model.fit(trainData, trainTarget)
 
 # evaluate the classifier
 print(classification_report(testTarget, model.predict(testData),
 	target_names = targetNames))
 
-# loop over a sample of the images
-#for i in np.random.choice(np.arange(0, len(imagePaths)), 10):
-	# grab the image and mask paths
-	#print(photopath)
-	#imagePath =  photopath						    #imagePaths[i]
-	#maskPath = 	 photomaskpath						#maskPaths[i]
 
-	# load the image and mask
+# WAY1: Getting the mask of the image
+#maskedImage = cv2.imread(args["photo"])
+#mask = np.zeros(image.shape[:2], dtype = "uint8")
+#(cX, cY) = (image.shape[1] // 2, image.shape[0] // 2)
+#cv2.rectangle(mask, (cX - 75, cY - 75), (cX + 75 , cY + 75), 255, -1)
+#masked = cv2.bitwise_and(image, image, mask = mask)
+#mask = np.zeros(image.shape[:2], dtype = "uint8")
+#cv2.circle(mask, (cX, cY), 100, 255, -1)
+#masked = cv2.bitwise_and(image, image, mask = mask)
 
-image = cv2.imread(photopath[0])
-
-# Getting the mask of the image
+# WAY2: Getting the mask of the image
 maskedImage = cv2.imread(args["photo"])
-mask = np.zeros(image.shape[:2], dtype = "uint8")
-(cX, cY) = (image.shape[1] // 2, image.shape[0] // 2)
-cv2.rectangle(mask, (cX - 75, cY - 75), (cX + 75 , cY + 75), 255, -1)
-masked = cv2.bitwise_and(image, image, mask = mask)
-mask = np.zeros(image.shape[:2], dtype = "uint8")
-cv2.circle(mask, (cX, cY), 100, 255, -1)
-masked = cv2.bitwise_and(image, image, mask = mask)
-
-#mask = cv2.imread(photomaskpath[0])
-mask = cv2.cvtColor(masked, cv2.COLOR_BGR2GRAY)
+imgray = cv2.cvtColor(maskedImage,cv2.COLOR_BGR2GRAY)
+edges = cv2.Canny(imgray, 50, 150)
+contourImage = cv2.Canny(imgray, 50, 150)
+image, contours, hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+cv2.drawContours(contourImage, contours, -1, (255,255,255), 3)
 
 # describe the image
-features = desc.describe(image, mask)
+features = desc.describe(maskedImage, contourImage)
 
 # predict what type of flower the image is
 flower = le.inverse_transform(model.predict([features]))[0]
 print("I think this flower is a {}".format(flower.upper()))
-#cv2.imshow("image", image)
-#cv2.waitKey(0)
+
+# Show Mask of flower
+plt.subplot(122),plt.imshow(edges,cmap = 'gray')
+plt.title('Mask of Image'), plt.xticks([]), plt.yticks([])
+plt.show()
