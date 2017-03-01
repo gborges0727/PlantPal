@@ -14,16 +14,14 @@ db.once('open', function () {
     console.log("Connected correctly to database");
 });
 
-exports.insertUser = function(db, document) {
+exports.insertUser = function(document) {
     // Get the documents
-    var data = document;
-    console.log(data);
     var newUser = new User({
-        firstname: data["firstname"],
-        lastname: data["lastname"],
-        username: data["username"], 
-        password: data["password"],
-        email: data["email"]
+        firstname: document["firstname"],
+        lastname: document["lastname"],
+        username: document["username"], 
+        password: document["password"],
+        email: document["email"]
     });
     
     newUser.save(function(err) {
