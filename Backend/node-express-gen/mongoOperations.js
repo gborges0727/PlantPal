@@ -16,7 +16,7 @@ db.once('open', function () {
     console.log("Connected correctly to database");
 });
 
-exports.insertUser = function(document) {
+exports.insertUser = function(document, callback) {
     // Get the documents
     var newUser = new User({
         firstname: document["firstname"],
@@ -28,8 +28,8 @@ exports.insertUser = function(document) {
     
     newUser.save(function(err) {
         if (err) throw err;
-        
         console.log("User created successfully!");
+        callback();
     });
     
     //callback(result);

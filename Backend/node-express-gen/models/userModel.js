@@ -17,6 +17,7 @@ var UserSchema = new Schema({
     updated_at: Date
 });
 
+// May need to create Picture in a seperate model file: cannot be true when creating a new user
 var PictureSchema = new Schema({
     location: String, 
     creator: {
