@@ -13,7 +13,7 @@ router.post('/login/', function(req, res, next) {
 });
 
 router.post('/register/', function(req, res, next) {
-    var jsonObject = req.body;
+    var jsonObject = JSON.parse(req.body);
     operations.insertDocument("plantpal", jsonObject, "users", next);
 });
 
