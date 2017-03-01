@@ -5,6 +5,7 @@ var User = require('./models/userModel');
 
 var url = 'mongodb://localhost:27017/plantpal';
 
+var mongoose.Promise = global.Promise;
 mongoose.connect(url);
 var db = mongoose.connection;
 
