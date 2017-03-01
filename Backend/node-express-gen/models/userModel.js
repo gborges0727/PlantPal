@@ -13,7 +13,7 @@ var UserSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: false,
         ref: 'PictureSchema'
-    }
+    },
     created_at: Date, 
     updated_at: Date
 });
