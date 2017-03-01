@@ -31,18 +31,6 @@ exports.insertUser = function(document, callback) {
         console.log("User created successfully!");
         callback();
     });
-    
-    //callback(result);
-    
-    /* Below is backup
-    var coll = db.collection(collection);
-    // Insert some documents
-    coll.insert(document, function(err, result) {
-        assert.equal(err, null);
-        console.log("Inserted " + result.result.n + " documents into the document collection " +
-            collection);
-        callback(result);
-    }); */
 };
 
 exports.findDocuments = function(db, collection, callback) {
