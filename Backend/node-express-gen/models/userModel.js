@@ -27,7 +27,7 @@ var PictureSchema = new Schema({
     }
 });
 
-User.methods.getName = function() {
+UserSchema.methods.getName = function() {
     return (this.firstname + ' ' + this.lastname);
 };
 
