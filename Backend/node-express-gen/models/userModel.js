@@ -42,14 +42,14 @@ UserSchema.methods.getName = function() {
     return (this.firstname + ' ' + this.lastname);
 };
 
-UserSchema.methods.insertUser = function(db, document, 'User', callback) {
+UserSchema.methods.insertUser = function(document, callback) {
     // Get the documents collection
-    var coll = db.collection(collection);
+    var coll = db.collection('User');
     // Insert some documents
     coll.insert(document, function(err, result) {
         assert.equal(err, null);
         console.log("Inserted " + result.result.n + " documents into the document collection " +
-            collection);
+            'User');
         callback(result);
     });
 };
