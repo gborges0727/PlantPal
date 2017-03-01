@@ -1,17 +1,6 @@
 // grab the things we need
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var url = 'mongodb://localhost:27017/plantpal';
-
-mongoose.connect(url);
-var db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-    // we're connected!
-    console.log("Connected correctly to database");
-});
-
 
 // create a schema
 var UserSchema = new Schema({
@@ -42,16 +31,8 @@ UserSchema.methods.getName = function() {
     return (this.firstname + ' ' + this.lastname);
 };
 
-UserSchema.methods.insertUser = function(document, callback) {
-    // Get the documents collection
-    var coll = db.collection('User');
-    // Insert some documents
-    coll.insert(document, function(err, result) {
-        assert.equal(err, null);
-        console.log("Inserted " + result.result.n + " documents into the document collection " +
-            'User');
-        callback(result);
-    });
+UserSchema.methods.getPictures = function() {
+    
 };
 
 // the schema is useless so far
