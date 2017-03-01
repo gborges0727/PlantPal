@@ -15,7 +15,7 @@ router.post('/login/', function(req, res, next) {
 
 router.post('/register/', function(req, res, next) {
     var myUser = new user;
-    mongoOperations.insertUser(req.body);
+    operations.insertUser(req.body);
 });
 
 module.exports = router;
