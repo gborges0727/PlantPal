@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var user = require('../models/userModel')
-var operations = require('./mongoOperations')
+var operations = require('../mongoOperations')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
