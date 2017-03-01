@@ -16,7 +16,7 @@ db.once('open', function () {
 
 exports.insertUser = function(db, document) {
     // Get the documents
-    var newUser = User({
+    var newUser = new User({
         firstname: document["firstname"],
         lastname: document["lastname"],
         username: document["username"], 
