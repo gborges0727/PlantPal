@@ -16,12 +16,14 @@ db.once('open', function () {
 
 exports.insertUser = function(db, document) {
     // Get the documents
+    var data = document;
+    console.log(data);
     var newUser = new User({
-        firstname: document["firstname"],
-        lastname: document["lastname"],
-        username: document["username"], 
-        password: document["password"],
-        email: document["email"]
+        firstname: data["firstname"],
+        lastname: data["lastname"],
+        username: data["username"], 
+        password: data["password"],
+        email: data["email"]
     });
     
     newUser.save(function(err) {
