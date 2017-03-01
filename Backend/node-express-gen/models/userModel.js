@@ -4,26 +4,25 @@ var Schema = mongoose.Schema;
 
 // create a schema
 var UserSchema = new Schema({
-    username: String,
+    username: { type: String, unique: true },
     password: String,
-    firstname: {
-      type: String,
-        default: ''
-    },
-    lastname: {
-      type: String,
-        default: ''
-    },
+    firstname: String,
+    lastname: String,
+    email: String,
     pictures:   {
         type: mongoose.Schema.Types.ObjectId,
+        required: false,
         ref: 'PictureSchema'
     }
+    created_at: Date, 
+    updated_at: Date
 });
 
 var PictureSchema = new Schema({
     location: String, 
     creator: {
-        type: mongoose.Schema.Types.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId,
+        required: true, 
         ref: 'UserSchema'
     }
 });
