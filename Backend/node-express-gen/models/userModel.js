@@ -35,6 +35,3 @@ UserSchema.methods.getName = function() {
 // we need to create a model using it
 module.exports = mongoose.model('User', UserSchema);
 module.exports = mongoose.model('Picture', PictureSchema);
-
-// make this available to our Node applications
-module.exports = Dishes;
