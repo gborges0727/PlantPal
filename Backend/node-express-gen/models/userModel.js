@@ -1,7 +1,17 @@
 // grab the things we need
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var uniqueValidator = require('mongoose-unique-validator');
+var url = 'mongodb://localhost:27017/plantpal';
+
+mongoose.connect(url);
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+    // we're connected!
+    console.log("Connected correctly to database");
+});
+
 
 // create a schema
 var UserSchema = new Schema({
@@ -9,7 +19,7 @@ var UserSchema = new Schema({
     password: String,
     firstname: String,
     lastname: String,
-    email: { type: String, index: true, unique: true, required: true, uniqueCaseInsensitive: true },
+    email: String,
     pictures:   {
         type: mongoose.Schema.Types.ObjectId,
         required: false,
@@ -27,9 +37,21 @@ var PictureSchema = new Schema({
         ref: 'UserSchema'
     }
 });
-UserSchema.plugin(uniqueValidator);
+
 UserSchema.methods.getName = function() {
     return (this.firstname + ' ' + this.lastname);
+};
+
+UserSchema.methods.insertUser = function(db, document, 'User', callback) {
+    // Get the documents collection
+    var coll = db.collection(collection);
+    // Insert some documents
+    coll.insert(document, function(err, result) {
+        assert.equal(err, null);
+        console.log("Inserted " + result.result.n + " documents into the document collection " +
+            collection);
+        callback(result);
+    });
 };
 
 // the schema is useless so far
