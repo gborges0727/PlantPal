@@ -2,11 +2,11 @@ var assert = require('assert');
 var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
 var User = require('./models/userModel');
-var mongopromise = require('mongodb-promise');
+//var mongopromise = require('mongodb-promise');
 
 var url = 'mongodb://localhost:27017/plantpal';
 
-mongoose.Promise = global.Promise;
+//mongoose.Promise = global.Promise;
 mongoose.connect(url);
 var db = mongoose.connection;
 
