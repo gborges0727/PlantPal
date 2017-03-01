@@ -13,7 +13,7 @@ router.post('/login/', function(req, res, next) {
 });
 
 router.post('/register/', function(req, res, next) {
-    
+    operations.insertDocument(plantpal, req.body, users, next);
 });
 
 module.exports = router;
