@@ -14,7 +14,7 @@ router.post('/login/', function(req, res, next) {
 });
 
 router.post('/register/', function(req, res, next) {
-    user.inserUser(req.body, next);
+    user.insertUser(req.body, next);
 });
 
 module.exports = router;
