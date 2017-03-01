@@ -21,7 +21,7 @@ var PictureSchema = new Schema({
     location: String, 
     creator: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true, 
+        //required: true, 
         ref: 'UserSchema'
     }
 });
