@@ -54,10 +54,10 @@ class SignUpScreenViewController: UIViewController {
         else {
             // Create alert controller here to say something along the lines of "Signing Up..."
             let infoDictionary = [
-                "firstName": FirstNameField.text!,
-                "lastName":  LastNameField.text!,
-                "userName":  UserNameField.text!,
-                "passWord":  PasswordField.text!,
+                "username":  UserNameField.text!,
+                "password":  PasswordField.text!,
+                "firstname": FirstNameField.text!,
+                "lastname":  LastNameField.text!,
                 "email":     EmailField.text!
             ]
             
@@ -65,12 +65,12 @@ class SignUpScreenViewController: UIViewController {
             if JSONSerialization.isValidJSONObject(infoDictionary) {
                 do {
                     let jsonObject = try JSONSerialization.data(withJSONObject: infoDictionary,
-                        options: .prettyPrinted)
-                    
+                                                                options: .prettyPrinted)
                     // Create Post request
-                    let url = URL(string: "https://plantpal.uconn.edu/login:5050") // IS POSSIBLE TO CHANGE! :D
+                    let url = URL(string: "http://plantpal.uconn.edu:5050/users/register")
                     var request = URLRequest(url: url!)
                     request.httpMethod = "POST"
+                    request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
                     
                     // Append JSON object
                     request.httpBody = jsonObject
