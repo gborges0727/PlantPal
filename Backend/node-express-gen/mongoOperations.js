@@ -1,15 +1,20 @@
 var assert = require('assert');
+var MongoClient = require('mongodb').MongoClient;
+
+var url = 'mongodb://localhost:27017/plantpal';
 
 exports.insertDocument = function(db, document, collection, callback) {
     // Get the documents collection
-    var coll = db.collection(collection);
-    // Insert some documents
-    coll.insert(document, function(err, result) {
-        assert.equal(err, null);
-        console.log("Inserted " + result.result.n + " documents into the document collection " +
-            collection);
-        callback(result);
-    });
+    MongoClient.connect(url, function (err, db) {
+        var coll = db.collection(collection);
+        // Insert some documents
+        coll.insert(document, function(err, result) {
+            assert.equal(err, null);
+            console.log("Inserted " + result.result.n + " documents into the document collection " +
+                collection);
+            callback(result);
+        });
+    })
 };
 
 exports.findDocuments = function(db, collection, callback) {
