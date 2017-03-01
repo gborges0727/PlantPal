@@ -7,14 +7,16 @@
 var app = require('../app');
 var debug = require('debug')('node-express-gen:server');
 var http = require('http');
+var https = require('https');
+var fs = require('fs');
 
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '4607');
-app.set('port', port + 443);
-
+app.set('port', port+443);
+app.set('secPort', port);
 /**
  * Create HTTP server.
  */
@@ -25,10 +27,10 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, "10.4.19.47");
+server.listen(port+443, "10.4.19.47");
+console.log('Server connected to port: ' + (port+443));
 server.on('error', onError);
 server.on('listening', onListening);
-
 /**
  * Normalize a port into a number, string, or false.
  */
