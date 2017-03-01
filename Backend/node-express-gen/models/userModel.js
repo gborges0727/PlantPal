@@ -11,7 +11,6 @@ var UserSchema = new Schema({
     email: String,
     pictures:   {
         type: mongoose.Schema.Types.ObjectId,
-        required: false,
         ref: 'PictureSchema'
     },
     created_at: Date, 
@@ -31,9 +30,8 @@ UserSchema.methods.getName = function() {
     return (this.firstname + ' ' + this.lastname);
 };
 
-UserSchema.methods.getPictures = function() {
-    
-};
+//UserSchema.methods.getPictures = function() {
+//};
 
 // the schema is useless so far
 // we need to create a model using it
