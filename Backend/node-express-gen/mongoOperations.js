@@ -26,10 +26,10 @@ exports.insertUser = function(document, callback) {
         email: document["email"]
     });
     
-    newUser.save(function(err) {
+    newUser.save(function(err, result) {
         if (err) throw err;
         console.log("User created successfully!");
-        callback();
+        callback(result);
     });
 };
 
