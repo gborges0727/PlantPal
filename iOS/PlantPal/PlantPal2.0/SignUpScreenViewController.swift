@@ -93,6 +93,7 @@ class SignUpScreenViewController: UIViewController {
             }
             
             // Send to next view (IFF the above works)
+            // TODO: Restrict the below to running IFF user is successfully created
             let tabBarView = self.storyboard?.instantiateViewController(withIdentifier: "TabBar")
                 as! TabBarViewController
             self.present(tabBarView, animated: true, completion: nil)
