@@ -42,9 +42,11 @@ exports.loginUser = function(document, callback) {
                 username: username
             }, function(err, user) {
                 if (err) {
+                    console.log("error 1");
                     return callback(err);
                 }
                 if (!user) {
+                    console.log("error 2");
                     return callback(null, false, {
                         message: 'Incorrect username.'
                     });
@@ -52,8 +54,12 @@ exports.loginUser = function(document, callback) {
                 
                 // Checks password using bcrypt
                 bcrypt.compareSync(passAttempt, password, function(err, result) {
-                    if (err) return callback(err);
+                    if (err) {
+                        console.log("Error 3");
+                        return callback(err);
+                    }
                     if (result === false) {
+                        console.log("Error 4");
                         return callback(null, false, {
                             message: 'Incorrect password.'
                         });
