@@ -39,5 +39,5 @@ UserSchema.methods.getName = function() {
 
 // the schema is useless so far
 // we need to create a model using it
-module.exports = mongoose.model('User', UserSchema);
-module.exports = mongoose.model('Picture', PictureSchema);
+module.exports.UserSchema = UserSchema;
+module.exports.PictureSchema = PictureSchema;

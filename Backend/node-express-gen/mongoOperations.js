@@ -1,21 +1,8 @@
 var assert = require('assert');
 var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
-var User = require('./models/userModel');
+var Models = require('./models/models');
 var bcrypt = require('bcrypt');
-//var mongopromise = require('mongodb-promise');
-
-var url = 'mongodb://localhost:27017/plantpal';
-
-//mongoose.Promise = global.Promise;
-mongoose.connect(url);
-var db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    // we're connected!
-    console.log("Connected correctly to database");
-});
 
 hashPassword = function(password) {
     bcrypt.hash(password, 10, function(err, hash) {
@@ -35,7 +22,7 @@ checkPassword = function(password) {
 
 exports.createUser = function(document, callback) {
     // Get the documents
-    var newUser = new User({
+    var newUser = new Models.User({
         firstname: document["firstname"],
         lastname: document["lastname"],
         username: document["username"],
