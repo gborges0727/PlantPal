@@ -37,7 +37,7 @@ UserSchema.methods.getName = function() {
 
 UserSchema.methods.hashPassword = function() {
     var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(myPlaintextPassword, salt);
+    var hash = bcrypt.hashSync(this.password, salt);
     this.password = hash;
 };
 
