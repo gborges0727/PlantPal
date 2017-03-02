@@ -20,7 +20,7 @@ exports.createUser = function(document, callback) {
         firstname: document["firstname"],
         lastname: document["lastname"],
         username: document["username"],
-        password: hashPassword(document["password"]),
+        password: document["password"],
         email: document["email"]
     });
     
