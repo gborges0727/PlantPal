@@ -4,12 +4,6 @@ var mongoose = require('mongoose');
 var Models = require('./models/models');
 var bcrypt = require('bcrypt');
 
-hashPassword = function(password) {
-    bcrypt.hash(password, 10, function(err, hash) {
-        return hash;
-    });
-};
-
 checkPassword = function(password) {
     bcrypt.compare(password, hash, function(err, res) {
         if (res == true) {
@@ -29,7 +23,11 @@ exports.createUser = function(document, callback) {
         password: hashPassword(document["password"]),
         email: document["email"]
     });
-
+    
+    newUser.hashPassword(function(err) {
+        if err throw err;
+    });
+    
     newUser.save(function(err, result) {
         if (err) throw err;
         console.log("User created successfully!");

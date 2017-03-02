@@ -34,6 +34,13 @@ UserSchema.methods.getName = function() {
     return (this.firstname + ' ' + this.lastname);
 };
 
+UserSchema.methods.hashPassword = function(this.password) {
+    bcrypt.hash(this.password, 10, function(err, hash) {
+        if err throw err;
+        this.password = hash;
+    });
+};
+
 //UserSchema.methods.getPictures = function() {
 //};
 
