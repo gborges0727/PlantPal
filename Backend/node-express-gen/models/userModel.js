@@ -41,6 +41,10 @@ UserSchema.methods.hashPassword = function() {
     this.password = hash;
 };
 
+UserSchema.methods.checkPassword = function(passAttempt) {
+    bcrypt.compareSync(passAttempt, this.password);
+};
+
 //UserSchema.methods.getPictures = function() {
 //};
 

@@ -4,16 +4,6 @@ var mongoose = require('mongoose');
 var Models = require('./models/models');
 var bcrypt = require('bcrypt');
 
-checkPassword = function(password) {
-    bcrypt.compare(password, hash, function(err, res) {
-        if (res == true) {
-            //TODO: Implement functionality to authenticate
-        } else {
-            console.log("Password was entered incorrectly");
-        }
-    });
-};
-
 exports.createUser = function(document, callback) {
     // Get the documents
     var newUser = new Models.User({
