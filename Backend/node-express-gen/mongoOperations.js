@@ -25,7 +25,7 @@ exports.createUser = function(document, callback) {
     });
     
     newUser.hashPassword(function(err) {
-        if err throw err;
+        if (err) throw err;
     });
     
     newUser.save(function(err, result) {

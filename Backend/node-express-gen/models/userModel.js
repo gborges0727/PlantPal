@@ -36,7 +36,7 @@ UserSchema.methods.getName = function() {
 
 UserSchema.methods.hashPassword = function() {
     bcrypt.hash(this.password, 10, function(err, hash) {
-        if err throw err;
+        if (err) throw err;
         this.password = hash;
     });
 };
