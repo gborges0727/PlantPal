@@ -12,6 +12,8 @@ var users = require('./routes/users');
 
 var app = express();
 
+// TODO: Implement HTTPS functionality for security  :) 
+
 /*// Secure traffic only
 app.all('*', function(req, res, next){
    if (req.secure) {

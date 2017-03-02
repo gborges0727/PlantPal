@@ -18,6 +18,9 @@ exports.createUser = function(document, callback) {
         if (err) throw err;
     });
     
+    // TODO: Add functionality here in order to check if the attempted creation
+    // already exists. If so, return the proper response back to the client. If not, 
+    // return an ok response to the client. 
     newUser.save(function(err, result) {
         if (err) throw err;
         console.log("User created successfully!");
