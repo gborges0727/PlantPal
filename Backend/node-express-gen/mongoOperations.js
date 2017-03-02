@@ -11,21 +11,37 @@ mongoose.connect(url);
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
+db.once('open', function() {
     // we're connected!
     console.log("Connected correctly to database");
 });
 
-exports.insertUser = function(document, callback) {
+hashPassword = function(password) {
+    bcrypt.hash(password, 10, function(err, hash) {
+        return hash;
+    });
+};
+
+checkPassword = function(password) {
+    bcrypt.compare(password, hash, function(err, res) {
+        if (res == true) {
+            //TODO: Implement functionality to authenticate
+        } else {
+            console.log("Password was entered incorrectly");
+        }
+    });
+};
+
+exports.createUser = function(document, callback) {
     // Get the documents
     var newUser = new User({
         firstname: document["firstname"],
         lastname: document["lastname"],
-        username: document["username"], 
-        password: document["password"],
+        username: document["username"],
+        password: hashPassword(document["password"]),
         email: document["email"]
     });
-    
+
     newUser.save(function(err, result) {
         if (err) throw err;
         console.log("User created successfully!");
@@ -33,42 +49,12 @@ exports.insertUser = function(document, callback) {
     });
 };
 
-exports.findDocuments = function(db, collection, callback) {
-    // Get the documents collection
-    var coll = db.collection(collection);
-
-    // Find some documents
-    coll.find({}).toArray(function(err, docs) {
-        assert.equal(err, null);
-        callback(docs);
+exports.loginUser = function(document, callback) {
+    User.find({
+        username: document["username"]
+    }, function(err, user) {
+        if (err) throw err;
+        console.log("User found!");
     });
-};
-
-exports.removeDocument = function(db, document, collection, callback) {
-
-    // Get the documents collection
-    var coll = db.collection(collection);
-
-    // Delete the document
-    coll.deleteOne(document, function(err, result) {
-        assert.equal(err, null);
-        console.log("Removed the document " + document);
-        callback(result);
-    });
-};
-
-exports.updateDocument = function(db, document, update, collection, callback) {
-
-    // Get the documents collection
-    var coll = db.collection(collection);
-
-    // Update document
-    coll.updateOne(document, {
-        $set: update
-    }, null, function(err, result) {
-
-        assert.equal(err, null);
-        console.log("Updated the document with " + update);
-        callback(result);
-    });
+    //TODO: Functionality here to authenticate the users using whatever means we want.
 };

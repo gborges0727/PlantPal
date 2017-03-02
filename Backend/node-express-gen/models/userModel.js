@@ -1,25 +1,29 @@
 // grab the things we need
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var bcrypt = require('bcrypt');
 
 // create a schema
 var UserSchema = new Schema({
-    username: { type: String, unique: true },
+    username: {
+        type: String,
+        unique: true
+    },
     password: String,
     firstname: String,
     lastname: String,
     email: String,
-    pictures:   {
+    pictures: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'PictureSchema'
     },
-    created_at: Date, 
+    created_at: Date,
     updated_at: Date
 });
 
 // May need to create Picture in a seperate model file: cannot be true when creating a new user
 var PictureSchema = new Schema({
-    location: String, 
+    location: String,
     creator: {
         type: mongoose.Schema.Types.ObjectId,
         //required: true, 

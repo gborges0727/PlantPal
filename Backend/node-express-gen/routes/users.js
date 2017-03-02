@@ -10,12 +10,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/login/', function(req, res, next) {
-    
+    operations.loginUser(req.body, next);
+    //TODO: Send responses
 });
 
 router.post('/register/', function(req, res, next) {
-    var myUser = new user;
-    operations.insertUser(req.body, next);
+    operations.createUser(req.body, next);
+    //TODO: Send responses
 });
 
 module.exports = router;
