@@ -27,6 +27,14 @@ router.post('/login/', function(req, res, next) {
             return next(null, false, { message: 'Incorrect username. '});
         }
         
+        if(bcrypt.compareSync(passAttempt, user.password)) {
+            console.log("Password success");
+            next(user);
+        } else {
+            console.log("Incorrect password");
+            next(null, false, {message: 'Incorrect password. '});
+        }
+        /*
         bcrypt.compare(passAttempt, user.password, function(err, result) {
             console.log("Got to password");
             console.log(passAttempt);
@@ -38,7 +46,7 @@ router.post('/login/', function(req, res, next) {
                 console.log("Incorrect password");
                 next(null, false, {message: 'Incorrect password. '});
             }
-        })
+        }) */
     });
     //TODO: Send responses
 });
