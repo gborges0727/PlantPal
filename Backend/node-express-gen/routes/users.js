@@ -3,6 +3,7 @@ var router = express.Router();
 var model = require('../models/models')
 var operations = require('../mongoOperations')
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
