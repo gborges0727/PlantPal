@@ -3,8 +3,6 @@ var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
 var Models = require('./models/models');
 var bcrypt = require('bcrypt');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
 
 exports.createUser = function(document, callback) {
