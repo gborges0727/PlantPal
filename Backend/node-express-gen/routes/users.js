@@ -30,8 +30,10 @@ router.post('/login/', function(req, res, next) {
         bcrypt.compare(passAttempt, user.password, function(err, result) {
             console.log("Got to password");
             if (res == true) {
+                console.log("Password success");
                 next(user);
             } else {
+                console.log("Incorrect password");
                 next(null, false, {message: 'Incorrect password. '});
             }
         })
