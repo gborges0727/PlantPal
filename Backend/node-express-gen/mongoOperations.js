@@ -36,7 +36,7 @@ exports.loginUser = function(document, callback) {
     
     console.log("Run");
     
-    Users.findOne({ username: username }, function(err, user) {
+    users.findOne({ username: username }, function(err, user) {
         console.log("test");
         if (err) {
             console.log("Error 1");
