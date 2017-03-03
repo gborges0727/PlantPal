@@ -10,7 +10,31 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/login/', function(req, res, next) {
-    operations.loginUser(req.body, next);
+    var username = req.body["username"];
+    var passAttempt = req.body["password"];
+    
+    console.log("Run");
+    
+    users.findOne({ username: username }, function(err, user) {
+        console.log("test");
+        if (err) {
+            console.log("Error 1");
+            return next(error);
+        } 
+        if (!user) {
+            console.log("Error 2");
+            return next(null, false, { message: 'Incorrect username. '});
+        }
+        
+        bcrypt.compare(passAttempt, user.password, function(err, result) {
+            console.log("Got to password");
+            if (res == true) {
+                next(user);
+            } else {
+                next(null, false, {message: 'Incorrect password. '});
+            }
+        })
+    });
     //TODO: Send responses
 });
 
