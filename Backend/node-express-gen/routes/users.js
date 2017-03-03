@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var user = require('../models/userModel')
+var model = require('../models/models')
 var operations = require('../mongoOperations')
 var mongoose = require('mongoose');
 
@@ -15,7 +15,7 @@ router.post('/login/', function(req, res, next) {
     
     console.log("Run");
     
-    user.findOne({ username: username }, function(err, user) {
+    model.findOne({ username: username }, function(err, user) {
         console.log("test");
         if (err) {
             console.log("Error 1");
