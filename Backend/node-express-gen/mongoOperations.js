@@ -34,43 +34,22 @@ exports.createUser = function(document, callback) {
 exports.loginUser = function(document, callback) {
     //TODO: Functionality here to authenticate the users using whatever means we want.
     var username = document["username"];
-    var password = document["password"];
+    var passAttempt = document["password"];
     
-    passport.use(new LocalStrategy(
-        function(username, password) {
-            User.findOne({
-                username: username
-            }, function(err, user) {
-                if (err) {
-                    console.log("error 1");
-                    return callback(err);
-                }
-                if (!user) {
-                    console.log("error 2");
-                    return callback(null, false, {
-                        message: 'Incorrect username.'
-                    });
-                }
-                
-                // Checks password using bcrypt
-                bcrypt.compareSync(passAttempt, password, function(err, result) {
-                    if (err) {
-                        console.log("Error 3");
-                        return callback(err);
-                    }
-                    if (result === false) {
-                        console.log("Error 4");
-                        return callback(null, false, {
-                            message: 'Incorrect password.'
-                        });
-                    } else {
-                        console.log("Sign in successful");
-                        return callback(null, user, {
-                            message: 'User signed in successfully'
-                        });
-                    }
-                });
-            });
+    User.findOne({username: username }, function(err, user) {
+        if (err) return callback(error);
+        if (!user) {
+            return callback(null, false, { message: 'Incorrect username. '});
         }
-    ));
+        
+        bcrypt.compare(passAttempt, user.password, function(err, result) {
+            if (res == true) {
+                callback(user);
+            } else {
+                callback(null, false, {message: 'Incorrect password. '});
+            }
+        })
+    });
 };
+
+
