@@ -15,7 +15,7 @@ router.post('/login/', function(req, res, next) {
     
     console.log("Run");
     
-    users.findOne({ username: username }, function(err, user) {
+    User.findOne({ username: username }, function(err, user) {
         console.log("test");
         if (err) {
             console.log("Error 1");
