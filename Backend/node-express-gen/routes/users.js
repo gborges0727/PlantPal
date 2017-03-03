@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var model = require('../models/models')
+var model = require('../models/models');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
