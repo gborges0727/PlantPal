@@ -11,6 +11,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/login/', function(req, res, next) {
+    //TODO: Send responses
+    
+    // Check for users
     var username = req.body["username"];
     var passAttempt = req.body["password"];
     
@@ -34,26 +37,32 @@ router.post('/login/', function(req, res, next) {
             console.log("Incorrect password");
             next(null, false, {message: 'Incorrect password. '});
         }
-        /*
-        bcrypt.compare(passAttempt, user.password, function(err, result) {
-            console.log("Got to password");
-            console.log(passAttempt);
-            console.log(user.password);
-            if (res == true) {
-                console.log("Password success");
-                next(user);
-            } else {
-                console.log("Incorrect password");
-                next(null, false, {message: 'Incorrect password. '});
-            }
-        }) */
-    });
-    //TODO: Send responses
+    });    
 });
 
 router.post('/register/', function(req, res, next) {
-    operations.createUser(req.body, next);
     //TODO: Send responses
+    // Get the documents
+    var newUser = new Models.User({
+        firstname: document["firstname"],
+        lastname: document["lastname"],
+        username: document["username"],
+        password: document["password"],
+        email: document["email"]
+    });
+
+    newUser.hashPassword(function(err) {
+        if (err) throw err;
+    });
+
+    // TODO: Add functionality here in order to check if the attempted creation
+    // already exists. If so, return the proper response back to the client. If not, 
+    // return an ok response to the client. 
+    newUser.save(function(err, result) {
+        if (err) throw err;
+        console.log("User created successfully!");
+        next(result);
+    });    
 });
 
 module.exports = router;
