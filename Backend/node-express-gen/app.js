@@ -6,62 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var passport = require('passport');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-
-
-// Setting up passport instance to use username/pass strategy
-passport.use(new LocalStrategy(
-    function(username, password) {
-        User.findOne({
-            username: username
-        }, function(err, user) {
-            if (err) {
-                console.log("error 1");
-                return callback(err);
-            }
-            if (!user) {
-                console.log("error 2");
-                return callback(null, false, {
-                    message: 'Incorrect username.'
-                });
-            }
-            
-            // Checks password using bcrypt
-            bcrypt.compareSync(passAttempt, password, function(err, result) {
-                if (err) {
-                    console.log("Error 3");
-                    return callback(err);
-                }
-                if (result === false) {
-                    console.log("Error 4");
-                    return callback(null, false, {
-                        message: 'Incorrect password.'
-                    });
-                } else {
-                    console.log("Sign in successful");
-                    return callback(null, user, {
-                        message: 'User signed in successfully'
-                    });
-                }
-            });
-        });
-    }
-));
-
-// Serialize / Deserialize are for session persistance (passport)
-passport.serializeUser(function(user, cb) {
-  cb(null, user.id);
-});
-
-passport.deserializeUser(function(id, cb) {
-  db.users.findById(id, function (err, user) {
-    if (err) { return cb(err); }
-    cb(null, user);
-  });
-});
 
 var app = express();
 
@@ -91,10 +38,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-
-// use passport authentication
-app.use(passport.initialize());
-app.use(passport.session());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
