@@ -54,11 +54,11 @@ router.post('/register/', function(req, res, next) {
     //TODO: Send responses
     // Get the documents
     var newUser = new model.User({
-        firstname: document["firstname"],
-        lastname:  document["lastname"],
-        username:  document["username"],
-        password:  document["password"],
-        email:     document["email"]
+        firstname: req.body["firstname"],
+        lastname:  req.body["lastname"],
+        username:  req.body["username"],
+        password:  req.body["password"],
+        email:     req.body["email"]
     });
 
     newUser.hashPassword(function(err) {
