@@ -69,13 +69,16 @@ router.post('/register/', function(req, res, next) {
     // already exists. If so, return the proper response back to the client. If not, 
     // return an ok response to the client. 
     newUser.save(function(err, result) {
-        if (err) throw err;
-        console.log("User created successfully!");
-        res.writeHead(200, {
-            'Content-Type': 'text/plain'
-        });
-        res.end('User created successfully!');
-        next(result);
+        if (err) {
+            console.log("User already exists :(");
+        } else {
+            console.log("User created successfully!");
+            res.writeHead(200, {
+                'Content-Type': 'text/plain'
+            });
+            res.end('User created successfully!');
+            next(result);
+        }
     });    
 });
 
