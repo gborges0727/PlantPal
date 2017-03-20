@@ -18,6 +18,8 @@ router.post('/login/', function(req, res, next) {
     
     console.log("Run");
     
+    // Weird error happening with sending responses: To fix if we have time
+    // Because it is otherwise functional :) 
     model.User.findOne({ username: username }, function(err, user) {
         console.log("test");
         if (err) {
@@ -69,6 +71,10 @@ router.post('/register/', function(req, res, next) {
     newUser.save(function(err, result) {
         if (err) throw err;
         console.log("User created successfully!");
+        res.writeHead(200, {
+            'Content-Type': 'text/plain'
+        });
+        res.end('User created successfully!');
         next(result);
     });    
 });
