@@ -62,14 +62,26 @@ router.post('/register/', function(req, res, next) {
     newUser.hashPassword(function(err) {
         if (err) throw err;
     });
-
+    
+    model.User.findOne({username: req.body["username"]}, function(err, user){
+        if (err) throw err;
+        else if (!user) {
+            
+        }
+        else {
+            res.writeHead(200, {
+                'Content-Type': 'text/plain'
+            });
+            res.end('User already exists!');
+        }
+    })
+    
     // TODO: Add functionality here in order to check if the attempted creation
     // already exists. If so, return the proper response back to the client. If not, 
     // return an ok response to the client. 
     newUser.save(function(err, result) {
         if (err) {
-            console.log("User already exists :(");
-            next(err);
+            throw err;
         } else {
             console.log("User created successfully!");
             res.writeHead(200, {
