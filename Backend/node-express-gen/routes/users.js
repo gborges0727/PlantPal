@@ -78,7 +78,7 @@ router.post('/register/', function(req, res, next) {
                 'Content-Type': 'text/plain'
             });
             res.end('User created successfully!');
-            next(result);
+            //next(result);
         }
     });    
 });
