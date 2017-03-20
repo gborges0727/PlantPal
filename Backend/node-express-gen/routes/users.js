@@ -31,6 +31,11 @@ router.post('/login/', function(req, res, next) {
         
         if(bcrypt.compareSync(passAttempt, user.password)) {
             console.log("Password success");
+            res.writeHead(200, {
+                'Content-Type': 'text/plain'
+            });
+            // res.body -- JSON object with user info to add here
+            res.end('User: ' + username + ' has signed in succesfully');
             next(user);
         } else {
             console.log("Incorrect password");
@@ -44,10 +49,10 @@ router.post('/register/', function(req, res, next) {
     // Get the documents
     var newUser = new Models.User({
         firstname: document["firstname"],
-        lastname: document["lastname"],
-        username: document["username"],
-        password: document["password"],
-        email: document["email"]
+        lastname:  document["lastname"],
+        username:  document["username"],
+        password:  document["password"],
+        email:     document["email"]
     });
 
     newUser.hashPassword(function(err) {
