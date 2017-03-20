@@ -38,14 +38,12 @@ router.post('/login/', function(req, res, next) {
             });
             // res.write -- JSON object with user info to add here
             res.end('User: ' + username + ' has signed in succesfully');
-            next(user);
         } else {
             res.writeHead(200, {
                 'Content-Type': 'text/plain'
             });
             res.end('Username: ' + username + ' has entered an incorrect password');
             console.log("Incorrect password");
-            next(null, false, {message: 'Incorrect password. '});
         }
     });    
 });
@@ -78,7 +76,6 @@ router.post('/register/', function(req, res, next) {
                 'Content-Type': 'text/plain'
             });
             res.end('User created successfully!');
-            //next(result);
         }
     });    
 });
