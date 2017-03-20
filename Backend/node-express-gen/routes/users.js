@@ -53,7 +53,7 @@ router.post('/login/', function(req, res, next) {
 router.post('/register/', function(req, res, next) {
     //TODO: Send responses
     // Get the documents
-    var newUser = new Models.User({
+    var newUser = new model.User({
         firstname: document["firstname"],
         lastname:  document["lastname"],
         username:  document["username"],
