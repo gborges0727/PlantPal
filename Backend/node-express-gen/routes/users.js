@@ -34,10 +34,14 @@ router.post('/login/', function(req, res, next) {
             res.writeHead(200, {
                 'Content-Type': 'text/plain'
             });
-            // res.body -- JSON object with user info to add here
+            // res.write -- JSON object with user info to add here
             res.end('User: ' + username + ' has signed in succesfully');
             next(user);
         } else {
+            res.writeHead(200, {
+                'Content-Type': 'text/plain'
+            });
+            res.end('Username: ' + username + ' has entered an incorrect password');
             console.log("Incorrect password");
             next(null, false, {message: 'Incorrect password. '});
         }
