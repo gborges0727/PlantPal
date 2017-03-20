@@ -71,6 +71,7 @@ router.post('/register/', function(req, res, next) {
     newUser.save(function(err, result) {
         if (err) {
             console.log("User already exists :(");
+            next(err);
         } else {
             console.log("User created successfully!");
             res.writeHead(200, {
