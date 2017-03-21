@@ -24,8 +24,8 @@ app.set('secPort', port);
 var server = http.createServer(app);
 
 var credentials = {
-    key: fs.readFileSync('key.pem'),
-    cert: fs.readFileSync('cert.pem')
+    key: fs.readFileSync('domain.key'),
+    cert: fs.readFileSync('plantpal_uconn_edu_cert.cer')
 };
 
 var secServer = https.createServer(credentials, app);
