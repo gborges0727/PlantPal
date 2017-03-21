@@ -49,7 +49,7 @@ class LoginScreenViewController: UIViewController {
                         options: .prettyPrinted)
                     
                     // Create Post request
-                    let url = URL(string: "https://plantpal.uconn.edu/login:5050") // IS POSSIBLE TO CHANGE! :D
+                    let url = URL(string: "https://plantpal.uconn.edu:4607/users/login") // IS POSSIBLE TO CHANGE! :D
                     var request = URLRequest(url: url!)
                     request.httpMethod = "POST"
                     request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")

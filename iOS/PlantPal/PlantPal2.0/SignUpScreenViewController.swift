@@ -67,7 +67,7 @@ class SignUpScreenViewController: UIViewController {
                     let jsonObject = try JSONSerialization.data(withJSONObject: infoDictionary,
                                                                 options: .prettyPrinted)
                     // Create Post request
-                    let url = URL(string: "http://plantpal.uconn.edu:5050/users/register")
+                    let url = URL(string: "https://plantpal.uconn.edu:4607/users/register")
                     var request = URLRequest(url: url!)
                     request.httpMethod = "POST"
                     request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
