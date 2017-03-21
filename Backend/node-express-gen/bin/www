@@ -37,6 +37,8 @@ var secServer = https.createServer(credentials, app);
 server.listen(port + 443, "10.4.19.47");
 secServer.listen(port, "10.4.19.47");
 console.log('Server connected to port: ' + (port + 443));
+secServer.on('error', onError);
+secServer.on('listening', onListening);
 server.on('error', onError);
 server.on('listening', onListening);
 /**
