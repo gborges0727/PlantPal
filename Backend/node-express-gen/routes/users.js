@@ -9,6 +9,10 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+router.post('/upload/', function(req, res, next) {
+    
+});
+
 router.post('/login/', function(req, res, next) {
     //TODO: Send responses
     
