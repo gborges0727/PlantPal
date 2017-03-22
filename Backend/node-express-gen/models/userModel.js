@@ -13,10 +13,9 @@ var UserSchema = new Schema({
     firstname: String,
     lastname: String,
     email: String,
-    pictures: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'PictureSchema'
-    },
+    pictures: [{
+        location: {type: String, required: false}
+    }],
     created_at: Date,
     updated_at: Date
 });

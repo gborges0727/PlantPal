@@ -3,14 +3,48 @@ var router = express.Router();
 var model = require('../models/models');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var multer = require('multer');
+var upload = multer({ storage: multer.memoryStorage() });
+var shortid = require('shortid');
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages')
+    }, 
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+});
+var upload = multer({storage: storage});
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post('/upload/', function(req, res, next) {
+router.post('/upload/', upload.single('plantPic'), (req, res) => {
+    // Save here - req.file = picture, req.body = other data (username)
+    var username = req.body;
+    var newName = shortid.generate();
+    var pic = fs.rename(req.file, newName, function(err) {
+        if err throw err; 
+        console.log("Image renamed");
+    });
     
+    // Analyze image here! Then save analysis alongside the image (somehow :D, may need to modify schema)
+    upload(pic, res, function(err) {
+        if err throw err;
+        console.log("Image uploaded successfully");
+        var id = model.User.findOne(username._id);
+        model.User.findOneAndUpdate({username: username},
+            {$push: {"pictures": {location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName}}},
+            {safe: true, upsert: true},
+            function(err, user) {
+            if err throw err;
+        });
+    });
+    
+    // save pic & username here -- also the code to analyze images goes here :) 
 });
 
 router.post('/login/', function(req, res, next) {
