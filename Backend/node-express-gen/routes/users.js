@@ -24,13 +24,14 @@ router.get('/', function(req, res, next) {
 
 router.post('/upload/', upload.single('plantPic'), (req, res) => {
     // Save here - req.file = picture, req.body = other data (username)
+    console.log("Part 1 reached");
     var username = req.body;
     var newName = shortid.generate();
     var pic = fs.rename(req.file, newName, function(err) {
         if (err) throw err; 
         console.log("Image renamed");
     });
-    
+    console.log("Part 2 reached");
     // Analyze image here! Then save analysis alongside the image (somehow :D, may need to modify schema)
     upload(pic, res, function(err) {
         if (err) throw err;
@@ -43,7 +44,7 @@ router.post('/upload/', upload.single('plantPic'), (req, res) => {
             if (err) throw err;
         });
     });
-    
+    console.log("Part 3 reached");
     // save pic & username here -- also the code to analyze images goes here :) 
 });
 
