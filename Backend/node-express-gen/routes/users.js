@@ -27,13 +27,13 @@ router.post('/upload/', upload.single('plantPic'), (req, res) => {
     var username = req.body;
     var newName = shortid.generate();
     var pic = fs.rename(req.file, newName, function(err) {
-        if err throw err; 
+        if (err) throw err; 
         console.log("Image renamed");
     });
     
     // Analyze image here! Then save analysis alongside the image (somehow :D, may need to modify schema)
     upload(pic, res, function(err) {
-        if err throw err;
+        if (err) throw err;
         console.log("Image uploaded successfully");
         var id = model.User.findOne(username._id);
         model.User.findOneAndUpdate({username: username},
