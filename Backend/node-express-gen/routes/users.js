@@ -40,7 +40,7 @@ router.post('/upload/', upload.single('plantPic'), (req, res) => {
             {$push: {"pictures": {location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName}}},
             {safe: true, upsert: true},
             function(err, user) {
-            if err throw err;
+            if (err) throw err;
         });
     });
     
