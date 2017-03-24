@@ -35,6 +35,8 @@ router.post('/upload/', function(req, res) {
     });
 
     form.on('field', function(fieldName, textValue) {
+        // Run python identification script here and save result to var
+        // Set result into the database alongside picture location 
         model.User.findOneAndUpdate({
                 username: textValue
             }, {
@@ -58,6 +60,7 @@ router.post('/login/', function(req, res, next) {
 
     // Check for users
     var username = req.body["username"];
+    console.log(username);
     var passAttempt = req.body["password"];
 
     console.log("Run");
