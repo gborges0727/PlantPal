@@ -16,7 +16,7 @@ var storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + Date.now())
     }
 });
-var upload = multer({storage: storage});
+var uploading = multer({storage: storage});
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -35,7 +35,8 @@ router.post('/upload/', upload.single('plantPic'), (req, res) => {
     }); */
     console.log("Part 2 reached");
     // Analyze image here! Then save analysis alongside the image (somehow :D, may need to modify schema)
-    upload(req.file, res, function(err) {
+    
+    uploading(req.file, res, function(err) {
         if (err) throw err;
         console.log("Image uploaded successfully");
         var id = model.User.findOne(username._id);
