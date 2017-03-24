@@ -46,8 +46,9 @@ router.post('/upload/', function(req, res) {
             }
         }, {
             safe: true,
-            upsert: false
-        }, {new: true}, 
+            upsert: true, 
+            new: true
+        },
         function(err, user) {
             if (err) throw err;
         });
