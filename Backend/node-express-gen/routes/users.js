@@ -62,6 +62,7 @@ router.post('/login/', function(req, res, next) {
     var username = req.body["username"];
     console.log(username);
     var passAttempt = req.body["password"];
+    console.log(passAttempt);
 
     console.log("Run");
 
