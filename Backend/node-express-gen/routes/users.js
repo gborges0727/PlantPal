@@ -21,6 +21,7 @@ router.post('/upload/', function(req, res) {
     console.log("3");
     // Rename the uploaded file :D
     form.on('file', function(field, file) {
+        console.log("9");
         fs.rename(file.path, path.join(form.uploadDir, newName));
     });
     console.log("4");
