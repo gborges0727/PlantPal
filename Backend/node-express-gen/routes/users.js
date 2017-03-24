@@ -35,7 +35,7 @@ router.post('/upload/', upload.single('plantPic'), (req, res) => {
     }); */
     console.log("Part 2 reached");
     // Analyze image here! Then save analysis alongside the image (somehow :D, may need to modify schema)
-    upload(pic, res, function(err) {
+    upload(req.file, res, function(err) {
         if (err) throw err;
         console.log("Image uploaded successfully");
         var id = model.User.findOne(username._id);
