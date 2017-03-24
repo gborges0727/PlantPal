@@ -17,22 +17,27 @@ router.post('/upload/', function(req, res) {
     var newName = shortid.generate();
     console.log("2");
     var form = new formidable.IncomingForm();
-    form.uploadDir = "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages";
     console.log("3");
     // Rename the uploaded file :D
-    form.on('file', function(field, file) {
-        console.log("9");
-        fs.rename(file.path, path.join(form.uploadDir, newName));
+    form.on('fileBegin', function (name, file){
+        file.path = __dirname + '../userImages/' + newName;
     });
+    
+    form.on('file', function(field, file) {
+        console.log('Uploaded ' + file.name);
+    });
+    
     console.log("4");
     form.on('error', function(err) {
         console.log('An error has occured: \n' + err);
     });
+    
     console.log("5");
     form.on('end', function() {
         console.log("8");
         res.end('success');
     });
+    
     console.log("6");
     form.parse(req);
     console.log("7");
