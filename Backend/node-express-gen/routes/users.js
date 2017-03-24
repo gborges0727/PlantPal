@@ -38,7 +38,7 @@ router.post('/upload/', function(req, res) {
     
     model.User.findOneAndUpdate({username: username},
             {$push: {"pictures": {location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".jpg"}}},
-            {safe: true, upsert: true},
+            {safe: true, upsert: false},
             function(err, user) {
             if (err) throw err;
         });
