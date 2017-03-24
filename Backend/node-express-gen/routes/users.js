@@ -60,11 +60,7 @@ router.post('/login/', function(req, res, next) {
 
     // Check for users
     var username = req.body["username"];
-    console.log(username);
     var passAttempt = req.body["password"];
-    console.log(passAttempt);
-
-    console.log("Run");
 
     // Weird error happening with sending responses: To fix if we have time
     // Because it is otherwise functional :) 
@@ -76,14 +72,14 @@ router.post('/login/', function(req, res, next) {
             console.log("Error 1");
             return next(error);
         }
-        if (!user) {
-            console.log("Error 2");
-            return next(null, false, {
-                message: 'Incorrect username. '
+        else if (!user) {
+            res.writeHead(404, {
+                'Content-Type': 'text/plain'
             });
+            res.end('Username was not found! Please try again');
         }
 
-        if (bcrypt.compareSync(passAttempt, user.password)) {
+        else if (bcrypt.compareSync(passAttempt, user.password)) {
             console.log("Password success");
             res.writeHead(200, {
                 'Content-Type': 'text/plain'
@@ -91,11 +87,10 @@ router.post('/login/', function(req, res, next) {
             // res.write -- JSON object with user info to add here
             res.end('User: ' + username + ' has signed in succesfully');
         } else {
-            res.writeHead(200, {
+            res.writeHead(401, {
                 'Content-Type': 'text/plain'
             });
-            res.end('Username: ' + username + ' has entered an incorrect password');
-            console.log("Incorrect password");
+            res.end('Incorrect password!');
         }
     });
 });
