@@ -3,7 +3,7 @@ var router = express.Router();
 var model = require('../models/models');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
-var formidible = require('formidible');
+var formidable = require('formidable');
 var shortid = require('shortid');
 var fs = require('fs');
 
@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 router.post('/upload/', function(req, res) {
     var newName = shortid.generate();
 
-    var form = new formidible.IncomingForm();
+    var form = new formidable.IncomingForm();
     form.uploadDir = "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages";
 
     // Rename the uploaded file :D
