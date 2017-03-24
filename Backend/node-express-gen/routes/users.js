@@ -34,7 +34,7 @@ router.post('/upload/', function(req, res) {
         res.end('success');
     });
 
-    form.on('username', function(username) {
+    form.on('textBegin', function(username) {
         model.User.findOneAndUpdate({
                 username: username
             }, {
