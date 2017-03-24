@@ -38,12 +38,13 @@ router.post('/upload/', function(req, res) {
         model.User.findOneAndUpdate({
                 username: textValue
             }, {
-                $set: {
+                $push: {
                     "pictures": {
                         location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".jpg"
                     }
                 }
             }, {
+                safe: true, 
                 new: true
             },
             function(err, user) {
