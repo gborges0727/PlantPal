@@ -34,9 +34,9 @@ router.post('/upload/', function(req, res) {
         res.end('success');
     });
 
-    var uname = req.body["username"];
-    console.log(req.body);
-    console.log(uname);
+    form.on('username', function() {
+        
+    });
 
     model.User.findOneAndUpdate({
             username: uname
