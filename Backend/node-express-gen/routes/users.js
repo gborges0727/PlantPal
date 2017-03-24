@@ -19,7 +19,9 @@ router.post('/upload/', function(req, res) {
     var form = new formidable.IncomingForm();
     console.log("3");
     // Rename the uploaded file :D
+    form.parse(req);
     form.on('fileBegin', function (name, file){
+        console.log("10");
         file.path = __dirname + '../userImages/' + newName;
     });
     
@@ -39,7 +41,6 @@ router.post('/upload/', function(req, res) {
     });
     
     console.log("6");
-    form.parse(req);
     console.log("7");
 
 });
