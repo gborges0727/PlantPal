@@ -3,77 +3,65 @@ var router = express.Router();
 var model = require('../models/models');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
-var multer = require('multer');
-var upload = multer({ storage: multer.memoryStorage() });
+var formidible = require('formidible');
 var shortid = require('shortid');
 var fs = require('fs');
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages')
-    }, 
-    filename: function(req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now())
-    }
-});
-var uploading = multer({storage: storage});
-
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+    res.send('respond with a resource');
 });
 
-router.post('/upload/', upload.single('plantPic'), (req, res) => {
-    // Save here - req.file = picture, req.body = other data (username)
-    console.log("Part 1 reached");
-    var username = req.body;
+router.post('/upload/', (req, res) {
     var newName = shortid.generate();
-    /*
-    var pic = fs.rename(req.file, newName, function(err) {
-        if (err) throw err; 
-        console.log("Image renamed");
-    }); */
-    console.log("Part 2 reached");
-    // Analyze image here! Then save analysis alongside the image (somehow :D, may need to modify schema)
-    
-    uploading(req.file, res, function(err) {
-        if (err) throw err;
-        console.log("Image uploaded successfully");
-        var id = model.User.findOne(username._id);
-        model.User.findOneAndUpdate({username: username},
-            {$push: {"pictures": {location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName}}},
-            {safe: true, upsert: true},
-            function(err, user) {
-            if (err) throw err;
-        });
+
+    var form = new formidible.IncomingForm();
+    form.uploadDir = "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages";
+
+    // Rename the uploaded file :D
+    form.on('file', function(field, file) {
+        fs.rename(file.path, path.join(form.uploadDir, newName));
     });
-    console.log("Part 3 reached");
-    // save pic & username here -- also the code to analyze images goes here :) 
+
+    form.on('error', function(err) {
+        console.log('An error has occured: \n' + err);
+    });
+
+    form.on('end', function() {
+        res.end('success');
+    });
+
+    form.parse(req);
+
 });
 
 router.post('/login/', function(req, res, next) {
     //TODO: Send responses
-    
+
     // Check for users
     var username = req.body["username"];
     var passAttempt = req.body["password"];
-    
+
     console.log("Run");
-    
+
     // Weird error happening with sending responses: To fix if we have time
     // Because it is otherwise functional :) 
-    model.User.findOne({ username: username }, function(err, user) {
+    model.User.findOne({
+        username: username
+    }, function(err, user) {
         console.log("test");
         if (err) {
             console.log("Error 1");
             return next(error);
-        } 
+        }
         if (!user) {
             console.log("Error 2");
-            return next(null, false, { message: 'Incorrect username. '});
+            return next(null, false, {
+                message: 'Incorrect username. '
+            });
         }
-        
-        if(bcrypt.compareSync(passAttempt, user.password)) {
+
+        if (bcrypt.compareSync(passAttempt, user.password)) {
             console.log("Password success");
             res.writeHead(200, {
                 'Content-Type': 'text/plain'
@@ -87,7 +75,7 @@ router.post('/login/', function(req, res, next) {
             res.end('Username: ' + username + ' has entered an incorrect password');
             console.log("Incorrect password");
         }
-    });    
+    });
 });
 
 router.post('/register/', function(req, res, next) {
@@ -95,17 +83,19 @@ router.post('/register/', function(req, res, next) {
     // Get the documents
     var newUser = new model.User({
         firstname: req.body["firstname"],
-        lastname:  req.body["lastname"],
-        username:  req.body["username"],
-        password:  req.body["password"],
-        email:     req.body["email"]
+        lastname: req.body["lastname"],
+        username: req.body["username"],
+        password: req.body["password"],
+        email: req.body["email"]
     });
 
     newUser.hashPassword(function(err) {
         if (err) throw err;
     });
-    
-    model.User.findOne({username: req.body["username"]}, function(err, user){
+
+    model.User.findOne({
+        username: req.body["username"]
+    }, function(err, user) {
         if (err) throw err;
         else if (!user) {
             newUser.save(function(err, result) {
@@ -118,9 +108,8 @@ router.post('/register/', function(req, res, next) {
                     });
                     res.end('User created successfully!');
                 }
-            });   
-        }
-        else {
+            });
+        } else {
             res.writeHead(200, {
                 'Content-Type': 'text/plain'
             });
