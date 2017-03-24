@@ -28,10 +28,11 @@ router.post('/upload/', upload.single('plantPic'), (req, res) => {
     console.log("Part 1 reached");
     var username = req.body;
     var newName = shortid.generate();
+    /*
     var pic = fs.rename(req.file, newName, function(err) {
         if (err) throw err; 
         console.log("Image renamed");
-    });
+    }); */
     console.log("Part 2 reached");
     // Analyze image here! Then save analysis alongside the image (somehow :D, may need to modify schema)
     upload(pic, res, function(err) {
