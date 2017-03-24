@@ -24,7 +24,7 @@ router.post('/upload/', function(req, res) {
         console.log("10");
         file.path = __dirname + '../userImages/' + newName;
     });
-    
+    console.log("3.5");
     form.on('file', function(field, file) {
         console.log('Uploaded ' + file.name);
     });
