@@ -34,6 +34,15 @@ router.post('/upload/', function(req, res) {
         res.end('success');
     });
     
+    var username = req.body["username"];
+    
+    model.User.findOneAndUpdate({username: username},
+            {$push: {"pictures": {location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".jpg"}}},
+            {safe: true, upsert: true},
+            function(err, user) {
+            if (err) throw err;
+        });
+    
 });
 
 router.post('/login/', function(req, res, next) {
