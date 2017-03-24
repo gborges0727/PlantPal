@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 
-router.post('/upload/', (req, res) {
+router.post('/upload/', function(req, res) {
     var newName = shortid.generate();
 
     var form = new formidible.IncomingForm();
