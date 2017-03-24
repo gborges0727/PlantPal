@@ -34,10 +34,11 @@ router.post('/upload/', function(req, res) {
         res.end('success');
     });
 
-    var username = req.body["username"];
+    var uname = req.body["username"];
+    console.log(uname);
 
     model.User.findOneAndUpdate({
-            username: username
+            username: uname
         }, {
             $set: {
                 "pictures": {
@@ -45,8 +46,6 @@ router.post('/upload/', function(req, res) {
                 }
             }
         }, {
-            safe: true,
-            upsert: true, 
             new: true
         },
         function(err, user) {
