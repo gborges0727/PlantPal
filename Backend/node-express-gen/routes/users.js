@@ -13,36 +13,27 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/upload/', function(req, res) {
-    console.log("1");
     var newName = shortid.generate();
-    console.log("2");
     var form = new formidable.IncomingForm();
-    console.log("3");
+    
     // Rename the uploaded file :D
     form.parse(req);
     form.on('fileBegin', function (name, file){
-        console.log("10");
         file.path = '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg';
     });
-    console.log("3.5");
+    
     form.on('file', function(field, file) {
         console.log('Uploaded ' + file.name);
     });
     
-    console.log("4");
     form.on('error', function(err) {
         console.log('An error has occured: \n' + err);
     });
     
-    console.log("5");
     form.on('end', function() {
-        console.log("8");
         res.end('success');
     });
     
-    console.log("6");
-    console.log("7");
-
 });
 
 router.post('/login/', function(req, res, next) {
