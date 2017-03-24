@@ -127,10 +127,10 @@ router.post('/register/', function(req, res, next) {
                 }
             });
         } else {
-            res.writeHead(200, {
+            res.writeHead(401, {
                 'Content-Type': 'text/plain'
             });
-            res.end('User already exists!');
+            res.end('Username already exists!');
         }
     });
 });
