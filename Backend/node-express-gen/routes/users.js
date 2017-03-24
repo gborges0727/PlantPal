@@ -29,6 +29,7 @@ router.post('/upload/', function(req, res) {
     });
     console.log("5");
     form.on('end', function() {
+        console.log("8");
         res.end('success');
     });
     console.log("6");
