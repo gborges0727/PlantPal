@@ -6,6 +6,7 @@ var bcrypt = require('bcrypt');
 var multer = require('multer');
 var upload = multer({ storage: multer.memoryStorage() });
 var shortid = require('shortid');
+var fs = require('fs');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
