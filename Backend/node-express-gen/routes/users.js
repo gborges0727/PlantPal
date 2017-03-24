@@ -34,9 +34,9 @@ router.post('/upload/', function(req, res) {
         res.end('success');
     });
 
-    form.on('textBegin', function(username) {
+    form.on('field', function(fieldName, textValue) {
         model.User.findOneAndUpdate({
-                username: username
+                username: textValue
             }, {
                 $set: {
                     "pictures": {
