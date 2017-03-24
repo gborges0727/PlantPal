@@ -34,25 +34,22 @@ router.post('/upload/', function(req, res) {
         res.end('success');
     });
 
-    form.on('username', function() {
-        
-    });
-
-    model.User.findOneAndUpdate({
-            username: uname
-        }, {
-            $set: {
-                "pictures": {
-                    location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".jpg"
+    form.on('username', function(username) {
+        model.User.findOneAndUpdate({
+                username: username
+            }, {
+                $set: {
+                    "pictures": {
+                        location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".jpg"
+                    }
                 }
-            }
-        }, {
-            new: true
-        },
-        function(err, user) {
-            if (err) throw err;
-        });
-
+            }, {
+                new: true
+            },
+            function(err, user) {
+                if (err) throw err;
+            });
+    });
 });
 
 router.post('/login/', function(req, res, next) {
