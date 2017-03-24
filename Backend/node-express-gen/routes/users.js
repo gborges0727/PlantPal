@@ -22,7 +22,7 @@ router.post('/upload/', function(req, res) {
     form.parse(req);
     form.on('fileBegin', function (name, file){
         console.log("10");
-        file.path = __dirname + '../userImages/' + newName;
+        file.path = '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg';
     });
     console.log("3.5");
     form.on('file', function(field, file) {
