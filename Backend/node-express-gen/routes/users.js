@@ -15,34 +15,43 @@ router.get('/', function(req, res, next) {
 router.post('/upload/', function(req, res) {
     var newName = shortid.generate();
     var form = new formidable.IncomingForm();
-    
+
     // Rename the uploaded file :D
     form.parse(req);
-    form.on('fileBegin', function (name, file){
+    form.on('fileBegin', function(name, file) {
         file.path = '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg';
     });
-    
+
     form.on('file', function(field, file) {
         console.log('Uploaded ' + file.name);
     });
-    
+
     form.on('error', function(err) {
         console.log('An error has occured: \n' + err);
     });
-    
+
     form.on('end', function() {
         res.end('success');
     });
-    
+
     var username = req.body["username"];
-    
-    model.User.findOneAndUpdate({username: username},
-            {$push: {"pictures": {location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".jpg"}}},
-            {safe: true, upsert: false},
-            function(err, user) {
+
+    model.User.findOneAndUpdate({
+            username: username
+        }, {
+            $set: {
+                "pictures": {
+                    location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".jpg"
+                }
+            }
+        }, {
+            safe: true,
+            upsert: false
+        },
+        function(err, user) {
             if (err) throw err;
         });
-    
+
 });
 
 router.post('/login/', function(req, res, next) {
