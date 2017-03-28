@@ -7,7 +7,7 @@ var formidable = require('formidable');
 var shortid = require('shortid');
 var fs = require('fs');
 var pythonshell = require('python-shell');
-var pyshell = new pythonshell('//var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/classify2.py');
+var pyshell = new pythonshell('/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/classify2.py');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
