@@ -69,7 +69,7 @@ model = Network(weights="imagenet")
 
 # load the input image using the Keras helper utility while ensuring
 # the image is resized to `inputShape`
-print("[Photo] is being processed and identified...")
+#print("[Photo] is being processed and identified...")
 image = load_img(args["photo"], target_size=inputShape)
 image = img_to_array(image)
 
@@ -105,7 +105,7 @@ def check():
                 return found
         if not found:
             return found
-r = "Plant= ROSE"
+r = "ROSE"
 
 def check2():
     # The object string that was found
@@ -163,7 +163,7 @@ def plantClass(target, data):
 
 	# predict what type of flower the image is
 	flower = le.inverse_transform(model.predict([features]))[0]
-	print("Plant= {}".format(flower.upper()))
+	print("{}".format(flower.upper()))
 
 # finding the results
 if check():
