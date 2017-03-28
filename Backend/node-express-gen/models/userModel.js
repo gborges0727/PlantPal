@@ -14,7 +14,8 @@ var UserSchema = new Schema({
     lastname: String,
     email: String,
     pictures: [{
-        location: String
+        location: String, 
+        plantType: String
     }],
     created_at: Date,
     updated_at: Date

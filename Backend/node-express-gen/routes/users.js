@@ -6,6 +6,8 @@ var bcrypt = require('bcrypt');
 var formidable = require('formidable');
 var shortid = require('shortid');
 var fs = require('fs');
+var pythonshell = require('python-shell');
+var pyshell = new pythonshell('var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/classify2.py');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -13,6 +15,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/upload/', function(req, res) {
+    var plantName = '';
     var newName = shortid.generate();
     var form = new formidable.IncomingForm();
 
@@ -34,24 +37,36 @@ router.post('/upload/', function(req, res) {
         res.end('success');
     });
 
-    form.on('field', function(fieldName, textValue) {
-        // Run python identification script here and save result to var
-        // Set result into the database alongside picture location 
-        model.User.findOneAndUpdate({
-                username: textValue
-            }, {
-                $push: {
-                    "pictures": {
-                        location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".jpg"
+    form.on('field', function(fieldName, textValue) {        
+        // Below code runs the analysis
+        pyshell.send('-p', '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg');
+        
+        pyshell.on('message', function(message) {
+            // received a message sent from the Python script (a simple "print" statement)
+            plantName = message;
+        });
+
+        pyshell.end(function(err) {
+            if (err) throw err;
+            console.log('Picture analysis complete');
+            model.User.findOneAndUpdate({
+                    username: textValue
+                }, {
+                    $push: {
+                        "pictures": {
+                            location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".jpg", 
+                            plantType: plantName
+                        }
                     }
-                }
-            }, {
-                safe: true, 
-                new: true
-            },
-            function(err, user) {
-                if (err) throw err;
-            });
+                }, {
+                    safe: true, 
+                    new: true
+                },
+                function(err, user) {
+                    if (err) throw err;
+                    console.log("Image Saved successfully");
+                });
+        });
     });
 });
 
