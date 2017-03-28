@@ -18,8 +18,6 @@ from keras.applications.inception_v3 import preprocess_input
 from keras.preprocessing.image import img_to_array
 from keras.preprocessing.image import load_img
 import numpy as np
-import sys
-sys.path.append('/usr/local/lib/python2.7/site-packages')
 import argparse
 import glob
 import cv2
