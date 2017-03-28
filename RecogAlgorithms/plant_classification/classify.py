@@ -1,4 +1,3 @@
-# USAGE
 # python classify.py --images dataset/images --masks dataset/masks
 
 # All photos that are used for -p have to be .png
@@ -15,9 +14,11 @@ import numpy as np
 import argparse
 import glob
 import cv2
+import PIL.ImageOps
 from PIL import Image
 from matplotlib import pyplot as plt
-import PIL.ImageOps
+import mahotas
+
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -36,10 +37,41 @@ imagePaths = sorted(glob.glob(args["images"] + "/*.png"))
 maskPaths = sorted(glob.glob(args["masks"] + "/*.png"))
 
 # Printing original input image
-oImage = Image.open(args["photo"])
-oImage.show()
+#oImage = Image.open(args["photo"])
+#oImage.show()
 print("\n Analyzing picture, now loading... \n")
 
+# Resizing the image
+image = cv2.imread(args["photo"])
+r = 400.0 / image.shape[1]
+dim = (400, int(image.shape[0] * r))
+resized = cv2.resize(image, dim, interpolation = cv2.INTER_AREA)
+blurred = cv2.GaussianBlur(resized, (5,5),0)
+T = mahotas.thresholding.otsu(blurred)
+print('Otsus threshold: %d' % T)
+thresh = image.copy()
+thresh[thresh > T] = 255
+thresh[thresh < 255] = 0
+thresh = cv2.bitwise_not(thresh)
+
+mPreview = Image.fromarray(thresh)
+mPreview.show()
+
+V = mahotas.thresholding.rc(blurred)
+print('Riddler-Calvard: %d' % V)
+thresh = image.copy()
+thresh[thresh > V] = 255
+thresh[thresh < 255] = 0
+thresh = cv2.bitwise_not(thresh)
+
+mPreview = Image.fromarray(thresh)
+mPreview.show()
+
+
+
+
+
+"""
 # initialize the list of data and class label targets
 data = []
 target = []
@@ -50,7 +82,7 @@ desc = RGBHistogram([8, 8, 8])
 # loop over the image and mask paths
 for (imagePath, maskPath) in zip(imagePaths, maskPaths):
 	# load the image and mask
-	image = cv2.imread(imagePath)
+    image = cv2.imread(imagePath)
 	mask = cv2.imread(maskPath)
 	mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
 
@@ -80,25 +112,7 @@ print(classification_report(testTarget, model.predict(testData),
 	target_names = targetNames))
 
 
-# WAY1: Getting the mask of the image
-#maskedImage = cv2.imread(args["photo"])
-#mask = np.zeros(image.shape[:2], dtype = "uint8")
-#(cX, cY) = (image.shape[1] // 2, image.shape[0] // 2)
-#cv2.rectangle(mask, (cX - 75, cY - 75), (cX + 75 , cY + 75), 255, -1)
-#masked = cv2.bitwise_and(image, image, mask = mask)
-#mask = np.zeros(image.shape[:2], dtype = "uint8")
-#cv2.circle(mask, (cX, cY), 100, 255, -1)
-#masked = cv2.bitwise_and(image, image, mask = mask)
-
-# WAY2: Getting the mask of the image
-#maskedImage = cv2.imread(args["photo"])
-#imgray = cv2.cvtColor(maskedImage,cv2.COLOR_BGR2GRAY)
-#edges = cv2.Canny(imgray, 50, 150)
-#contourImage = cv2.Canny(imgray, 50, 150)
-#image, contours, hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-#cv2.drawContours(contourImage, contours, -1, (255,255,255), 3)
-
-# WAY3: Getting the Simple Threshold of the image/masking it
+# Getting the Simple Threshold of the image/masking it
 maskedImage = cv2.imread(args["photo"])
 imgray = cv2.cvtColor(maskedImage, cv2.COLOR_BGR2GRAY)
 blurred = cv2.GaussianBlur(imgray, (5, 5), 0)
@@ -118,3 +132,4 @@ features = desc.describe(maskedImage, threshInv)
 # predict what type of flower the image is
 flower = le.inverse_transform(model.predict([features]))[0]
 print("I think this flower is a {}".format(flower.upper()))
+"""
