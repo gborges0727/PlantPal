@@ -27,6 +27,7 @@ from matplotlib import pyplot as plt
 import mahotas
 import re
 
+
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 
