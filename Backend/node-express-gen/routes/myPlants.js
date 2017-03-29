@@ -8,9 +8,24 @@ router.get('/allPlants', function(req, res, next) {
     model.User.findOne({
         username: req.body
     }, function(err, user) {
-        console.log(JSON.stringify('Got user: ' + req.body));
-        if (err) throw err;
-        console.log('I GOT A USER!!!');
+        if (err) {
+            res.writeHead(404, {
+                'Content-Type': 'text/plain'
+            });
+            res.end('Error: Username was not found! Please try again');
+        }
+        
+        var userPictures = JSON.stringify {
+            pictures: [{
+                user.pictures
+            }]
+        };
+        
+        res.writeHead(200, {
+            'Content-Type': 'application/json'
+        });
+        
+        res.end(userPictures);
     });
 });
 
@@ -31,7 +46,7 @@ router.get('/specificPlant', function(req, res, next) {
             family: flower.family,
             nativeRegion: flower.nativeRegion,
             Description: flower.Description
-        }
+        };
 
         res.writeHead(200, {
             'Content-Type': 'application/json'
