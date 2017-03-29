@@ -140,6 +140,7 @@ def plantClass(target, data):
         image = cv2.imread(imagePath)
         mask = cv2.imread(maskPath)
         mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
+        print(image)
 
 		# describe the image
     	features = desc.describe(image, mask)
@@ -157,8 +158,6 @@ def plantClass(target, data):
     (trainData, testData, trainTarget, testTarget) = train_test_split(data, target,
         test_size = 0.3, random_state = 42)
 
-    print(data)
-    print(target)
 	# train the classifier
     model = RandomForestClassifier(n_estimators = 25, random_state = 84)
     model.fit(trainData, trainTarget)
