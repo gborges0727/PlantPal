@@ -107,7 +107,9 @@ def check():
     # The object string that was found
     w = label
     # opening the file
+	#with open("flowerwords.txt") as f:
 	with open("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/flowerwords.txt") as f:
+<<<<<<< HEAD
 		#with open("flowerwords.txt") as f:
     	found = False
     	for line in f:
@@ -115,6 +117,22 @@ def check():
             	found = True
             	return found
 		if not found:
+||||||| merged common ancestors
+    #with open("flowerwords.txt") as f:
+        found = False
+        for line in f:
+            if w in line:
+                found = True
+                return found
+        if not found:
+=======
+        found = False
+        for line in f:
+            if w in line:
+                found = True
+                return found
+        if not found:
+>>>>>>> c7f9e458734a9821be8c5fa2d384b8d030fbdc88
             return found
 r = "ROSE"
 
@@ -122,8 +140,8 @@ def check2():
     # The object string that was found
     w = label
     # opening the file
+	#with open("xfile.txt") as f:
 	with open("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/xfile.txt") as f:
-    #with open("xfile.txt") as f:
         found = False
         for line in f:
             if w in line:
