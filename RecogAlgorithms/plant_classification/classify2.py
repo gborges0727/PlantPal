@@ -8,11 +8,11 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-from keras.applications import ResNet50
-from keras.applications import InceptionV3
-from keras.applications import Xception # TensorFlow ONLY
+#from keras.applications import ResNet50
+#from keras.applications import InceptionV3
+#from keras.applications import Xception # TensorFlow ONLY
 from keras.applications import VGG16
-from keras.applications import VGG19
+#from keras.applications import VGG19
 from keras.applications import imagenet_utils
 from keras.applications.inception_v3 import preprocess_input
 from keras.preprocessing.image import img_to_array
