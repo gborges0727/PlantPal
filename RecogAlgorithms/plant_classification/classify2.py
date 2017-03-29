@@ -34,9 +34,6 @@ from matplotlib import pyplot as plt
 import re
 import warnings
 
-# To suppress the RuntimeWarning
-warnings.simplefilter('ignore', RuntimeWarning)
-
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 
@@ -72,6 +69,8 @@ preprocess = imagenet_utils.preprocess_input
 # first time, the VGG16 will download to local disk
 #Network = VGG16
 model = VGG16(weights="imagenet")
+# To suppress the RuntimeWarning
+warnings.simplefilter('ignore', RuntimeWarning)
 
 # load the input image using the Keras helper utility while ensuring
 # the image is resized to `inputShape`
