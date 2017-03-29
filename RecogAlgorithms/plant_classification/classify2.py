@@ -8,11 +8,11 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-from keras.applications import ResNet50
-from keras.applications import InceptionV3
-from keras.applications import Xception # TensorFlow ONLY
+#from keras.applications import ResNet50
+#from keras.applications import InceptionV3
+#from keras.applications import Xception # TensorFlow ONLY
 from keras.applications import VGG16
-from keras.applications import VGG19
+#from keras.applications import VGG19
 from keras.applications import imagenet_utils
 from keras.applications.inception_v3 import preprocess_input
 from keras.preprocessing.image import img_to_array
@@ -23,8 +23,10 @@ import glob
 import cv2
 import PIL.ImageOps
 from PIL import Image
+import matplotlib 
+matplotlib.use('Agg')
 from matplotlib import pyplot as plt
-import mahotas
+#import mahotas
 import re
 
 
@@ -43,11 +45,7 @@ maskPaths = sorted(glob.glob("dataset/masks/" + "/*.png"))
 # define a dictionary that maps model names to their classes
 # The different types of pretrained neural networks on the datasets in ImageNet
 MODELS = {
-	"vgg16": VGG16,
-	"vgg19": VGG19,
-	"inception": InceptionV3,
-	"xception": Xception, # TensorFlow ONLY
-	"resnet": ResNet50
+	"vgg16": VGG16
 }
 
 # initialize the list of data and class label targets
