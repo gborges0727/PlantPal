@@ -12,7 +12,7 @@ router.get('/allPlants', function(req, res, next) {
         if (err) throw err;
         else
             console.log('I GOT A USER!!!')
-    })
+    });
 });
 
 router.get('/specificPlant', function(req, res, next) {
