@@ -23,6 +23,7 @@ from keras.applications.vgg16 import preprocess_input
 import keras.layers.convolutional
 import numpy as np
 import argparse
+import tensorflow
 import glob
 import cv2
 print(cv2.__version__)
@@ -134,6 +135,7 @@ def check2():
 
 def plantClass(target, data):
 	# loop over the image and mask paths
+    print(tensorflow.__version__)
     for (imagePath, maskPath) in zip(imagePaths, maskPaths):
         image = cv2.imread(imagePath)
         mask = cv2.imread(maskPath)
