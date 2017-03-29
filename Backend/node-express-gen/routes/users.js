@@ -38,8 +38,9 @@ router.post('/upload/', function(req, res) {
 
     form.on('field', function(fieldName, textValue) {        
         // Below code runs the analysis
+        console.log(newName);
         pythonshell.defaultOptions = { scriptPath: '/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/', 
-            args: ['/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg']
+            args: ['-p', '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg']
         };
         var pyshell = new pythonshell('classify2.py');
         
