@@ -20,17 +20,6 @@ from keras.preprocessing.image import load_img
 from keras.layers.convolutional import Conv2D
 from keras.layers.convolutional import Conv1D
 from keras.applications.vgg16 import preprocess_input
-#tensorflow imports
-import tensorflow as tf
-from tensorflow.python.training import moving_averages
-from tensorflow.python.ops import tensor_array_ops
-from tensorflow.python.ops import control_flow_ops
-from tensorflow.python.ops import functional_ops
-from tensorflow.python.ops import ctc_ops as ctc
-from collections import defaultdict
-import os
-import warnings
-
 import keras.layers.convolutional
 import numpy as np
 import argparse
