@@ -108,13 +108,13 @@ def check():
     w = label
     # opening the file
 	with open("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/flowerwords.txt") as f:
-    #with open("flowerwords.txt") as f:
-        found = False
-        for line in f:
-            if w in line:
-                found = True
-                return found
-        if not found:
+		#with open("flowerwords.txt") as f:
+    	found = False
+    	for line in f:
+        	if w in line:
+            	found = True
+            	return found
+		if not found:
             return found
 r = "ROSE"
 
