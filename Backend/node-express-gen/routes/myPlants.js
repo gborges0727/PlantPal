@@ -9,5 +9,26 @@ router.get('/allPlants', function(req, res, next) {
 });
 
 router.get('/specificPlant', function(req, res, next) {
-    
+    model.Flower.findOne({name: req.body}, function(err, flower){
+        if (err) {
+            res.writeHead(404, {
+                'Content-Type': 'text/plain'
+            });
+            res.end('Flower was not found! Please try again');
+        }
+        
+        var flowerToSend = JSON.stringify {
+            name: flower.name,
+            sciName: flower.scientificName, 
+            family: flower.family, 
+            nativeRegion: flower.nativeRegion, 
+            Description: flower.Description
+        }
+        
+        res.writeHead(200, {
+            'Content-Type': 'application/json'
+        });
+        
+        res.end(flowerToSend);
+    });
 });
