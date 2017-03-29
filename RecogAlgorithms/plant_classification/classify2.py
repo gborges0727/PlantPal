@@ -32,6 +32,10 @@ matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 #import mahotas
 import re
+import warnings
+
+# To suppress the RuntimeWarning
+warnings.simplefilter('ignore', RuntimeWarning)
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
