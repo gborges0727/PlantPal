@@ -106,7 +106,8 @@ def check():
     # The object string that was found
     w = label
     # opening the file
-    with open("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/flowerwords.txt") as f:
+	with open("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/flowerwords.txt") as f:
+    #with open("flowerwords.txt") as f:
         found = False
         for line in f:
             if w in line:
@@ -120,7 +121,8 @@ def check2():
     # The object string that was found
     w = label
     # opening the file
-    with open("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/xfile.txt") as f:
+	with open("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/xfile.txt") as f:
+    #with open("xfile.txt") as f:
         found = False
         for line in f:
             if w in line:
@@ -142,6 +144,9 @@ def plantClass(target, data):
 		# update the list of data and targets
 		data.append(features)
 		target.append(imagePath.split("_")[-2])
+
+		print(data)
+		print(target)
 
 	# grab the unique target names and encode the labels
 	targetNames = np.unique(target)
@@ -169,6 +174,7 @@ def plantClass(target, data):
 
 	# describe the image
 	features = desc.describe(maskedImage, threshInv)
+	print(features)
 
 	# predict what type of flower the image is
 	flower = le.inverse_transform(model.predict([features]))[0]
