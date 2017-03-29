@@ -17,18 +17,18 @@ from keras.applications import imagenet_utils
 from keras.applications.inception_v3 import preprocess_input
 from keras.preprocessing.image import img_to_array
 from keras.preprocessing.image import load_img
+from keras.layers.convolutional import Convolution2D
 import numpy as np
 import argparse
 import glob
 import cv2
 import PIL.ImageOps
 from PIL import Image
-import matplotlib 
+import matplotlib
 matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 #import mahotas
 import re
-
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
