@@ -25,8 +25,6 @@ import numpy as np
 import argparse
 import glob
 import cv2
-import sys
-print(sys.version)
 import PIL.ImageOps
 from PIL import Image
 import matplotlib
