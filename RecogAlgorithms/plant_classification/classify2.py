@@ -157,6 +157,8 @@ def plantClass(target, data):
     (trainData, testData, trainTarget, testTarget) = train_test_split(data, target,
         test_size = 0.3, random_state = 42)
 
+    print(trainData)
+    print(trainTarget)		
 	# train the classifier
     model = RandomForestClassifier(n_estimators = 25, random_state = 84)
     model.fit(trainData, trainTarget)
