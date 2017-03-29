@@ -19,6 +19,13 @@ from keras.preprocessing.image import img_to_array
 from keras.preprocessing.image import load_img
 from keras.layers.convolutional import Conv2D
 from keras.layers.convolutional import Conv1D
+#tensorflow imports
+import tensorflow as tf
+from tensorflow.python.training import moving_averages
+from tensorflow.python.ops import tensor_array_ops
+from tensorflow.python.ops import control_flow_ops
+from tensorflow.python.ops import functional_ops
+from tensorflow.python.ops import ctc_ops as ctc
 import keras.layers.convolutional
 import numpy as np
 import argparse
@@ -65,8 +72,8 @@ preprocess = imagenet_utils.preprocess_input
 
 # load our the network weights from disk
 # first time, the VGG16 will download to local disk
-Network = VGG16
-model = Network(weights="imagenet")
+#Network = VGG16
+model = VGG16(weights="imagenet")
 
 # load the input image using the Keras helper utility while ensuring
 # the image is resized to `inputShape`
