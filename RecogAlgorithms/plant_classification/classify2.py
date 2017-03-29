@@ -23,6 +23,8 @@ import glob
 import cv2
 import PIL.ImageOps
 from PIL import Image
+import matplotlib 
+matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 import mahotas
 import re
