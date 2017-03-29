@@ -44,11 +44,7 @@ maskPaths = sorted(glob.glob("dataset/masks/" + "/*.png"))
 # define a dictionary that maps model names to their classes
 # The different types of pretrained neural networks on the datasets in ImageNet
 MODELS = {
-	"vgg16": VGG16,
-	"vgg19": VGG19,
-	"inception": InceptionV3,
-	"xception": Xception, # TensorFlow ONLY
-	"resnet": ResNet50
+	"vgg16": VGG16
 }
 
 # initialize the list of data and class label targets
