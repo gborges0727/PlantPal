@@ -41,7 +41,7 @@ router.post('/upload/', function(req, res) {
     form.on('field', function(fieldName, textValue) {        
         // Below code runs the analysis
         console.log(newName);
-        var options = {args: ['-p', '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg']}
+        var options = {args: ['-p', '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/Hk5lUjO2g.jpg']}
         var pyshell = new pythonshell('classify2.py', options);
         
         pyshell.on('message', function(message) {
