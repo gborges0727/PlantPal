@@ -5,7 +5,7 @@ var router = express.Router();
 var model = require('../models/models');
 var mongoose = require('mongoose');
 
-router.get('/feed', function(res, res, next) {
+router.get('/feed', function(req, res, next) {
     
 });
 
