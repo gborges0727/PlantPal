@@ -38,7 +38,7 @@ class LoginScreenViewController: UIViewController {
         
         else {
             let infoDictionary = [
-                "name": UserNameField.text!,
+                "username": UserNameField.text!,
                 "password": PasswordField.text!
             ]
             
@@ -65,8 +65,36 @@ class LoginScreenViewController: UIViewController {
                             return
                         }
                         let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                        let httpResponse = response as! HTTPURLResponse
+                        let statusCode = httpResponse.statusCode
+                        let responseString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
                         if let responseJSON = responseJSON as? [String: Any] {
                             print(responseJSON)
+                        }
+                        if (statusCode == 200) {
+                            // Add code here to preserve username info: Needed when picture is uploaded
+                            let tabBarView = self.storyboard?.instantiateViewController(
+                                withIdentifier: "TabBar") as! TabBarViewController
+                            self.present(tabBarView, animated: true, completion: nil)
+                        }
+                        else if (statusCode == 404) {
+                            let alertController = UIAlertController(title: "Incorrect Username!",
+                                                                    message: responseString as String?, preferredStyle: .alert)
+                            let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                            alertController.addAction(defaultAction)
+                            self.present(alertController, animated: true, completion: nil)
+                        } else if (statusCode == 401) {
+                            let alertController = UIAlertController(title: "Incorrect Password!",
+                                                                    message: responseString as String?, preferredStyle: .alert)
+                            let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                            alertController.addAction(defaultAction)
+                            self.present(alertController, animated: true, completion: nil)
+                        } else {
+                            let alertController = UIAlertController(title: "Error",
+                                                                    message: "Unknown Error occured! Please try again.", preferredStyle: .alert)
+                            let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                            alertController.addAction(defaultAction)
+                            self.present(alertController, animated: true, completion: nil)
                         }
                     }
                     task.resume() // Sends the request
@@ -74,10 +102,6 @@ class LoginScreenViewController: UIViewController {
                     print(error.localizedDescription)
                 }
             }
-            // Run the below only if http 201 is returned (authenticated)
-            let tabBarView = self.storyboard?.instantiateViewController(
-                withIdentifier: "TabBar") as! TabBarViewController
-            self.present(tabBarView, animated: true, completion: nil)
         }
     }
     
