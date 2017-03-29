@@ -18,6 +18,8 @@ from keras.applications.inception_v3 import preprocess_input
 from keras.preprocessing.image import img_to_array
 from keras.preprocessing.image import load_img
 from keras.layers.convolutional import Conv2D
+from keras.layers.convolutional import Conv1D
+import keras.layers.convolutional
 import numpy as np
 import argparse
 import glob
