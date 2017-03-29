@@ -26,7 +26,7 @@ from PIL import Image
 import matplotlib 
 matplotlib.use('Agg')
 from matplotlib import pyplot as plt
-import mahotas
+#import mahotas
 import re
 
 # construct the argument parser and parse the arguments
