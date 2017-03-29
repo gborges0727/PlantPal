@@ -73,6 +73,7 @@ preprocess = imagenet_utils.preprocess_input
 # first time, the VGG16 will download to local disk
 #Network = VGG16
 model = VGG16(weights="imagenet")
+
 # To suppress the RuntimeWarning
 warnings.simplefilter('ignore', RuntimeWarning)
 
@@ -97,7 +98,7 @@ P = imagenet_utils.decode_predictions(preds)
 # loop over the predictions and display the top ranked choice
 # probabilities to our terminal
 for (i, (imagenetID, label, prob)) in enumerate(P[0]):
-        break
+	break
 
 # for testing, I am printing what the label is
 #print('Label= %s'%label)
@@ -138,14 +139,12 @@ def plantClass(target, data):
         mask = cv2.imread(maskPath)
         mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
 
-	# describe the image
-    features = desc.describe(image, mask)
+		# describe the image
+    	features = desc.describe(image, mask)
 
-	# update the list of data and targets
-    data.append(features)
-    target.append(imagePath.split("_")[-2])
-
-
+		# update the list of data and targets
+    	data.append(features)
+    	target.append(imagePath.split("_")[-2])
 
 	# grab the unique target names and encode the labels
     targetNames = np.unique(target)
