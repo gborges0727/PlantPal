@@ -108,14 +108,14 @@ def check():
     w = label
     # opening the file
 	#with open("flowerwords.txt") as f:
-	with open("/var/www/plantpal.uconn.edu/ProjectFiless/RecogAlgorithms/plant_classification/flowerwords.txt") as f:
-		found = False
-		for line in f:
-			if w in line:
-				found = True
-				return found
-		if not found:
-			return found
+    with open("/var/www/plantpal.uconn.edu/ProjectFiless/RecogAlgorithms/plant_classification/flowerwords.txt") as f:
+        found = False
+            for line in f:
+                if w in line:
+                    found = True
+                        return found
+                            if not found:
+                                    return found
 r = "ROSE"
 
 def check2():
@@ -123,10 +123,10 @@ def check2():
     w = label
     # opening the file
 	#with open("xfile.txt") as f:
-	with open("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/xfile.txt") as f:
-		found = False
-		for line in f:
-            if w in line:
+    with open("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/xfile.txt") as f:
+        found = False
+            for line in f:
+                if w in line:
                 found = True
                 return found
         if not found:
@@ -134,58 +134,58 @@ def check2():
 
 def plantClass(target, data):
 	# loop over the image and mask paths
-	for (imagePath, maskPath) in zip(imagePaths, maskPaths):
-		image = cv2.imread(imagePath)
-		mask = cv2.imread(maskPath)
-		mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
+    for (imagePath, maskPath) in zip(imagePaths, maskPaths):
+        image = cv2.imread(imagePath)
+            mask = cv2.imread(maskPath)
+                mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
 
 		# describe the image
-		features = desc.describe(image, mask)
+                features = desc.describe(image, mask)
 
 		# update the list of data and targets
-		data.append(features)
-		target.append(imagePath.split("_")[-2])
+        data.append(features)
+        target.append(imagePath.split("_")[-2])
 
-		print(data)
-		print(target)
+        print(data)
+        print(target)
 
 	# grab the unique target names and encode the labels
-	targetNames = np.unique(target)
-	le = LabelEncoder()
-	target = le.fit_transform(target)
+        targetNames = np.unique(target)
+        le = LabelEncoder()
+        target = le.fit_transform(target)
 
 	# construct the training and testing splits
-	(trainData, testData, trainTarget, testTarget) = train_test_split(data, target,
-		test_size = 0.3, random_state = 42)
+        (trainData, testData, trainTarget, testTarget) = train_test_split(data, target,
+        test_size = 0.3, random_state = 42)
 
 	# train the classifier
-	model = RandomForestClassifier(n_estimators = 25, random_state = 84)
-	model.fit(trainData, trainTarget)
+        model = RandomForestClassifier(n_estimators = 25, random_state = 84)
+        model.fit(trainData, trainTarget)
 
 	# evaluate the classifier
 	#print(classification_report(testTarget, model.predict(testData),
 	#	target_names = targetNames))
 
 	# Getting the Simple Threshold of the image/masking it
-	maskedImage = cv2.imread(args["photo"])
-	imgray = cv2.cvtColor(maskedImage, cv2.COLOR_BGR2GRAY)
-	blurred = cv2.GaussianBlur(imgray, (5, 5), 0)
-	(T, threshInv) = cv2.threshold(blurred, 155, 255, cv2.THRESH_BINARY_INV)
+        maskedImage = cv2.imread(args["photo"])
+        imgray = cv2.cvtColor(maskedImage, cv2.COLOR_BGR2GRAY)
+        blurred = cv2.GaussianBlur(imgray, (5, 5), 0)
+        (T, threshInv) = cv2.threshold(blurred, 155, 255, cv2.THRESH_BINARY_INV)
 
 
 	# describe the image
-	features = desc.describe(maskedImage, threshInv)
-	print(features)
+        features = desc.describe(maskedImage, threshInv)
+        print(features)
 
 	# predict what type of flower the image is
-	flower = le.inverse_transform(model.predict([features]))[0]
-	print("{}".format(flower.upper()))
+        flower = le.inverse_transform(model.predict([features]))[0]
+        print("{}".format(flower.upper()))
 
 # finding the results
 if check():
-	plantClass(target, data)
+        plantClass(target, data)
 if not check():
-	if check2():
-		print(r)
-	else:
-		print("Not a Plant")
+        if check2():
+            print(r)
+        else:
+            print("Not a Plant")
