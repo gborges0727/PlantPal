@@ -8,18 +8,6 @@ router.get('/allPlants', function(req, res, next) {
     model.User.findOne({
         username: req.body
     }, function(err, user) {
-<<<<<<< HEAD
-        if (err) throw err;
-	var pictures = JSON.stringify {
-		location: user.location
-		plantType : user.plantType
-	}
-	
-	res.writeHead(200,{
-	'Content-Type': 'application/json'
-         });
-	res.end(pictures);	
-=======
         if (err) {
             res.writeHead(404, {
                 'Content-Type': 'text/plain'
@@ -38,7 +26,6 @@ router.get('/allPlants', function(req, res, next) {
         });
         
         res.end(userPictures);
->>>>>>> 795ee291fbb14fe637de7e30ac49c0f431bb2b83
     });
 });
 
