@@ -172,7 +172,7 @@ def plantClass(target, data):
 
 	# describe the image
     features = desc.describe(maskedImage, threshInv)
-
+	print(features)
 
 	# predict what type of flower the image is
     flower = le.inverse_transform(model.predict([features]))[0]
