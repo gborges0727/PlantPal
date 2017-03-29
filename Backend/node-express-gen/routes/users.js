@@ -41,7 +41,7 @@ router.post('/upload/', function(req, res) {
         pythonshell.defaultOptions = { scriptPath: '/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/', 
             args: ['-p', '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg']
         };
-        var pyshell = new pythonshell('classify2.py', args['-p', '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg']);
+        var pyshell = new pythonshell('classify2.py');
         
         pyshell.on('message', function(message) {
             // received a message sent from the Python script (a simple "print" statement)
