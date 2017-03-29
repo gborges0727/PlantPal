@@ -98,7 +98,7 @@ P = imagenet_utils.decode_predictions(preds)
 # loop over the predictions and display the top ranked choice
 # probabilities to our terminal
 for (i, (imagenetID, label, prob)) in enumerate(P[0]):
-	break
+        break
 
 # for testing, I am printing what the label is
 #print('Label= %s'%label)
@@ -110,12 +110,12 @@ def check():
 	#with open("flowerwords.txt") as f:
     with open("/var/www/plantpal.uconn.edu/ProjectFiless/RecogAlgorithms/plant_classification/flowerwords.txt") as f:
         found = False
-            for line in f:
-                if w in line:
-                    found = True
-                        return found
-                            if not found:
-                                    return found
+        for line in f:
+            if w in line:
+                found = True
+            return found
+        if not found:
+            return found
 r = "ROSE"
 
 def check2():
@@ -125,8 +125,8 @@ def check2():
 	#with open("xfile.txt") as f:
     with open("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/xfile.txt") as f:
         found = False
-            for line in f:
-                if w in line:
+        for line in f:
+            if w in line:
                 found = True
                 return found
         if not found:
@@ -136,11 +136,11 @@ def plantClass(target, data):
 	# loop over the image and mask paths
     for (imagePath, maskPath) in zip(imagePaths, maskPaths):
         image = cv2.imread(imagePath)
-            mask = cv2.imread(maskPath)
-                mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
+        mask = cv2.imread(maskPath)
+        mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
 
 		# describe the image
-                features = desc.describe(image, mask)
+        features = desc.describe(image, mask)
 
 		# update the list of data and targets
         data.append(features)
@@ -185,7 +185,7 @@ def plantClass(target, data):
 if check():
         plantClass(target, data)
 if not check():
-        if check2():
-            print(r)
-        else:
-            print("Not a Plant")
+    if check2():
+        print(r)
+    else:
+        print("Not a Plant")
