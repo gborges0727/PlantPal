@@ -107,8 +107,8 @@ def check():
     # The object string that was found
     w = label
     # opening the file
+	#with open("flowerwords.txt") as f:
 	with open("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/flowerwords.txt") as f:
-    #with open("flowerwords.txt") as f:
         found = False
         for line in f:
             if w in line:
@@ -122,8 +122,8 @@ def check2():
     # The object string that was found
     w = label
     # opening the file
+	#with open("xfile.txt") as f:
 	with open("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/xfile.txt") as f:
-    #with open("xfile.txt") as f:
         found = False
         for line in f:
             if w in line:
