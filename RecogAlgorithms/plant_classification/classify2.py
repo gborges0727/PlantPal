@@ -102,7 +102,7 @@ for (i, (imagenetID, label, prob)) in enumerate(P[0]):
 
 # for testing, I am printing what the label is
 #print('Label= %s'%label)
-
+"""
 def check():
     # The object string that was found
     w = label
@@ -116,7 +116,7 @@ def check():
             	return found
     	if not found:
         	return found
-r = "ROSE"
+r = "ROSE" """
 
 def check2():
     # The object string that was found
