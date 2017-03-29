@@ -72,8 +72,8 @@ preprocess = imagenet_utils.preprocess_input
 
 # load our the network weights from disk
 # first time, the VGG16 will download to local disk
-Network = VGG16
-model = Network(weights="imagenet")
+#Network = VGG16
+model = VGG16(weights="imagenet")
 
 # load the input image using the Keras helper utility while ensuring
 # the image is resized to `inputShape`
