@@ -7,6 +7,8 @@ var formidable = require('formidable');
 var shortid = require('shortid');
 var fs = require('fs');
 var pythonshell = require('python-shell');
+pythonshell.defaultOptions = { scriptPath: '/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/'
+};
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -39,10 +41,7 @@ router.post('/upload/', function(req, res) {
     form.on('field', function(fieldName, textValue) {        
         // Below code runs the analysis
         console.log(newName);
-        pythonshell.defaultOptions = { scriptPath: '/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/', 
-            args: ['-p', '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg']
-        };
-        var pyshell = new pythonshell('classify2.py');
+        var pyshell = new pythonshell('classify2.py', args: ['-p', '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg']);
         
         pyshell.on('message', function(message) {
             // received a message sent from the Python script (a simple "print" statement)
