@@ -129,7 +129,7 @@ def check2():
         if not found:
             return found
 
-def plantClass():
+def plantClass(target, data):
 	# loop over the image and mask paths
 	for (imagePath, maskPath) in zip(imagePaths, maskPaths):
 		image = cv2.imread(imagePath)
@@ -176,7 +176,7 @@ def plantClass():
 
 # finding the results
 if check():
-	plantClass()
+	plantClass(target, data)
 if not check():
 	if check2():
 		print(r)
