@@ -4,6 +4,10 @@ var router = express.Router();
 var model = require('../models/models');
 var mongoose = require('mongoose');
 
-router.get('/feed', function(res, res, next) {
+router.get('/allPlants', function(req, res, next) {
+    
+});
+
+router.get('/specificPlant', function(req, res, next) {
     
 });

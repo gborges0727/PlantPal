@@ -82,8 +82,29 @@ class SignUpScreenViewController: UIViewController {
                             return
                         }
                         let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                        let httpResponse = response as! HTTPURLResponse
+                        let statusCode = httpResponse.statusCode
+                        let responseString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
                         if let responseJSON = responseJSON as? [String: Any] {
                             print(responseJSON)
+                        }
+                        if (statusCode == 200) {
+                            // TODO: Add code here to preserve username info: Needed when picture is uploaded
+                            let tabBarView = self.storyboard?.instantiateViewController(
+                                withIdentifier: "TabBar") as! TabBarViewController
+                            self.present(tabBarView, animated: true, completion: nil)
+                        } else if (statusCode == 401) {
+                            let alertController = UIAlertController(title: "Uh-Oh!",
+                                                                    message: responseString as String?, preferredStyle: .alert)
+                            let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                            alertController.addAction(defaultAction)
+                            self.present(alertController, animated: true, completion: nil)
+                        } else {
+                            let alertController = UIAlertController(title: "Error",
+                                                                    message: "Unknown Error occured! Please try again.", preferredStyle: .alert)
+                            let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                            alertController.addAction(defaultAction)
+                            self.present(alertController, animated: true, completion: nil)
                         }
                     }
                     task.resume() // Sends the request
@@ -91,12 +112,6 @@ class SignUpScreenViewController: UIViewController {
                     print(error.localizedDescription)
                 }
             }
-            
-            // Send to next view (IFF the above works)
-            // TODO: Restrict the below to running IFF user is successfully created
-            let tabBarView = self.storyboard?.instantiateViewController(withIdentifier: "TabBar")
-                as! TabBarViewController
-            self.present(tabBarView, animated: true, completion: nil)
         }
     }
     
