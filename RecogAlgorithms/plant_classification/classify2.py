@@ -79,6 +79,7 @@ warnings.simplefilter('ignore', RuntimeWarning)
 # the image is resized to `inputShape`
 #print("[Photo] is being processed and identified...")
 image = load_img(args["photo"], target_size=inputShape)
+print(image)
 image = img_to_array(image)
 
 # below, our input photo is represented as a NumPy array of shape
@@ -119,7 +120,7 @@ def check2():
     # The object string that was found
     w = label
     # opening the file
-    with open("xfile.txt") as f:
+    with open("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/xfile.txt") as f:
         found = False
         for line in f:
             if w in line:
@@ -128,7 +129,7 @@ def check2():
         if not found:
             return found
 
-def plantClass(target, data):
+def plantClass():
 	# loop over the image and mask paths
 	for (imagePath, maskPath) in zip(imagePaths, maskPaths):
 		image = cv2.imread(imagePath)
@@ -175,7 +176,7 @@ def plantClass(target, data):
 
 # finding the results
 if check():
-	plantClass(target, data)
+	plantClass()
 if not check():
 	if check2():
 		print(r)
