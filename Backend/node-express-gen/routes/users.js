@@ -7,8 +7,6 @@ var formidable = require('formidable');
 var shortid = require('shortid');
 var fs = require('fs');
 var pythonshell = require('python-shell');
-pythonshell.defaultOptions = { scriptPath: '/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/'};
-var pyshell = new pythonshell('classify2.py');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -40,6 +38,8 @@ router.post('/upload/', function(req, res) {
 
     form.on('field', function(fieldName, textValue) {        
         // Below code runs the analysis
+        pythonshell.defaultOptions = { scriptPath: '/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/'};
+        var pyshell = new pythonshell('classify2.py');
         pyshell.send('-p', '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg');
         
         pyshell.on('message', function(message) {
