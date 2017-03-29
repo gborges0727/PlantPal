@@ -11,7 +11,7 @@ router.get('/allPlants', function(req, res, next) {
         console.log(JSON.stringify('Got user: ' + req.body))
         if (err) throw err;
         else
-            console.log('I GOT A USER!!!')
+            console.log('I GOT A USER!!!');
     });
 });
 
