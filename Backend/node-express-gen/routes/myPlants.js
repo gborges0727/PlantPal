@@ -8,9 +8,16 @@ router.get('/allPlants', function(req, res, next) {
     model.User.findOne({
         username: req.body
     }, function(err, user) {
-        console.log(JSON.stringify('Got user: ' + req.body));
         if (err) throw err;
-        console.log('I GOT A USER!!!');
+	var pictures = JSON.stringify {
+		location: user.location
+		plantType : user.plantType
+	}
+	
+	res.writeHead(200,{
+	'Content-Type': 'application/json'
+         });
+	res.end(pictures);	
     });
 });
 
@@ -30,7 +37,7 @@ router.get('/specificPlant', function(req, res, next) {
             sciName: flower.scientificName,
             family: flower.family,
             nativeRegion: flower.nativeRegion,
-            Description: flower.Description
+        
         }
 
         res.writeHead(200, {
