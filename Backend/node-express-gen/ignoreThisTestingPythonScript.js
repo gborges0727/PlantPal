@@ -9,7 +9,9 @@ var options = {
 };
 
 PythonShell.run('classify2.py', options, function(err, results) {
-    if (err) throw err;
+    if (err)  {
+        console.log('results: %j', results);
+        throw err;
+    }
     // results is an array consisting of messages collected during execution
-    console.log('results: %j', results);
 });
