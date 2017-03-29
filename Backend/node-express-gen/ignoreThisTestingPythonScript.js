@@ -4,9 +4,9 @@ var PythonShell = require('python-shell');
 
 var plantName = '';
 var options = {
-    args: ['-p', '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/Hk5lUjO2g.jpg'],
+    args: ['-p', '/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/images/plants/daisy2.jpg'],
     scriptPath: '/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/'
-}
+};
 
 PythonShell.run('classify2.py', options, function(err, results) {
     if (err) throw err;
