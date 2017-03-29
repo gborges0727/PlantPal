@@ -102,21 +102,21 @@ for (i, (imagenetID, label, prob)) in enumerate(P[0]):
 
 # for testing, I am printing what the label is
 #print('Label= %s'%label)
-"""
+
 def check():
     # The object string that was found
     w = label
     # opening the file
 	#with open("flowerwords.txt") as f:
 	with open("/var/www/plantpal.uconn.edu/ProjectFiless/RecogAlgorithms/plant_classification/flowerwords.txt") as f:
-    	found = False
-    	for line in f:
-        	if w in line:
-            	found = True
-            	return found
-    	if not found:
-        	return found
-r = "ROSE" """
+		found = False
+		for line in f:
+			if w in line:
+				found = True
+				return found
+		if not found:
+			return found
+r = "ROSE"
 
 def check2():
     # The object string that was found
@@ -124,8 +124,8 @@ def check2():
     # opening the file
 	#with open("xfile.txt") as f:
 	with open("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/xfile.txt") as f:
-        found = False
-        for line in f:
+		found = False
+		for line in f:
             if w in line:
                 found = True
                 return found
