@@ -34,6 +34,9 @@ from matplotlib import pyplot as plt
 import re
 import warnings
 
+# All warnings
+warnings.filterwarnings("ignore")
+
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 
