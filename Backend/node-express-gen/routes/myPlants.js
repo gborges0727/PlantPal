@@ -45,13 +45,8 @@ router.get('/specificPlant', function(req, res, next) {
             sciName: flower.scientificName,
             family: flower.family,
             nativeRegion: flower.nativeRegion,
-<<<<<<< HEAD
-        
-        }
-=======
             Description: flower.Description
         };
->>>>>>> 795ee291fbb14fe637de7e30ac49c0f431bb2b83
 
         res.writeHead(200, {
             'Content-Type': 'application/json'
