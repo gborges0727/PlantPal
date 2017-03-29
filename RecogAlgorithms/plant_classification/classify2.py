@@ -140,7 +140,6 @@ def plantClass(target, data):
         image = cv2.imread(imagePath)
         mask = cv2.imread(maskPath)
         mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
-        print(image)
 
 		# describe the image
     	features = desc.describe(image, mask)
