@@ -108,7 +108,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         request.httpMethod = "POST";
         
         let param = [
-            "username"  : "newplantguy123"
+            "username"  : "saitmanager123"
         ]
         
         let boundary = generateBoundaryString()
