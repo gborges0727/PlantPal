@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var PythonShell = require('python-shell');
 var exec = require('child_process').exec;
-var cmd = 'python /var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/classify2.py -p /var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/images/plants/daisy2.jpg';
+var cmd = 'python -W ignore /var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/classify2.py -p /var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/images/plants/daisy2.jpg';
 
 exec(cmd, function(error, stdout, stderr) {
     if(stderr) {
