@@ -46,10 +46,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBAction func uploadActionButton(_ sender: UIButton) {
         // Below code is all pre-node server
         if imageView.image != nil {
-            print("Test")
             let myImage = imageView.image!
             uploadPhoto(image: myImage)
-            let alertController = UIAlertController(title: "Upload Complete!", message: "Please click on 'myPhotos' below to see your results!", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Upload Complete!", message: "Please click on 'MyPlants' below to see your results!", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Okay.", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             present(alertController, animated: true, completion: nil)
