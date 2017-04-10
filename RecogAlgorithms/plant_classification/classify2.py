@@ -26,7 +26,7 @@ import argparse
 import tensorflow
 import glob
 import cv2
-print(cv2.__version__)
+#print(cv2.__version__)
 import PIL.ImageOps
 from PIL import Image
 import matplotlib
@@ -135,7 +135,7 @@ def check2():
 
 def plantClass(target, data):
 	# loop over the image and mask paths
-    print(tensorflow.__version__)
+    #print(tensorflow.__version__)
 	#print("target=",target)
 	#print("data=",data)
 
