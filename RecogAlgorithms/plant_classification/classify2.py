@@ -136,8 +136,8 @@ def check2():
 def plantClass(target, data):
 	# loop over the image and mask paths
     print(tensorflow.__version__)
-	print(target)
-	print(data)
+	print("target=",target)
+	print("data=",data)
     for (imagePath, maskPath) in zip(imagePaths, maskPaths):
         image = cv2.imread(imagePath)
         mask = cv2.imread(maskPath)
