@@ -90,9 +90,8 @@ class SignUpScreenViewController: UIViewController {
                         }
                         if (statusCode == 200) {
                             // TODO: Add code here to preserve username info: Needed when picture is uploaded
-                            let tabBarView = self.storyboard?.instantiateViewController(
-                                withIdentifier: "TabBar") as! TabBarViewController
-                            self.present(tabBarView, animated: true, completion: nil)
+                            let loginView = self.storyboard?.instantiateViewController(withIdentifier: "LogIn Screen") as! LoginScreenViewController
+                            self.present(loginView, animated: true, completion: nil)
                         } else if (statusCode == 401) {
                             let alertController = UIAlertController(title: "Uh-Oh!",
                                                                     message: responseString as String?, preferredStyle: .alert)
