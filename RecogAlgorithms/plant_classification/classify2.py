@@ -8,11 +8,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-#from keras.applications import ResNet50
-#from keras.applications import InceptionV3
-#from keras.applications import Xception # TensorFlow ONLY
 from keras.applications import VGG16
-#from keras.applications import VGG19
 from keras.applications import imagenet_utils
 from keras.applications.inception_v3 import preprocess_input
 from keras.preprocessing.image import img_to_array
@@ -26,13 +22,11 @@ import argparse
 import tensorflow
 import glob
 import cv2
-#print(cv2.__version__)
 import PIL.ImageOps
 from PIL import Image
 import matplotlib
 matplotlib.use('Agg')
 from matplotlib import pyplot as plt
-#import mahotas
 import re
 import warnings
 
@@ -72,7 +66,6 @@ preprocess = imagenet_utils.preprocess_input
 
 # load our the network weights from disk
 # first time, the VGG16 will download to local disk
-#Network = VGG16
 model = VGG16(weights="imagenet")
 
 # To suppress the RuntimeWarning
