@@ -44,6 +44,7 @@ router.post('/upload/', function(req, res) {
             if (stderr) console.log(stderr);
             console.log('Picture analysis complete');
             plantName = stdout;
+            plantName = plantName.replace(/^\s+|\s+$/g, '');
             model.User.findOneAndUpdate({
                     username: textValue
                 }, {
