@@ -6,7 +6,7 @@ var cmd = 'python /var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant
 
 exec(cmd, function(error, stdout, stderr) {
     if(stderr) {
-        throw stderr;
+        console.log(stderr);
     }
     console.log(stdout);
 });
