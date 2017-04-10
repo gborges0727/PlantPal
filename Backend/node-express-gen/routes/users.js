@@ -6,9 +6,6 @@ var bcrypt = require('bcrypt');
 var formidable = require('formidable');
 var shortid = require('shortid');
 var fs = require('fs');
-var pythonshell = require('python-shell');
-pythonshell.defaultOptions = { scriptPath: '/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/'
-};
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
