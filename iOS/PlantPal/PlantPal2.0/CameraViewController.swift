@@ -158,62 +158,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
         
         task.resume()
-        
-        // the below was pre node code - commented temporarily while testing new implentation
-        /*
-        let request = NSMutableURLRequest(url:myUrl! as URL);
-        request.httpMethod = "POST";
-        
-        let param = [
-            "firstName"  : "Sergey",
-            "lastName"    : "Kargopolov",
-            "userId"    : "9"
-        ]
-        
-        let boundary = generateBoundaryString()
-        
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        
-        
-        let imageData = UIImageJPEGRepresentation(imageView.image!, 1)
-        
-        if(imageData==nil)  { return; }
-        
-        request.httpBody = createBodyWithParameters(parameters: param, filePathKey: "file", imageDataKey: imageData! as NSData, boundary: boundary) as Data
-        
-        
-        //myActivityIndicator.startAnimating();
-        
-        let task = URLSession.shared.dataTask(with: request as URLRequest) {
-            data, response, error in
-            
-            if error != nil {
-                print("error=\(error)")
-                return
-            }
-            
-            // You can print out response object
-            print("******* response = \(response)")
-            
-            // Print out reponse body
-            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            print("****** response data = \(responseString!)")
-            
-            do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary
-                
-                print(json)
-                
-                //dispatch_async(dispatch_get_main_queue(),{
-                 //   self.myActivityIndicator.stopAnimating()
-                   // self.myImageView.image = nil;
-                //});
-                
-            } catch {
-                print(error)
-            }
-        }
-        task.resume() */
     }
 }
 
