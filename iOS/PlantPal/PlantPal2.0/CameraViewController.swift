@@ -44,6 +44,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     @IBAction func uploadActionButton(_ sender: UIButton) {
+        // Testing the static user variable
+        print(LoginScreenViewController.username)
+        
         // Below code is all pre-node server
         if imageView.image != nil {
             let myImage = imageView.image!
@@ -108,7 +111,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         request.httpMethod = "POST";
         
         let param = [
-            "username"  : "saitmanager123"
+            "username"  : LoginScreenViewController.username
         ]
         
         let boundary = generateBoundaryString()

@@ -13,6 +13,8 @@ class LoginScreenViewController: UIViewController {
     @IBOutlet weak var UserNameField: UITextField!
     @IBOutlet weak var PasswordField: UITextField!
     
+    static var username = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -37,6 +39,7 @@ class LoginScreenViewController: UIViewController {
         }
         
         else {
+            LoginScreenViewController.username = UserNameField.text!
             let infoDictionary = [
                 "username": UserNameField.text!,
                 "password": PasswordField.text!
