@@ -8,7 +8,7 @@ exec(cmd, function(error, stdout, stderr) {
     if(stderr) {
         console.log(stderr);
     }
-    console.log(stdout[1]);
+    console.log(stdout);
 });
 /*
 var plantName = '';
