@@ -48,8 +48,8 @@ ap.add_argument("-p", "--photo", required = True,
 args = vars(ap.parse_args())
 
 # grab the image and mask paths
-imagePaths = sorted(glob.glob("dataset/images" + "/*.png"))
-maskPaths = sorted(glob.glob("dataset/masks/" + "/*.png"))
+imagePaths = sorted(glob.glob("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/dataset/images" + "/*.png"))
+maskPaths = sorted(glob.glob("/var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/dataset/masks/" + "/*.png"))
 
 # define a dictionary that maps model names to their classes
 # The different types of pretrained neural networks on the datasets in ImageNet
@@ -138,7 +138,7 @@ def plantClass(target, data):
     print(tensorflow.__version__)
 	#print("target=",target)
 	#print("data=",data)
-	
+
     for (imagePath, maskPath) in zip(imagePaths, maskPaths):
         image = cv2.imread(imagePath)
         mask = cv2.imread(maskPath)
