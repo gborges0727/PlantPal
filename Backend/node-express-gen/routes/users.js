@@ -6,6 +6,7 @@ var bcrypt = require('bcrypt');
 var formidable = require('formidable');
 var shortid = require('shortid');
 var fs = require('fs');
+var exec = require('child_process').exec;
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
