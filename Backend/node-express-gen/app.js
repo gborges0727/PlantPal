@@ -11,6 +11,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var myPlants = require('./routes/myPlants');
 var feed = require('./routes/feed');
+var dispImg = require('./routes/dispImage');
 
 var app = express();
 
@@ -42,7 +43,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/myPlants', myPlants);
 app.use('/feed', feed);
-
+app.use('/dispImg', dispImg);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
