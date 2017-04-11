@@ -40,13 +40,13 @@ router.get('/specificPlant', function(req, res, next) {
             res.end('Flower was not found! Please try again');
         }
 
-        var flowerToSend = JSON.stringify {
+        var flowerToSend = JSON.stringify ({
             name: flower.name,
             sciName: flower.scientificName,
             family: flower.family,
             nativeRegion: flower.nativeRegion,
             Description: flower.Description
-        };
+        });
 
         res.writeHead(200, {
             'Content-Type': 'application/json'
