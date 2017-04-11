@@ -5,7 +5,7 @@ var router = express.Router();
 var model = require('../models/models');
 var mongoose = require('mongoose');
 
-router.get('/feed', function(req, res, next) {
+router.get('/', function(req, res, next) {
     res.writeHead(200, {
         'Content-Type': 'text/plain'
     });
