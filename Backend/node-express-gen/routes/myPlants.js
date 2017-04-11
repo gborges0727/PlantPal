@@ -9,6 +9,7 @@ router.get('/allPlants', function(req, res, next) {
         username: req.body
     }, function(err, user) {
         if (err) {
+            console.log(err);
             res.writeHead(404, {
                 'Content-Type': 'text/plain'
             });
