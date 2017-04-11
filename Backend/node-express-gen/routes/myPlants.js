@@ -4,7 +4,7 @@ var router = express.Router();
 var model = require('../models/models');
 var mongoose = require('mongoose');
 
-router.get('/allPlants', function(req, res, next) {
+router.post('/allPlants', function(req, res, next) {
     console.log(req.body);
     model.User.findOne({
         username: req.body
@@ -29,7 +29,7 @@ router.get('/allPlants', function(req, res, next) {
     });
 });
 
-router.get('/specificPlant', function(req, res, next) {
+router.post('/specificPlant', function(req, res, next) {
     model.Flower.findOne({
         name: req.body
     }, function(err, flower) {
