@@ -5,6 +5,7 @@ var model = require('../models/models');
 var mongoose = require('mongoose');
 
 router.get('/allPlants', function(req, res, next) {
+    console.log(req.body);
     model.User.findOne({
         username: req.body
     }, function(err, user) {
