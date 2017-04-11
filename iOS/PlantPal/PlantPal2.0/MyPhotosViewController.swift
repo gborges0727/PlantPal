@@ -8,13 +8,24 @@
 
 import UIKit
 
-class MyPhotosViewController: UIViewController {
+class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // username should be preserved across viewcontrollers: Hard coded for now :)
     let username = "plants123"
+    let animals: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
+    let cellReuseIdentifier = "cell"
+    
+    @IBOutlet weak var plantList: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // below is temporary stand in for code that will be retrieved from server
+        
+        self.plantList.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        
+        plantList.delegate = self
+        plantList.dataSource = self
         
         // Below code retrieves all plant pictures for the user w/ given username
         let infoDictionary = [
@@ -74,7 +85,27 @@ class MyPhotosViewController: UIViewController {
             }
         }
     }
-
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.animals.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // create a new cell if needed or reuse an old one
+        let cell:UITableViewCell = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
+        
+        // set the text from the data model
+        cell.textLabel?.text = self.animals[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You tapped cell number \(indexPath.row).")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
