@@ -1,17 +1,17 @@
-var express = require('express')
-var app = express()
-var path = require('path')
-app.set('view engine', 'ejs')
+var fs = require('fs');
+var express = require('express');
+var router = express.Router();
+var model = require('../models/models');
+var mongoose = require('mongoose');
 
-app.use(express.static(__dirname + '/userImages'))
+router.get('/getimages/:picurl', function(req, res, next) {
+	res.writeHead(200, {
+		'Content-Type': 'text/plain'
+	});
 
-app.get('/getimages/:picurl',function(req,res){	
+	var pic = '/'+req.params.picurl
 	
-	var pic ='/'+ req.params.picurl
-	
-	res.render('display', {dispImg: pic })
-})
+	res.end('display', {dispImg: pic});
+});
 
-app.listen(80,function(){
-	console.log('App listening on port 80')
-})
+module.exports = router;
