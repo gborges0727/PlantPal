@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 router.post('/allPlants', function(req, res, next) {
     console.log(req.body);
     model.User.findOne({
-        username: req.body
+        username: req.body["username"]
     }, function(err, user) {
         if (err) {
             console.log(err);
