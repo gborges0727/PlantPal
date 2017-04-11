@@ -18,7 +18,7 @@ router.post('/allPlants', function(req, res, next) {
         }
         
         var userPictures = JSON.stringify ({
-            pictures: user.pictures
+            user.pictures
         });
         
         res.writeHead(200, {
