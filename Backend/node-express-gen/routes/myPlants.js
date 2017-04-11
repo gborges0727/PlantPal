@@ -17,7 +17,9 @@ router.post('/allPlants', function(req, res, next) {
             res.end('Error: Username was not found! Please try again');
         }
         
-        var userPictures = user.pictures;
+        var userPictures = JSON.stringify ({
+            pictures: user.pictures
+        });
         
         res.writeHead(200, {
             'Content-Type': 'application/json'
