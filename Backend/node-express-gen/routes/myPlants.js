@@ -57,3 +57,5 @@ router.get('/specificPlant', function(req, res, next) {
         res.end(flowerToSend);
     });
 });
+
+module.exports = router;

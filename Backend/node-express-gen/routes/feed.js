@@ -45,3 +45,5 @@ function getNewestFile(dir, files, callback) {
         }
     });
 }
+
+module.exports = router;
