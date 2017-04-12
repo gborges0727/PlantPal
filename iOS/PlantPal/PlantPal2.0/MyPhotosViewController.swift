@@ -13,7 +13,7 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
     // username should be preserved across viewcontrollers: Hard coded for now :)
     let username = LoginScreenViewController.username
     let animals: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
-    let colors = [UIColor.blue, UIColor.yellow, UIColor.magenta, UIColor.red, UIColor.brown]
+    let colors = [UIColor.blue, UIColor.yellow, UIColor.magenta, UIColor.red, UIColor.brown, UIColor.brown, UIColor.brown, UIColor.brown, UIColor.brown, UIColor.brown]
     
     // To add to plantInfo, DO: plantInfo.append((location: "localString", plantType: "plantTypeString"))
     var plantInfo:[(location: String, plantType: String)] = []
@@ -27,7 +27,7 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
         updatePlants()
         //self.plantList.register(MyCustomCellModel.self, forCellReuseIdentifier: "cell")
         
-        self.plantList.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        //self.plantList.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         
         plantList.delegate = self
         plantList.dataSource = self
@@ -46,7 +46,8 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        /*
+        // ***** THIS IS THE OLD CODE *******
         // create a new cell if needed or reuse an old one
         let cell:UITableViewCell = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
         
@@ -54,23 +55,27 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
         print(plantInfo)
         print("plantinfo printed above (from within func tableView")
         cell.textLabel?.text = self.plantInfo[indexPath.row].plantType
-        
+ 
         return cell
-        
+        */
         // ------ BELOW IS NEW CODE: WILL REPLACE ONCE WORKING ----- 
-        /*
+        
         
         // set the text from the data model
-        let cell:MyCustomCellModel = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! MyCustomCellModel
+        let cell:MyCustomCellModel = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! MyCustomCellModel
         
-        cell.plantImage.backgroundColor = self.colors[indexPath.row]
-        cell.plantLabel.text = self.animals[indexPath.row]
+        cell.plantImage.backgroundColor = self.colors[1]
+        cell.plantLabel.text = self.plantInfo[indexPath.row].plantType
         
-        return cell */
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0; // Sets custom row height
     }
     
     func updatePlants() {
