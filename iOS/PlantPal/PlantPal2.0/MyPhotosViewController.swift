@@ -24,14 +24,60 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updatePlants()
         //self.plantList.register(MyCustomCellModel.self, forCellReuseIdentifier: "cell")
         
-        // Below code retrieves all plant pictures for the user w/ given username
+        self.plantList.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        
+        plantList.delegate = self
+        plantList.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updatePlants()
+        self.plantList.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("run")
+        print(self.plantInfo.count)
+        return self.plantInfo.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // create a new cell if needed or reuse an old one
+        let cell:UITableViewCell = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
+        
+        // set the text from the data model
+        print(plantInfo)
+        print("plantinfo printed above (from within func tableView")
+        cell.textLabel?.text = self.plantInfo[indexPath.row].plantType
+        
+        return cell
+        
+        // ------ BELOW IS NEW CODE: WILL REPLACE ONCE WORKING ----- 
+        /*
+        
+        // set the text from the data model
+        let cell:MyCustomCellModel = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! MyCustomCellModel
+        
+        cell.plantImage.backgroundColor = self.colors[indexPath.row]
+        cell.plantLabel.text = self.animals[indexPath.row]
+        
+        return cell */
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You tapped cell number \(indexPath.row).")
+    }
+    
+    func updatePlants() {
         let infoDictionary = [
             "username": username
         ]
         
-        // TODO: Send this http request
         if JSONSerialization.isValidJSONObject(infoDictionary) {
             do {
                 let jsonObject = try JSONSerialization.data(withJSONObject: infoDictionary,
@@ -59,6 +105,7 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
                             if let data = data,
                                 let jsonResponse = try JSONSerialization.jsonObject(with: data) as? [String: Any],
                                 let pictures = jsonResponse["pictures"] as? [[String: Any]] {
+                                self.plantInfo.removeAll()
                                 for picture in pictures {
                                     if let location = picture["location"] as? String,
                                         let value = picture["plantType"] as? String {
@@ -91,46 +138,6 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
                 print(error.localizedDescription)
             }
         }
-        
-        self.plantList.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-        
-        plantList.delegate = self
-        plantList.dataSource = self
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("run")
-        print(self.plantInfo.count)
-        return self.plantInfo.count
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // create a new cell if needed or reuse an old one
-        let cell:UITableViewCell = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
-        
-        // set the text from the data model
-        print(plantInfo)
-        print("plantinfo printed above (from within func tableView")
-        cell.textLabel?.text = self.plantInfo[indexPath.row].plantType
-        
-        return cell
-        
-        // ------ BELOW IS NEW CODE: WILL REPLACE ONCE WORKING ----- 
-        /*
-        
-        // set the text from the data model
-        let cell:MyCustomCellModel = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! MyCustomCellModel
-        
-        cell.plantImage.backgroundColor = self.colors[indexPath.row]
-        cell.plantLabel.text = self.animals[indexPath.row]
-        
-        return cell */
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped cell number \(indexPath.row).")
     }
     
     override func didReceiveMemoryWarning() {
