@@ -6,9 +6,9 @@ var mongoose = require('mongoose');
 var https = require('https');
 var url = require('url');
 
-router.get('/:picurl', function(req, res) {
+router.get('/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages' + '/:picurl', function(req, res) {
 	
-	var pic ='/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + req.params.picurl;
+	var pic = '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' +  req.params.picurl;
 	
 	res.sendFile(pic);
 });
