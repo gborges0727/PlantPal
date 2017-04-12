@@ -24,6 +24,7 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.plantList.register(MyCustomCellModel.self, forCellReuseIdentifier: "cell")
         
         // Below code retrieves all plant pictures for the user w/ given username
         let infoDictionary = [
@@ -106,6 +107,18 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        // create a new cell if needed or reuse an old one
+        let cell:UITableViewCell = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
+        
+        // set the text from the data model
+        print(plantInfo)
+        print("plantinfo printed above (from within func tableView")
+        cell.textLabel?.text = self.plantInfo[indexPath.row].plantType
+        
+        return cell
+        
+        // ------ BELOW IS NEW CODE: WILL REPLACE ONCE WORKING ----- 
+        /*
         
         // set the text from the data model
         let cell:MyCustomCellModel = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! MyCustomCellModel
@@ -113,7 +126,7 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.plantImage.backgroundColor = self.colors[indexPath.row]
         cell.plantLabel.text = self.animals[indexPath.row]
         
-        return cell
+        return cell */
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
