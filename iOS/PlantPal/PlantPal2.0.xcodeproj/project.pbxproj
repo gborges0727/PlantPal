@@ -22,6 +22,8 @@
 		454263A31DF5D82800480B0F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454263A21DF5D82800480B0F /* TabBarViewController.swift */; };
 		454263A91DF81B1400480B0F /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454263A81DF81B1400480B0F /* LoginScreenViewController.swift */; };
 		454263AB1DF81B2600480B0F /* SignUpScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454263AA1DF81B2600480B0F /* SignUpScreenViewController.swift */; };
+		459E92271E9DADFD00629B7A /* SpecificPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E92261E9DADFD00629B7A /* SpecificPlantViewController.swift */; };
+		459E92291E9E797600629B7A /* MyCustomCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E92281E9E797600629B7A /* MyCustomCellModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		454263A21DF5D82800480B0F /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		454263A81DF81B1400480B0F /* LoginScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		454263AA1DF81B2600480B0F /* SignUpScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpScreenViewController.swift; sourceTree = "<group>"; };
+		459E92261E9DADFD00629B7A /* SpecificPlantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecificPlantViewController.swift; sourceTree = "<group>"; };
+		459E92281E9E797600629B7A /* MyCustomCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomCellModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,8 @@
 				452042261DEE71C200F46F67 /* FirstScreenViewController.swift */,
 				4520422A1DEE7F2300F46F67 /* PlantMapViewController.swift */,
 				452041FA1DEE6E1700F46F67 /* Main.storyboard */,
+				459E92281E9E797600629B7A /* MyCustomCellModel.swift */,
+				459E92261E9DADFD00629B7A /* SpecificPlantViewController.swift */,
 				454263A81DF81B1400480B0F /* LoginScreenViewController.swift */,
 				454263AA1DF81B2600480B0F /* SignUpScreenViewController.swift */,
 				454263A21DF5D82800480B0F /* TabBarViewController.swift */,
@@ -291,11 +297,13 @@
 				452042291DEE71CF00F46F67 /* StoreVIewController.swift in Sources */,
 				454263A91DF81B1400480B0F /* LoginScreenViewController.swift in Sources */,
 				452041F91DEE6E1700F46F67 /* MyPhotosViewController.swift in Sources */,
+				459E92291E9E797600629B7A /* MyCustomCellModel.swift in Sources */,
 				454263AB1DF81B2600480B0F /* SignUpScreenViewController.swift in Sources */,
 				452041F51DEE6E1700F46F67 /* AppDelegate.swift in Sources */,
 				452042251DEE6FE900F46F67 /* CameraViewController.swift in Sources */,
 				4520422B1DEE7F2300F46F67 /* PlantMapViewController.swift in Sources */,
 				452041F71DEE6E1700F46F67 /* FeedViewController.swift in Sources */,
+				459E92271E9DADFD00629B7A /* SpecificPlantViewController.swift in Sources */,
 				452042271DEE71C200F46F67 /* FirstScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
