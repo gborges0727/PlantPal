@@ -11,21 +11,18 @@ import UIKit
 class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // username should be preserved across viewcontrollers: Hard coded for now :)
-    let username = "plants123"
+    let username = LoginScreenViewController.username
     let animals: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
+    
+    // To add to plantInfo, DO: plantInfo.append((location: "localString", plantType: "plantTypeString"))
+    var plantInfo:[(location: String, plantType: String)] = []
+    
     let cellReuseIdentifier = "cell"
     
     @IBOutlet weak var plantList: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // below is temporary stand in for code that will be retrieved from server
-        
-        self.plantList.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-        
-        plantList.delegate = self
-        plantList.dataSource = self
         
         // Below code retrieves all plant pictures for the user w/ given username
         let infoDictionary = [
@@ -50,20 +47,28 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
                 
                 // Send request
                 let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                    guard let data = data, error == nil else {
-                        print(error?.localizedDescription ?? "No Data")
-                        return
-                    }
-                    let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
                     let httpResponse = response as! HTTPURLResponse
                     let statusCode = httpResponse.statusCode
-                    let responseString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
-                    if let responseJSON = responseJSON as? [String: Any] {
-                        print(responseJSON)
-                    }
                     if (statusCode == 200) {
                         // Add code here to display the pictures from the response: Remember, response will be
                         // A JSON array with URLS to images :)
+                        print("test")
+                        do {
+                            if let data = data,
+                                let jsonResponse = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                                let pictures = jsonResponse["pictures"] as? [[String: Any]] {
+                                for picture in pictures {
+                                    if let location = picture["location"] as? String,
+                                        let value = picture["plantType"] as? String {
+                                        self.plantInfo.append((location: location, plantType: value))
+                                    }
+                                }
+                            }
+                            self.plantList.reloadData()
+                        } catch {
+                            print("Error deserializing JSON: \(error)")
+                        }
+                        print(self.plantInfo)
                     }
                     else if (statusCode == 404) {
                         let alertController = UIAlertController(title: "Connection Error!",
@@ -84,10 +89,17 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
                 print(error.localizedDescription)
             }
         }
+        
+        self.plantList.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        
+        plantList.delegate = self
+        plantList.dataSource = self
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.animals.count
+        print("run")
+        print(self.plantInfo.count)
+        return self.plantInfo.count
     }
     
     
@@ -97,7 +109,9 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell:UITableViewCell = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
         
         // set the text from the data model
-        cell.textLabel?.text = self.animals[indexPath.row]
+        print(plantInfo)
+        print("plantinfo printed above (from within func tableView")
+        cell.textLabel?.text = self.plantInfo[indexPath.row].plantType
         
         return cell
     }
