@@ -9,6 +9,7 @@
 import UIKit
 class MyCustomCellModel: UITableViewCell {
     
-    
+    @IBOutlet weak var plantImage: UIImageView!
+    @IBOutlet weak var plantLabel: UILabel!
     
 }
