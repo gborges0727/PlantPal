@@ -38,12 +38,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', index);
 app.use('/users', users);
 app.use('/myPlants', myPlants);
 app.use('/feed', feed);
-app.use('/dispImg', dispImg);
+app.use('/dispImages', dispImg);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

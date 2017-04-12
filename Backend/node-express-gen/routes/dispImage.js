@@ -3,15 +3,14 @@ var express = require('express');
 var router = express.Router();
 var model = require('../models/models');
 var mongoose = require('mongoose');
+var https = require('https');
+var url = require('url');
 
-router.get('/getimages/:picurl', function(req, res, next) {
-	res.writeHead(200, {
-		'Content-Type': 'text/plain'
-	});
-
-	var pic = '/'+req.params.picurl
+router.get('/:picurl', function(req, res) {
 	
-	res.end('display', {dispImg: pic});
+	var pic ='/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + req.params.picurl;
+	
+	res.sendFile(pic);
 });
 
 module.exports = router;
