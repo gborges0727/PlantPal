@@ -13,6 +13,7 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
     // username should be preserved across viewcontrollers: Hard coded for now :)
     let username = LoginScreenViewController.username
     let animals: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
+    let colors = [UIColor.blue, UIColor.yellow, UIColor.magenta, UIColor.red, UIColor.brown]
     
     // To add to plantInfo, DO: plantInfo.append((location: "localString", plantType: "plantTypeString"))
     var plantInfo:[(location: String, plantType: String)] = []
@@ -105,13 +106,12 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // create a new cell if needed or reuse an old one
-        let cell:UITableViewCell = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
         
         // set the text from the data model
-        print(plantInfo)
-        print("plantinfo printed above (from within func tableView")
-        cell.textLabel?.text = self.plantInfo[indexPath.row].plantType
+        let cell:MyCustomCellModel = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! MyCustomCellModel
+        
+        cell.plantImage.backgroundColor = self.colors[indexPath.row]
+        cell.plantLabel.text = self.animals[indexPath.row]
         
         return cell
     }
