@@ -63,10 +63,15 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // set the text from the data model
         let cell:MyCustomCellModel = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! MyCustomCellModel
+        print(self.plantInfo[indexPath.row].location)
+        if let url  = NSURL(string: "https://plantpal.uconn.edu:4607/dispImages" + self.plantInfo[indexPath.row].location),
+            let data = NSData(contentsOf: url as URL)
+        {
+            print("this was reached")
+            cell.plantImage.image = UIImage(data: data as Data)
+        }
         
-        cell.plantImage.backgroundColor = self.colors[1]
         cell.plantLabel.text = self.plantInfo[indexPath.row].plantType
-        
         return cell
     }
     
