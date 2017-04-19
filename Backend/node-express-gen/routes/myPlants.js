@@ -41,10 +41,10 @@ router.post('/specificPlant', function(req, res, next) {
         }
 
         var flowerToSend = JSON.stringify ({
-            name: flower.name,
-            sciName: flower.scientificName,
-            family: flower.family,
-            nativeRegion: flower.nativeRegion,
+            name: flower.Name,
+            sciName: flower.ScientificName,
+            family: flower.Family,
+            nativeRegion: flower.NativeRegion,
             Description: flower.Description
         });
 
