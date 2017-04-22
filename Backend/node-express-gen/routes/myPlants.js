@@ -39,7 +39,7 @@ router.post('/specificPlant', function(req, res, next) {
             });
             res.end('Flower was not found! Please try again');
         }
-
+        console.log(flower.Name);
         var flowerToSend = JSON.stringify ({
             name: flower.Name,
             sciName: flower.ScientificName,
