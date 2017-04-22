@@ -3,46 +3,32 @@ var express = require('express');
 var router = express.Router();
 var model = require('../models/models');
 var mongoose = require('mongoose');
+var sys = require('sys');
+var exec = require('child_process').exec;
 
 router.get('/', function(req, res, next) {
-    res.writeHead(200, {
-        'Content-Type': 'text/plain'
-    });
-    res.end('Success');
-});
+    var cmd = "ls -Aru | tail -n 10";
+    exec(cmd, function(error, stdout, stderr) {
+        if(error) throw err;
+        else if (stderr) {
+            console.log(stderr);
+            res.writeHead(501, {
+                'Content-Type': 'text/plain'
+            });
+            res.end('Error Running server command.');
+        }
+        else {
+            var myTest = stdout;
+            var pics = JSON.stringify({
+                pictures: myTest;
+            });
+            res.writeHead(200, {
+                'Content-Type': 'application/json'
+            });
 
-function getNewestFile(dir, files, callback) {
-    if (!callback) return;
-    if (!files || (files && files.length === 0)) {
-        callback();
-    }
-    if (files.length === 1) {
-        callback(files[0]);
-    }
-    var newest = {
-        file: files[0]
-    };
-    var checked = 0;
-    fs.stat(dir + newest.file, function(err, stats) {
-        newest.mtime = stats.mtime;
-        for (var i = 0; i < files.length; i++) {
-            var file = files[i];
-            (function(file) {
-                fs.stat(file, function(err, stats) {
-                    ++checked;
-                    if (stats.mtime.getTime() > newest.mtime.getTime()) {
-                        newest = {
-                            file: file,
-                            mtime: stats.mtime
-                        };
-                    }
-                    if (checked == files.length) {
-                        callback(newest);
-                    }
-                });
-            })(dir + file);
+            res.end(flowerToSend);
         }
     });
-}
+});
 
 module.exports = router;
