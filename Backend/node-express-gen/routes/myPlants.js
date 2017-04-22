@@ -59,7 +59,7 @@ router.post('/specificPlant', function(req, res, next) {
 });
 
 router.post('/uploadPlant', function(req, res, next) {
-    if (!req.body["name"] || !req.body["scientificName"], || !req.body["family"] ||
+    if (!req.body["name"] || !req.body["scientificName"] || !req.body["family"] ||
         req.body["nativeRegion"] || !Description: req.body["description"]) {
         res.writeHead(401, {
             'Content-Type': 'text/plain'
