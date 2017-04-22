@@ -31,7 +31,7 @@ class SpecificPlantViewController: UIViewController {
     
     func getPlantInfo() {
         let infoDictionary = [
-            "plantName": "Sunflower"
+            "flowerName": "testFlower"
         ]
         if JSONSerialization.isValidJSONObject(infoDictionary) {
             do {
