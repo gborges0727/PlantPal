@@ -33,26 +33,29 @@ router.post('/specificPlant', function(req, res, next) {
     model.Flower.findOne({
         flowerID: req.body["flowerName"]
     }, function(err, flower) {
-        if (err) {
+        if (err) throw err;
+        if (!flower) {
             res.writeHead(404, {
                 'Content-Type': 'text/plain'
             });
             res.end('Flower was not found! Please try again');
         }
-        console.log(flower.Name);
-        var flowerToSend = JSON.stringify ({
-            name: flower.Name,
-            sciName: flower.ScientificName,
-            family: flower.Family,
-            nativeRegion: flower.NativeRegion,
-            Description: flower.Description
-        });
+        else {
+            console.log(flower.Name);
+            var flowerToSend = JSON.stringify ({
+                name: flower.Name,
+                sciName: flower.ScientificName,
+                family: flower.Family,
+                nativeRegion: flower.NativeRegion,
+                Description: flower.Description
+            });
 
-        res.writeHead(200, {
-            'Content-Type': 'application/json'
-        });
+            res.writeHead(200, {
+                'Content-Type': 'application/json'
+            });
 
-        res.end(flowerToSend);
+            res.end(flowerToSend);
+        }
     });
 });
 
