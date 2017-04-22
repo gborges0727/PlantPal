@@ -56,4 +56,38 @@ router.post('/specificPlant', function(req, res, next) {
     });
 });
 
+router.post('/uploadPlant', function(req, res, next) {
+    var newPlant = new model.Flower({
+        Name: req.body["name"], 
+        ScientificName: req.body["scientificName"], 
+        Family: req.body["family"], 
+        NativeRegion: req.body["nativeRegion"], 
+        Description: req.body["description"]
+    });
+    
+    model.Flower.findOne({
+        Name: req.body["name"]
+    }, function(err, flower) {
+        if (err) throw err;
+        else if (!flower) {
+            newPlant.save(function(err, result) {
+                if (err) {
+                    throw err;
+                } else {
+                    console.log("Flower created successfully!");
+                    res.writeHead(200, {
+                        'Content-Type': 'text/plain'
+                    });
+                    res.end('Flower created successfully!');
+                }
+            });
+        } else {
+            res.writeHead(401, {
+                'Content-Type': 'text/plain'
+            });
+            res.end('Flower already exists!');
+        }
+    });
+});
+
 module.exports = router;
