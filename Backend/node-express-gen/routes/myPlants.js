@@ -60,6 +60,14 @@ router.post('/specificPlant', function(req, res, next) {
 });
 
 router.post('/uploadPlant', function(req, res, next) {
+    if(!req.body["name"] || !req.body["scientificName"], || !req.body["family"] 
+            || req.body["nativeRegion"] || !Description: req.body["description"]) {
+                res.writeHead(401, {
+                    'Content-Type': 'text/plain'
+                });
+                res.end('Missing flower elements!');
+    }
+        
     var newPlant = new model.Flower({
         Name: req.body["name"], 
         ScientificName: req.body["scientificName"], 
