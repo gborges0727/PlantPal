@@ -31,7 +31,7 @@ router.post('/allPlants', function(req, res, next) {
 
 router.post('/specificPlant', function(req, res, next) {
     model.Flower.findOne({
-        flowerID: req.body["flowerName"]
+        Name: req.body["flowerName"]
     }, function(err, flower) {
         if (err) throw err;
         if (!flower) {
