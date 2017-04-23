@@ -18,6 +18,7 @@ router.get('/', function(req, res, next) {
             res.end('Error Running server command.');
         }
         else {
+            console.log(stdout);
             var myTest = stdout;
             var pics = JSON.stringify({
                 pictures: myTest
