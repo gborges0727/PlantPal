@@ -129,6 +129,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Feed" image="newspaper-7" id="acW-dT-cKf"/>
+                    <connections>
+                        <outlet property="plantList" destination="hCk-u3-fgL" id="b7y-or-p9S"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
@@ -370,7 +373,7 @@
         <!--Specific Plant-->
         <scene sceneID="WTl-zY-izg">
             <objects>
-                <viewController storyboardIdentifier="Specific Plant" title="Specific Plant" id="Xoh-QC-nFb" customClass="SpecificPlantViewController" customModule="PlantPal2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="specificPlant" title="Specific Plant" id="Xoh-QC-nFb" customClass="SpecificPlantViewController" customModule="PlantPal2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vrY-Mu-mgE"/>
                         <viewControllerLayoutGuide type="bottom" id="IhB-iY-6QE"/>
@@ -406,14 +409,33 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vJL-lA-dPb">
-                                        <rect key="frame" x="27" y="8" width="320" height="354"/>
+                                        <rect key="frame" x="27" y="105" width="320" height="354"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PlantName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qxJ-WC-bIe">
+                                        <rect key="frame" x="27" y="41" width="320" height="56"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Misc Plant Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VTT-MO-HDZ">
+                                        <rect key="frame" x="27" y="480" width="320" height="112"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.32549019607843138" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="plantDescripLabel" destination="VTT-MO-HDZ" id="oxV-rt-0fK"/>
+                        <outlet property="plantImageView" destination="vJL-lA-dPb" id="psa-fY-NJs"/>
+                        <outlet property="plantNameLabel" destination="qxJ-WC-bIe" id="4nQ-yl-3tL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NsN-xI-GUK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

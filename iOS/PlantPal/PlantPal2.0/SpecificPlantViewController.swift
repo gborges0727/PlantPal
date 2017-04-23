@@ -10,7 +10,11 @@ import UIKit
 
 class SpecificPlantViewController: UIViewController {
     
-    var plantInfo:[(location: String, plantType: String)] = []
+    @IBOutlet weak var plantNameLabel: UILabel!
+    @IBOutlet weak var plantDescripLabel: UILabel!
+    @IBOutlet weak var plantImageView: UIImageView!
+    
+    var plantInfo = ("", "") // First string is location, second is type
     var plantName = ""
     var sciName = ""
     var family = ""
@@ -27,11 +31,18 @@ class SpecificPlantViewController: UIViewController {
         super.viewDidLoad()
         getPlantInfo()
         print("INFO: " + plantName + " " + sciName + " " + family + " " + nativeRegion + " " + plantDescrip)
+        plantNameLabel.text = self.plantName
+        if let url  = NSURL(string: "https://plantpal.uconn.edu:4607/dispImages" + self.plantInfo.0),
+            let data = NSData(contentsOf: url as URL)
+        {
+            print("this was reached")
+            self.plantImageView.image = UIImage(data: data as Data)
+        }
     }
     
     func getPlantInfo() {
         let infoDictionary = [
-            "flowerName": "testFlower"
+            "flowerName": self.plantInfo.1
         ]
         if JSONSerialization.isValidJSONObject(infoDictionary) {
             do {
