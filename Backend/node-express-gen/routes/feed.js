@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
         else {
             var myTest = stdout;
             var pics = JSON.stringify({
-                pictures: myTest;
+                pictures: myTest
             });
             res.writeHead(200, {
                 'Content-Type': 'application/json'
