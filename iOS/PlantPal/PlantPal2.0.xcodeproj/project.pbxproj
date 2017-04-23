@@ -19,6 +19,7 @@
 		452042271DEE71C200F46F67 /* FirstScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452042261DEE71C200F46F67 /* FirstScreenViewController.swift */; };
 		452042291DEE71CF00F46F67 /* StoreVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452042281DEE71CF00F46F67 /* StoreVIewController.swift */; };
 		4520422B1DEE7F2300F46F67 /* PlantMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4520422A1DEE7F2300F46F67 /* PlantMapViewController.swift */; };
+		453134591EAC2AFE00C583DD /* MySecondCustomCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453134581EAC2AFE00C583DD /* MySecondCustomCellModel.swift */; };
 		454263A31DF5D82800480B0F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454263A21DF5D82800480B0F /* TabBarViewController.swift */; };
 		454263A91DF81B1400480B0F /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454263A81DF81B1400480B0F /* LoginScreenViewController.swift */; };
 		454263AB1DF81B2600480B0F /* SignUpScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454263AA1DF81B2600480B0F /* SignUpScreenViewController.swift */; };
@@ -62,6 +63,7 @@
 		452042261DEE71C200F46F67 /* FirstScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstScreenViewController.swift; sourceTree = "<group>"; };
 		452042281DEE71CF00F46F67 /* StoreVIewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreVIewController.swift; sourceTree = "<group>"; };
 		4520422A1DEE7F2300F46F67 /* PlantMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantMapViewController.swift; sourceTree = "<group>"; };
+		453134581EAC2AFE00C583DD /* MySecondCustomCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MySecondCustomCellModel.swift; path = ../MySecondCustomCellModel.swift; sourceTree = "<group>"; };
 		454263A21DF5D82800480B0F /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		454263A81DF81B1400480B0F /* LoginScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		454263AA1DF81B2600480B0F /* SignUpScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpScreenViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				452042281DEE71CF00F46F67 /* StoreVIewController.swift */,
 				452041FA1DEE6E1700F46F67 /* Main.storyboard */,
 				459E92281E9E797600629B7A /* MyCustomCellModel.swift */,
+				453134581EAC2AFE00C583DD /* MySecondCustomCellModel.swift */,
 				452041FD1DEE6E1700F46F67 /* Assets.xcassets */,
 				452041FF1DEE6E1700F46F67 /* LaunchScreen.storyboard */,
 				452042021DEE6E1700F46F67 /* Info.plist */,
@@ -298,6 +301,7 @@
 				454263A91DF81B1400480B0F /* LoginScreenViewController.swift in Sources */,
 				452041F91DEE6E1700F46F67 /* MyPhotosViewController.swift in Sources */,
 				459E92291E9E797600629B7A /* MyCustomCellModel.swift in Sources */,
+				453134591EAC2AFE00C583DD /* MySecondCustomCellModel.swift in Sources */,
 				454263AB1DF81B2600480B0F /* SignUpScreenViewController.swift in Sources */,
 				452041F51DEE6E1700F46F67 /* AppDelegate.swift in Sources */,
 				452042251DEE6FE900F46F67 /* CameraViewController.swift in Sources */,
