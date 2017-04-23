@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
                 'Content-Type': 'application/json'
             });
 
-            res.end(flowerToSend);
+            res.end(pics);
         }
     });
 });
