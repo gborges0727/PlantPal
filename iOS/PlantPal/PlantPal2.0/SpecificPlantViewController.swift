@@ -7,12 +7,18 @@
 //
 
 import UIKit
+import QuartzCore
 
 class SpecificPlantViewController: UIViewController {
     
     @IBOutlet weak var plantNameLabel: UILabel!
-    @IBOutlet weak var plantDescripLabel: UILabel!
+    //@IBOutlet weak var plantDescripLabel: UITextView!
+    @IBOutlet weak var plantDescripLabel: UITextView!
     @IBOutlet weak var plantImageView: UIImageView!
+    @IBOutlet weak var plantSciName: UILabel!
+    @IBOutlet weak var plantFamily: UILabel!
+    
+    
     
     var plantInfo = ("", "") // First string is location, second is type
     var plantName = ""
@@ -31,17 +37,28 @@ class SpecificPlantViewController: UIViewController {
         super.viewDidLoad()
         getPlantInfo()
         print("INFO: " + plantName + " " + sciName + " " + family + " " + nativeRegion + " " + plantDescrip)
-        plantNameLabel.text = self.plantName
         if let url  = NSURL(string: "https://plantpal.uconn.edu:4607/dispImages" + self.plantInfo.0),
             let data = NSData(contentsOf: url as URL)
         {
             print("this was reached")
+            self.plantImageView.layer.borderColor = UIColor.white.cgColor
+            self.plantImageView.layer.borderWidth = 6
             self.plantImageView.image = UIImage(data: data as Data)
         }
         print(plantName)
         print(plantDescrip)
-        plantNameLabel.text = plantName
-        plantDescripLabel.text = plantDescrip
+        if (plantName == ""){
+            plantNameLabel.text? += "Not a flower\n"
+            plantSciName.text? += "N/A\n"
+            plantFamily.text? += "N/A\n"
+            plantDescripLabel.text? += "N/A\n"
+        }
+        else{
+            plantDescripLabel.text? += "Plant Name: " + plantName + "\n"
+        }
+        plantDescripLabel.text? += "Scientific Name: " + sciName + "\n"
+        plantDescripLabel.text? += "Family: " + family + "\n"
+        plantDescripLabel.text? += "Description: " + plantDescrip + "\n"
     }
     
     func getPlantInfo() {
