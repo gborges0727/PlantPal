@@ -49,7 +49,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         {
             print("this was reached")
             cell.plantPictureView.image = UIImage(data: data as Data)
-        }
+        }f
         
         //cell.plantLabel.text = self.plantInfo[indexPath.row]
         
