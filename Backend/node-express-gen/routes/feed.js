@@ -39,8 +39,8 @@ router.post('/getPlantInfo', function(req, res, next) {
     model.User.findOne({
         fileName: plantFileName
     }, function(err, picture) {
-        if (err) throw err;
         console.log(picture["plantName"]);
+        if (err) throw err;
         else if(!picture) {
             console.log("Picture not found! ");
             res.writeHead(404, {
