@@ -63,7 +63,7 @@ router.post('/upload/', function(req, res) {
                     console.log("Image Saved successfully");
                 });
             var newPicture = new model.Picture({
-                fileName: newName,
+                fileName: newName + ".jpg",
                 plantName: plantName, 
                 uploader: textValue
             });
