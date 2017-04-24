@@ -35,8 +35,8 @@ router.get('/', function(req, res, next) {
 // Takes one plant pic name at a time! 
 router.post('/getPlantInfo', function(req, res, next) {
     var plantFileName = req.body["fileName"];
-    
-    model.User.findOne({
+    console.log(plantFileName);
+    model.Picture.findOne({
         fileName: plantFileName
     }, function(err, picture) {
         if (err) throw err;
