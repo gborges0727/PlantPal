@@ -32,4 +32,33 @@ router.get('/', function(req, res, next) {
     });
 });
 
+// Takes one plant pic name at a time! 
+router.post('/getPlantInfo', function(req, res, next) {
+    var plantFileName = req.body["fileName"];
+    
+    model.User.findOne({
+        fileName: plantFileName
+    }, function(err, picture) {
+        if (err) throw err;
+        else if(!picture) {
+            console.log("Picture not found! ");
+            res.writeHead(404, {
+                'Content-Type': 'text/plain'
+            });
+            
+            res.end("Picture with that filename not found! ");
+        }
+        else {
+            var picInfo = JSON.stringify({
+                plantName: picture["plantName"], 
+                uploader: picture["uploader"]
+            });
+            res.writeHead(200, {
+                'Content-Type': 'application/json'
+            });
+            res.end(picInfo);
+        }
+    });
+});
+
 module.exports = router;
