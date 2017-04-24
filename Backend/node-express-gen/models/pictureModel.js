@@ -6,3 +6,5 @@ var PictureSchema = new Schema({
     plantName: String, 
     uploader: String
 });
+
+module.exports.PictureSchema = PictureSchema;
