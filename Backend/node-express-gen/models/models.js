@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 var Users = require('./userModel');
 var Flowers = require('./flowerModel');
+var Pictures = require('./pictureModel');
 
 mongoose.connect('mongodb://localhost:27017/plantpal');
 var db = mongoose.connection;
@@ -15,6 +16,8 @@ db.once('open', function() {
 
 var User = mongoose.model('User', Users.UserSchema);
 var Flower = mongoose.model('Flower', Flowers.FlowerSchema);
+var Picture = mongoose.model('Picture', Pictures.PictureSchema);
 
 module.exports.User = User;
 module.exports.Flower = Flower;
+module.exports.Picture = Picture;

@@ -62,6 +62,18 @@ router.post('/upload/', function(req, res) {
                     if (err) throw err;
                     console.log("Image Saved successfully");
                 });
+            var newPicture = new model.Picture({
+                fileName: newName,
+                plantName: plantName, 
+                uploader: textValue
+            });
+            
+            newPicture.save(function(err, result) {
+                if (err) throw err;
+                else {
+                    console.log("Pic saved in db!");
+                }
+            });
         });
     });
 });
