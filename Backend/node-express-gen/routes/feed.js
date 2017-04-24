@@ -40,6 +40,7 @@ router.post('/getPlantInfo', function(req, res, next) {
         fileName: plantFileName
     }, function(err, picture) {
         if (err) throw err;
+        console.log(picture["plantName"]);
         else if(!picture) {
             console.log("Picture not found! ");
             res.writeHead(404, {
