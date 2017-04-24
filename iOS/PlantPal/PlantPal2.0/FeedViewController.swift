@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedViewController: UIViewController {
+class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // plantInfo stores the 10 most recently uploaded pictures that are on the server
     var plantInfo:[String] = []
     let cellReuseIdentifier = "cell2"
@@ -18,6 +18,16 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        getFeedList()
+        plantList.delegate = self
+        plantList.dataSource = self
+        plantList.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getFeedList()
+        self.plantList.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,7 +44,7 @@ class FeedViewController: UIViewController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // set the text from the data model
         let cell:MySecondCustomCellModel = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! MySecondCustomCellModel
-        if let url  = NSURL(string: "https://plantpal.uconn.edu:4607/dispImages" + self.plantInfo[indexPath.row]),
+        if let url  = NSURL(string: "https://plantpal.uconn.edu:4607/dispImages" + "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + self.plantInfo[indexPath.row]),
             let data = NSData(contentsOf: url as URL)
         {
             print("this was reached")
@@ -58,7 +68,7 @@ class FeedViewController: UIViewController {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0; // Sets custom row height
+        return 300.0; // Sets custom row height
     }
     
     func getFeedList() {

@@ -38,12 +38,19 @@ class SpecificPlantViewController: UIViewController {
             print("this was reached")
             self.plantImageView.image = UIImage(data: data as Data)
         }
+        print(plantName)
+        print(plantDescrip)
+        plantNameLabel.text = plantName
+        plantDescripLabel.text = plantDescrip
     }
     
     func getPlantInfo() {
+        let plantName = self.plantInfo.1.lowercased().capitalized
         let infoDictionary = [
-            "flowerName": self.plantInfo.1
+            "flowerName": plantName
         ]
+        print("================================")
+        print(infoDictionary)
         if JSONSerialization.isValidJSONObject(infoDictionary) {
             do {
                 let jsonObject = try JSONSerialization.data(withJSONObject: infoDictionary,
@@ -75,6 +82,7 @@ class SpecificPlantViewController: UIViewController {
                                     let fam = jsonResponse["family"] as? String,
                                     let region = jsonResponse["nativeRegion"] as? String,
                                     let descrip = jsonResponse["Description"] as? String {
+                                    print("************************************")
                                     print("Hit here")
                                     self.plantName = name
                                     self.sciName = sci
