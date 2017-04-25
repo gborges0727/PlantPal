@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mWs-Wd-Hjo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mWs-Wd-Hjo">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -490,7 +490,7 @@
         <!--First Screen View Controller-->
         <scene sceneID="TS5-v8-Ynj">
             <objects>
-                <viewController id="mWs-Wd-Hjo" customClass="FirstScreenViewController" customModule="PlantPal2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FirstScreen" id="mWs-Wd-Hjo" customClass="FirstScreenViewController" customModule="PlantPal2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yEV-ej-LRA"/>
                         <viewControllerLayoutGuide type="bottom" id="QE3-9j-9ih"/>
@@ -524,7 +524,11 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gabe's_plantpal" translatesAutoresizingMaskIntoConstraints="NO" id="46S-be-uI6">
-                                <rect key="frame" x="37" y="187" width="301" height="104"/>
+                                <rect key="frame" x="37" y="68" width="301" height="104"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tree" translatesAutoresizingMaskIntoConstraints="NO" id="H6F-e7-WQX">
+                                <rect key="frame" x="16" y="242" width="343" height="284"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -619,6 +623,22 @@
                                 <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mG0-EE-8Zk">
+                                <rect key="frame" x="16" y="28" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="&lt; Back">
+                                            <attributes>
+                                                <font key="NSFont" size="17" name="Futura-Medium"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="BackActionButton:" destination="gfx-I6-cqM" eventType="touchUpInside" id="IgX-D0-wKD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.32549019607843138" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -697,6 +717,23 @@
                                     <action selector="SubmitActionButton:" destination="Lb8-xc-iIp" eventType="touchUpInside" id="Hta-cM-Tbt"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B69-2p-RjU">
+                                <rect key="frame" x="16" y="28" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="&lt; Back">
+                                            <attributes>
+                                                <font key="NSFont" size="17" name="Futura-Medium"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="BackActionButton:" destination="Lb8-xc-iIp" eventType="touchUpInside" id="lBe-9R-wEc"/>
+                                    <action selector="backToAllPlants:" destination="Xoh-QC-nFb" eventType="touchUpInside" id="bNb-cQ-Vye"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.32549019607843138" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -741,6 +778,7 @@
         <image name="newspaper-7" width="30" height="30"/>
         <image name="pin-map-7" width="30" height="30"/>
         <image name="tag-7" width="30" height="30"/>
+        <image name="tree" width="240" height="192"/>
         <image name="vase-plant-7" width="29" height="30"/>
     </resources>
 </document>

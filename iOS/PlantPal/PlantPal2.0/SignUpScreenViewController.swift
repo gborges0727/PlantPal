@@ -29,6 +29,10 @@ class SignUpScreenViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func BackActionButton(_ sender: UIButton) {
+        let firstView = self.storyboard?.instantiateViewController(withIdentifier: "FirstScreen") as! FirstScreenViewController
+        self.present(firstView, animated: true, completion: nil)
+    }
     
     @IBAction func SubmitActionButton(_ sender: UIButton) {
         //First, check if the two passwords are equal
