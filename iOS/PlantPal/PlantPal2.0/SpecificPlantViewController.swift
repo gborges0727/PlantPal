@@ -37,12 +37,16 @@ class SpecificPlantViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getPlantInfo()
-        let att = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 17)]
-        let sciText = "Scientific Name: "
         
-        let famText = NSMutableAttributedString(string: "Family Name: ", attributes:att)
-        let nameText = NSMutableAttributedString(string: "Plant Name: ", attributes:att)
-        let desText = NSMutableAttributedString(string: "Description: ", attributes:att)
+        // Testing Bold Fonts
+        let att = [NSFontAttributeName: UIFont.fontNames(forFamilyName: "Futura-Bold")]
+        let sciText = NSMutableAttributedString(string: "Scientific Name: ", attributes:att)
+        
+        let famText = NSMutableAttributedString(string: "Family Name: ", attributes: att)
+        let nameText = NSMutableAttributedString(string: "Plant Name: ", attributes: att)
+        let desText = NSMutableAttributedString(string: "Description: ", attributes: att)
+        
+        
         print("INFO: " + plantName + " " + sciName + " " + family + " " + nativeRegion + " " + plantDescrip)
         if let url  = NSURL(string: "https://plantpal.uconn.edu:4607/dispImages" + self.plantInfo.0),
             let data = NSData(contentsOf: url as URL)
