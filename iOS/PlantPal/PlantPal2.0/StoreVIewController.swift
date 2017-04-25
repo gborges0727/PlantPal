@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import SafariServices
 
 class StoreViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let url = URL(string: "https://web9.uits.uconn.edu/uconnblooms/")
+
         // Do any additional setup after loading the view, typically from a nib.
+        let svc = SFSafariViewController(url: url!)
+        present(svc, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
