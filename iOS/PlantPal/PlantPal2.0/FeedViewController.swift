@@ -147,6 +147,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             self.plantInfo.removeAll()
                             if let locations = jsonResponse["pictures"] as? String {
                                 self.plantInfo = locations.lines
+                                self.plantInfo.reverse()
                             }
                         }
                     } catch {
