@@ -7,7 +7,7 @@ var sys = require('sys');
 var exec = require('child_process').exec;
 
 router.get('/', function(req, res, next) {
-    var cmd = "ls -Aru /var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/ | tail -n 10";
+    var cmd = "ls -rt /var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/ | tail -n 10";
     exec(cmd, function(error, stdout, stderr) {
         if(error) throw err;
         else if (stderr) {
