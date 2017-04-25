@@ -29,6 +29,12 @@ class SpecificPlantViewController: UIViewController {
     var test = "hello"
 
 
+    @IBAction func wrongMatchActionButton(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "We appreciate your feedback!", message:
+            "It will help with our ongoing algorithm development", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
     
     @IBAction func backToAllPlants(_ sender: UIButton) {
         let tabBarView = self.storyboard?.instantiateViewController(
