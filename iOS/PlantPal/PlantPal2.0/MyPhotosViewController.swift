@@ -51,7 +51,7 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.plantImage.image = UIImage(data: data as Data)
         }
         
-        cell.plantLabel.text = self.plantInfo[indexPath.row].plantType
+        cell.plantLabel.text = self.plantInfo[indexPath.row].plantType.lowercased().capitalized
         return cell
     }
     
