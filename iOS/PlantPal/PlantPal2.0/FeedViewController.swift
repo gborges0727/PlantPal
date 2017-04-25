@@ -65,7 +65,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300.0; // Sets custom row height
+        return 500.0; // Sets custom row height
     }
     
     func getNameAndUsername() {
