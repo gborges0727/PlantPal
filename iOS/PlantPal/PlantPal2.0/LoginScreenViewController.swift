@@ -69,6 +69,11 @@ class LoginScreenViewController: UIViewController {
                     let task = URLSession.shared.dataTask(with: request) { data, response, error in
                         guard let data = data, error == nil else {
                             print(error?.localizedDescription ?? "No Data")
+                            let alertController = UIAlertController(title: "ERROR: Could not connect to the server", message:
+                                "Please make sure you are connected to UConn-Secure", preferredStyle: UIAlertControllerStyle.alert)
+                            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+                            
+                            self.present(alertController, animated: true, completion: nil)
                             return
                         }
                         let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
@@ -107,6 +112,7 @@ class LoginScreenViewController: UIViewController {
                     task.resume() // Sends the request
                 } catch {
                     print(error.localizedDescription)
+                    
                 }
             }
         }
