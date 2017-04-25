@@ -93,7 +93,6 @@ class SignUpScreenViewController: UIViewController {
                             print(responseJSON)
                         }
                         if (statusCode == 200) {
-                            // TODO: Add code here to preserve username info: Needed when picture is uploaded
                             let loginView = self.storyboard?.instantiateViewController(withIdentifier: "LogIn Screen") as! LoginScreenViewController
                             self.present(loginView, animated: true, completion: nil)
                         } else if (statusCode == 401) {
