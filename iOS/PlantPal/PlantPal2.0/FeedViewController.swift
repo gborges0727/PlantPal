@@ -22,6 +22,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         getFeedList()
         getNameAndUsername()
         print(plantNameAndUsername)
+        plantList.allowsSelection = false
         plantList.delegate = self
         plantList.dataSource = self
         plantList.reloadData()
