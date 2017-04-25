@@ -106,6 +106,7 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
                                         self.plantInfo.append((location: location, plantType: value))
                                     }
                                 }
+                                self.plantInfo.reverse()
                             }
                             self.plantList.reloadData()
                         } catch {
