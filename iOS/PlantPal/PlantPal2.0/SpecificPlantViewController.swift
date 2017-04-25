@@ -27,6 +27,8 @@ class SpecificPlantViewController: UIViewController {
     var nativeRegion = ""
     var plantDescrip = ""
     var test = "hello"
+
+
     
     @IBAction func backToAllPlants(_ sender: UIButton) {
         let tabBarView = self.storyboard?.instantiateViewController(
@@ -39,12 +41,14 @@ class SpecificPlantViewController: UIViewController {
         getPlantInfo()
         
         // Testing Bold Fonts
-        let att = [NSFontAttributeName: UIFont.fontNames(forFamilyName: "Futura-Bold")]
-        let sciText = NSMutableAttributedString(string: "Scientific Name: ", attributes:att)
-        
-        let famText = NSMutableAttributedString(string: "Family Name: ", attributes: att)
-        let nameText = NSMutableAttributedString(string: "Plant Name: ", attributes: att)
-        let desText = NSMutableAttributedString(string: "Description: ", attributes: att)
+        let att = [NSFontAttributeName: UIFont.fontNames(forFamilyName: "Futura Medium")]
+        let sciBold = NSMutableAttributedString(string: "Scientific Name: ", attributes:att)
+        let famBold = NSMutableAttributedString(string: "Family Name: ", attributes: att)
+        let nameBold = NSMutableAttributedString(string: "Plant Name: ", attributes: att)
+        let desBold = NSMutableAttributedString(string: "Description: ", attributes: att)
+
+
+
         
         
         print("INFO: " + plantName + " " + sciName + " " + family + " " + nativeRegion + " " + plantDescrip)
@@ -53,23 +57,26 @@ class SpecificPlantViewController: UIViewController {
         {
             print("this was reached")
             self.plantImageView.layer.borderColor = UIColor.white.cgColor
-            self.plantImageView.layer.borderWidth = 6
+            self.plantImageView.layer.borderWidth = 4
             self.plantImageView.image = UIImage(data: data as Data)
+            self.plantDescripLabel.layer.borderColor = UIColor.black.cgColor
+            self.plantDescripLabel.layer.borderWidth = 1
         }
         print(plantName)
         print(plantDescrip)
         if (plantName == ""){
-            plantNameLabel.text? = "Not a flower\n"
-            plantSciName.text? += "N/A\n"
-            plantFamily.text? += "N/A\n"
-            plantDescripLabel.text? += "N/A\n"
+            plantDescripLabel.text? = nameBold.string + "Not a flower\n\n"
+            plantDescripLabel.text? += sciBold.string + "N/A\n\n"
+            plantDescripLabel.text? += famBold.string + "N/A\n\n"
+            plantDescripLabel.text? += desBold.string + "N/A\n\n"
         }
         else{
-            plantDescripLabel.text? = nameText.string + plantName + "\n\n"
+            plantDescripLabel.text? = nameBold.string + plantName + "\n\n"
+            plantDescripLabel.text? += sciBold.string + sciName + "\n\n"
+            plantDescripLabel.text? += famBold.string + family + "\n\n"
+            plantDescripLabel.text? += desBold.string + plantDescrip + "\n\n"
         }
-        plantDescripLabel.text? += sciText.string + sciName + "\n\n"
-        plantDescripLabel.text? += famText.string + family + "\n\n"
-        plantDescripLabel.text? += desText.string + plantDescrip + "\n\n"
+        
     }
     
     func getPlantInfo() {
@@ -112,6 +119,7 @@ class SpecificPlantViewController: UIViewController {
                                     let descrip = jsonResponse["Description"] as? String {
                                     print("************************************")
                                     print("Hit here")
+                                    
                                     self.plantName = name
                                     self.sciName = sci
                                     self.family = fam
