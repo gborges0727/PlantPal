@@ -20,6 +20,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         getFeedList()
+        getNameAndUsername()
+        print(plantNameAndUsername)
         plantList.delegate = self
         plantList.dataSource = self
         plantList.reloadData()
@@ -28,6 +30,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getFeedList()
+        getNameAndUsername()
+        print(plantNameAndUsername)
         self.plantList.reloadData()
     }
 
@@ -64,8 +68,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return 300.0; // Sets custom row height
     }
     
-    // is called at the end of getFeedList()
     func getNameAndUsername() {
+        let semaphore = DispatchSemaphore(value: 0)
         self.plantNameAndUsername.removeAll()
         for plant in plantInfo {
             do {
@@ -112,8 +116,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         alertController.addAction(defaultAction)
                         self.present(alertController, animated: true, completion: nil)
                     }
+                    semaphore.signal()
                 }
                 task.resume()
+                semaphore.wait(timeout: .distantFuture)
             } catch {
                 print(error.localizedDescription)
             }
@@ -164,8 +170,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } catch {
             print(error.localizedDescription)
         }
-        getNameAndUsername()
-    }    
+        print(self.plantNameAndUsername)
+    }
 }
 
 // Used to parse server response in getFeedList()

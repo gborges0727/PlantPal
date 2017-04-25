@@ -35,19 +35,19 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("run")
-        print(self.plantInfo.count)
+        //print("run")
+        //print(self.plantInfo.count)
         return self.plantInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // set the text from the data model
         let cell:MyCustomCellModel = self.plantList.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! MyCustomCellModel
-        print(self.plantInfo[indexPath.row].location)
+        //print(self.plantInfo[indexPath.row].location)
         if let url  = NSURL(string: "https://plantpal.uconn.edu:4607/dispImages" + self.plantInfo[indexPath.row].location),
             let data = NSData(contentsOf: url as URL)
         {
-            print("this was reached")
+            //print("this was reached")
             cell.plantImage.image = UIImage(data: data as Data)
         }
         
@@ -111,7 +111,7 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
                         } catch {
                             print("Error deserializing JSON: \(error)")
                         }
-                        print(self.plantInfo)
+                        //print(self.plantInfo)
                     }
                     else if (statusCode == 404) {
                         let alertController = UIAlertController(title: "Connection Error!",
