@@ -26,6 +26,7 @@ class SpecificPlantViewController: UIViewController {
     var family = ""
     var nativeRegion = ""
     var plantDescrip = ""
+    var test = "hello"
     
     @IBAction func backToAllPlants(_ sender: UIButton) {
         let tabBarView = self.storyboard?.instantiateViewController(
@@ -36,6 +37,12 @@ class SpecificPlantViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getPlantInfo()
+        let att = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 17)]
+        let sciText = "Scientific Name: "
+        
+        let famText = NSMutableAttributedString(string: "Family Name: ", attributes:att)
+        let nameText = NSMutableAttributedString(string: "Plant Name: ", attributes:att)
+        let desText = NSMutableAttributedString(string: "Description: ", attributes:att)
         print("INFO: " + plantName + " " + sciName + " " + family + " " + nativeRegion + " " + plantDescrip)
         if let url  = NSURL(string: "https://plantpal.uconn.edu:4607/dispImages" + self.plantInfo.0),
             let data = NSData(contentsOf: url as URL)
@@ -48,17 +55,17 @@ class SpecificPlantViewController: UIViewController {
         print(plantName)
         print(plantDescrip)
         if (plantName == ""){
-            plantNameLabel.text? += "Not a flower\n"
+            plantNameLabel.text? = "Not a flower\n"
             plantSciName.text? += "N/A\n"
             plantFamily.text? += "N/A\n"
             plantDescripLabel.text? += "N/A\n"
         }
         else{
-            plantDescripLabel.text? += "Plant Name: " + plantName + "\n"
+            plantDescripLabel.text? = nameText.string + plantName + "\n\n"
         }
-        plantDescripLabel.text? += "Scientific Name: " + sciName + "\n"
-        plantDescripLabel.text? += "Family: " + family + "\n"
-        plantDescripLabel.text? += "Description: " + plantDescrip + "\n"
+        plantDescripLabel.text? += sciText.string + sciName + "\n\n"
+        plantDescripLabel.text? += famText.string + family + "\n\n"
+        plantDescripLabel.text? += desText.string + plantDescrip + "\n\n"
     }
     
     func getPlantInfo() {
