@@ -43,9 +43,10 @@ router.post('/upload/', function(req, res) {
         exec(cmd, function(error, stdout, stderr) {
             if (stderr) console.log(stderr);
             console.log('Picture analysis complete');
-            plantsAndPercents = stdout.split(" ");
+            plantInfo = stdout.replace(/^\s+|\s+$/g, '');
+            plantsAndPercents = plantInfo.split(" ");
             console.log(plantsAndPercents);
-            //plantName = plantName.replace(/^\s+|\s+$/g, '');
+            
             model.User.findOneAndUpdate({
                     username: textValue
                 }, {
