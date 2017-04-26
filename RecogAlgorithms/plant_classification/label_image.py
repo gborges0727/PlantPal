@@ -4,12 +4,13 @@
 
 import tensorflow as tf, sys, warnings
 
+# Added this to disable any warnings from the program. Using different versions of the libraries sometimes trigger warnings
 warnings.filterwarnings('ignore')
 
-
+# Getting the picture to classify from the user
 image_path = sys.argv[1]
 
-# Read in the image_data
+# Reads the image given by the user
 image_data = tf.gfile.FastGFile(image_path, 'rb').read()
 
 # Loads label file, strips off carriage return
