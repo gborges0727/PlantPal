@@ -36,10 +36,10 @@ with tf.Session() as sess:
     f1Percent = predictions[0][top_k[0]]*100
 
     if (f1Percent > 30.0):
-        tPercent = 100 - predictions[0][top_k[0]]*100
+        tPercent = 100 - predictions[0][top_k[1]]*100
         print "%s %.3f %s %.3f"%(label_lines[top_k[0]],tPercent, label_lines[top_k[1]],predictions[0][top_k[1]]*100)
     else:
-        print "NotAPlant 100.0 NotAPlant 100.0"
+        print "NotAPlant 100.0 %s %.3f"%(label_lines[top_k[0]],predictions[0][top_k[0]]*100)
 
     # Removed so it does not list all possibilities
     '''
