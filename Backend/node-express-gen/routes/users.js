@@ -38,20 +38,24 @@ router.post('/upload/', function(req, res) {
 
     form.on('field', function(fieldName, textValue) {        
         // Below code runs the analysis
-        var cmd = 'python -W ignore /var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/classify2.py -p /var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg';
+        var cmd = 'python /var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/label_image.py /var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg';
 
         exec(cmd, function(error, stdout, stderr) {
             if (stderr) console.log(stderr);
             console.log('Picture analysis complete');
-            plantName = stdout;
-            plantName = plantName.replace(/^\s+|\s+$/g, '');
+            plantsAndPercents = stdout.split(" ");
+            console.log(plantsAndPercents);
+            //plantName = plantName.replace(/^\s+|\s+$/g, '');
             model.User.findOneAndUpdate({
                     username: textValue
                 }, {
                     $push: {
                         "pictures": {
                             location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".jpg", 
-                            plantType: plantName
+                            plantType: plantName[0], 
+                            percentage: plantsAndPercents[1],
+                            secondClosest: plantsAndPercents[2], 
+                            secondClosestPercent: plantsAndPercents[3]
                         }
                     }
                 }, {
