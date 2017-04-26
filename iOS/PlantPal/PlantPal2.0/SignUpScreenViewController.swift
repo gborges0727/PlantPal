@@ -17,6 +17,7 @@ class SignUpScreenViewController: UIViewController {
     @IBOutlet weak var PasswordConfirmField: UITextField!
     @IBOutlet weak var EmailField: UITextField!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -93,8 +94,12 @@ class SignUpScreenViewController: UIViewController {
                             print(responseJSON)
                         }
                         if (statusCode == 200) {
+                            /*
                             let loginView = self.storyboard?.instantiateViewController(withIdentifier: "LogIn Screen") as! LoginScreenViewController
-                            self.present(loginView, animated: true, completion: nil)
+                            self.present(loginView, animated: true, completion: nil) */
+                            DispatchQueue.main.async() { () -> Void in
+                                self.performSegue(withIdentifier: "SignUpToLogin", sender: sender)
+                            }
                         } else if (statusCode == 401) {
                             let alertController = UIAlertController(title: "Uh-Oh!",
                                                                     message: responseString as String?, preferredStyle: .alert)

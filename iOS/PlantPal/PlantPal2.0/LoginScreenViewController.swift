@@ -85,9 +85,13 @@ class LoginScreenViewController: UIViewController {
                         }
                         if (statusCode == 200) {
                             // Add code here to preserve username info: Needed when picture is uploaded
+                            DispatchQueue.main.async() { () -> Void in
+                                self.performSegue(withIdentifier: "LoginToTabBar", sender: sender)
+                            }
+                            /*
                             let tabBarView = self.storyboard?.instantiateViewController(
                                 withIdentifier: "TabBar") as! TabBarViewController
-                            self.present(tabBarView, animated: true, completion: nil)
+                            self.present(tabBarView, animated: true, completion: nil) */
                         }
                         else if (statusCode == 404) {
                             let alertController = UIAlertController(title: "Incorrect Username!",
