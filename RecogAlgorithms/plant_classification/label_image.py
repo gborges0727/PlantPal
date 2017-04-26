@@ -33,8 +33,13 @@ with tf.Session() as sess:
     top_k = predictions[0].argsort()[-len(predictions[0]):][::-1]
 
     # Prints the top two flowers with the highest precent predictions
-    tPercent = 100 - predictions[0][top_k[1]]*100
-    print "%s %.3f %s %.3f"%(label_lines[top_k[0]],tPercent, label_lines[top_k[1]],predictions[0][top_k[1]]*100)
+    f1Percent = predictions[0][top_k[1]]*100
+
+    if (f1Percent > 30.0):
+        tPercent = 100 - predictions[0][top_k[1]]*100
+        print "%s %.3f %s %.3f"%(label_lines[top_k[0]],tPercent, label_lines[top_k[1]],predictions[0][top_k[1]]*100)
+    else:
+        print "NotAPlant 100.0 NotAPlant 100.0"    
 
     # Removed so it does not list all possibilities
     '''
