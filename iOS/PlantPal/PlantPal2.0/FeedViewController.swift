@@ -108,7 +108,9 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                 if let plantName = jsonResponse["plantName"] as? String,
                                     let uploader = jsonResponse["uploader"] as? String {
                                     self.plantNameAndUsername.append((plantName.lowercased().capitalized, uploader))
-                                    self.plantList.reloadData()
+                                    DispatchQueue.main.async(execute: {
+                                        self.plantList.reloadData()
+                                    })
                                 }
                             }
                         } catch {

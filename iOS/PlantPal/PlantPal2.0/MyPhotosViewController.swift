@@ -14,7 +14,7 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
     let username = LoginScreenViewController.username
     
     // To add to plantInfo, DO: plantInfo.append((location: "localString", plantType: "plantTypeString"))
-    var plantInfo:[(location: String, plantType: String)] = []
+    var plantInfo:[(location: String, plantType: String, percentage: String, secondClosest: String, secondClosestPercent: String)] = []
     
     let cellReuseIdentifier = "cell"
     
@@ -30,6 +30,7 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print(plantInfo)
         updatePlants()
         self.plantList.reloadData()
     }
@@ -51,7 +52,8 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.plantImage.image = UIImage(data: data as Data)
         }
         
-        cell.plantLabel.text = self.plantInfo[indexPath.row].plantType.lowercased().capitalized
+        cell.plantLabel.text = self.plantInfo[indexPath.row].plantType.lowercased().capitalized + " " + self.plantInfo[indexPath.row].percentage.lowercased().capitalized + "%"
+        cell.secondClosestLabel.text = self.plantInfo[indexPath.row].secondClosest.lowercased().capitalized + " " + self.plantInfo[indexPath.row].secondClosestPercent.lowercased().capitalized + "%"
         return cell
     }
     
@@ -99,16 +101,23 @@ class MyPhotosViewController: UIViewController, UITableViewDataSource, UITableVi
                             if let data = data,
                                 let jsonResponse = try JSONSerialization.jsonObject(with: data) as? [String: Any],
                                 let pictures = jsonResponse["pictures"] as? [[String: Any]] {
+                                print(jsonResponse)
                                 self.plantInfo.removeAll()
                                 for picture in pictures {
                                     if let location = picture["location"] as? String,
-                                        let value = picture["plantType"] as? String {
-                                        self.plantInfo.append((location: location, plantType: value))
+                                        let value = picture["plantType"] as? String,
+                                        let percentage = picture["percentage"] as? String,
+                                        let secondClosest = picture["secondClosest"] as? String,
+                                        let secondClosestPercent = picture["secondClosestPercent"] as? String {
+                                        print("AAAAAAAAAAAAAAAAAAAAAAAAA")
+                                        self.plantInfo.append((location: location, plantType: value, percentage: percentage, secondClosest: secondClosest, secondClosestPercent: secondClosestPercent))
                                     }
                                 }
                                 self.plantInfo.reverse()
                             }
-                            self.plantList.reloadData()
+                            DispatchQueue.main.async(execute: {
+                                self.plantList.reloadData()
+                            })
                         } catch {
                             print("Error deserializing JSON: \(error)")
                         }

@@ -11,5 +11,6 @@ class MyCustomCellModel: UITableViewCell {
     
     @IBOutlet weak var plantImage: UIImageView!
     @IBOutlet weak var plantLabel: UILabel!
+    @IBOutlet weak var secondClosestLabel: UILabel!
     
 }

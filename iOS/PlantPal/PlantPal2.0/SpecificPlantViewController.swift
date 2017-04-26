@@ -20,7 +20,7 @@ class SpecificPlantViewController: UIViewController {
     
     
     
-    var plantInfo = ("", "") // First string is location, second is type
+    var plantInfo = ("", "", "", "", "") // First string is location, second is type, third is percent, fourth is secondclosest, fifth is secondclosestpercent
     var plantName = ""
     var sciName = ""
     var family = ""
