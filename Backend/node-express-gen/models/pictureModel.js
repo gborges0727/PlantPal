@@ -5,7 +5,9 @@ var PictureSchema = new Schema({
     fileName: String,
     plantName: String, 
     uploader: String,
-    percentage: String	
+    percentMatch: String, 
+    secondClosest: String, 
+    secondClosestPercent: String	
 });
 
 module.exports.PictureSchema = PictureSchema;

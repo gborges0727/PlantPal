@@ -16,7 +16,9 @@ var UserSchema = new Schema({
     pictures: [{
         location: String, 
         plantType: String,
-        percentage: String
+        percentage: String, 
+        secondClosest: String, 
+        secondClosestPercent: String
     }],
     created_at: Date,
     updated_at: Date
