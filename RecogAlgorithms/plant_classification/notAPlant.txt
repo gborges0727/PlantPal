@@ -72,3 +72,6 @@ Plants
 51.3
 
 1713/35 = 48
+
+
+Final Concensus = Anything below 30%

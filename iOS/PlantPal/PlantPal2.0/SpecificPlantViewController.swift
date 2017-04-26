@@ -27,12 +27,22 @@ class SpecificPlantViewController: UIViewController {
     var nativeRegion = ""
     var plantDescrip = ""
     var test = "hello"
+    var p = ""
+    var newP = ""
 
 
     @IBAction func wrongMatchActionButton(_ sender: UIButton) {
+        newP = self.plantInfo.3.lowercased().capitalized
         let alertController = UIAlertController(title: "We appreciate your feedback!", message:
             "It will help with our ongoing algorithm development", preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+        alertController.addAction(UIAlertAction(title: "Try Second Match", style: UIAlertActionStyle.default,handler: {(action:UIAlertAction!) in self.getPlantInfo(p: self.newP);
+            print(self.newP);
+            self.plantDescripLabel.text? = "Plant Name: " + self.plantName + "\n\n";
+            self.plantDescripLabel.text? += "Scientific Name: " + self.sciName + "\n\n";
+            self.plantDescripLabel.text? +=  "Family Name: " + self.family + "\n\n";
+            self.plantDescripLabel.text? += "Description: " + self.plantDescrip + "\n\n";
+        }))
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -44,7 +54,8 @@ class SpecificPlantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getPlantInfo()
+        p = self.plantInfo.1.lowercased().capitalized
+        getPlantInfo(p: p)
         
         // Testing Bold Fonts
         let att = [NSFontAttributeName: UIFont.fontNames(forFamilyName: "Futura Medium")]
@@ -54,8 +65,6 @@ class SpecificPlantViewController: UIViewController {
         let desBold = NSMutableAttributedString(string: "Description: ", attributes: att)
 
 
-
-        
         
         print("INFO: " + plantName + " " + sciName + " " + family + " " + nativeRegion + " " + plantDescrip)
         if let url  = NSURL(string: "https://plantpal.uconn.edu:4607/dispImages" + self.plantInfo.0),
@@ -85,8 +94,8 @@ class SpecificPlantViewController: UIViewController {
         
     }
     
-    func getPlantInfo() {
-        let plantName = self.plantInfo.1.lowercased().capitalized
+    func getPlantInfo(p :String) {
+        let plantName = p
         let infoDictionary = [
             "flowerName": plantName
         ]
