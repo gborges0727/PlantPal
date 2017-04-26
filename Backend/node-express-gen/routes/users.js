@@ -43,10 +43,11 @@ router.post('/upload/', function(req, res) {
         exec(cmd, function(error, stdout, stderr) {
             if (stderr) console.log(stderr);
             console.log('Picture analysis complete');
+            
+            // The line below removes the newline character from stdout
             plantInfo = stdout.replace(/^\s+|\s+$/g, '');
             plantsAndPercents = plantInfo.split(" ");
             console.log(plantsAndPercents);
-            
             model.User.findOneAndUpdate({
                     username: textValue
                 }, {
