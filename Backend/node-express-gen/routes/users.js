@@ -70,7 +70,7 @@ router.post('/upload/', function(req, res) {
                 });
             var newPicture = new model.Picture({
                 fileName: newName + ".jpg",
-                plantName: plantName, 
+                plantName: plantsAndPercents[0], 
                 uploader: textValue
             });
             
