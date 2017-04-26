@@ -54,7 +54,7 @@ router.post('/upload/', function(req, res) {
                     $push: {
                         "pictures": {
                             location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".jpg", 
-                            plantType: plantName[0], 
+                            plantType: plantsAndPercents[0], 
                             percentage: plantsAndPercents[1],
                             secondClosest: plantsAndPercents[2], 
                             secondClosestPercent: plantsAndPercents[3]
