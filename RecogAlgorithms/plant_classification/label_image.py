@@ -2,7 +2,8 @@
 # UConn Senior Design 2016-2017
 # Tensorflow development
 
-import tensorflow as tf, sys, warnings
+import tensorflow as tf, sys, warnings, cv2
+import numpy as np
 
 # Added this to disable any warnings from the program. Using different versions of the libraries sometimes trigger warnings
 warnings.filterwarnings('ignore')
