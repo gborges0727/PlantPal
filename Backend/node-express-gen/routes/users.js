@@ -38,7 +38,7 @@ router.post('/upload/', function(req, res) {
 
     form.on('field', function(fieldName, textValue) {        
         // Below code runs the analysis
-        var cmd = 'python /var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/label_image.py /var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg';
+        var cmd = 'python /var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/label_image.py /var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.png';
 
         exec(cmd, function(error, stdout, stderr) {
             if (stderr) console.log(stderr);
