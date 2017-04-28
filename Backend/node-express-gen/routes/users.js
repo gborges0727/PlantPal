@@ -21,7 +21,7 @@ router.post('/upload/', function(req, res) {
     // Rename the uploaded file :D
     form.parse(req);
     form.on('fileBegin', function(name, file) {
-        file.path = '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.png';
+        file.path = '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg';
     });
 
     form.on('file', function(field, file) {
@@ -38,7 +38,7 @@ router.post('/upload/', function(req, res) {
 
     form.on('field', function(fieldName, textValue) {        
         // Below code runs the analysis
-        var cmd = 'python /var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/label_image.py /var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.png';
+        var cmd = 'python /var/www/plantpal.uconn.edu/ProjectFiles/RecogAlgorithms/plant_classification/label_image.py /var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg';
 
         exec(cmd, function(error, stdout, stderr) {
             if (stderr) console.log(stderr);
@@ -53,7 +53,7 @@ router.post('/upload/', function(req, res) {
                 }, {
                     $push: {
                         "pictures": {
-                            location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".png", 
+                            location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".jpg", 
                             plantType: plantsAndPercents[0], 
                             percentage: plantsAndPercents[1],
                             secondClosest: plantsAndPercents[2], 
