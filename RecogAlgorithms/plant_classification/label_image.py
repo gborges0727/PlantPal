@@ -11,7 +11,11 @@ warnings.filterwarnings('ignore')
 image_path = sys.argv[1]
 
 # Reads the image given by the user
-image_data = tf.gfile.FastGFile(image_path, 'rb').read()
+#image_data = tf.gfile.FastGFile(image_path, 'rb').read()
+img2 = cv2.imread(image_path)
+img2= cv2.resize(img2,dsize=(299,299), interpolation = cv2.INTER_CUBIC)
+np_image_data = np.asarray(img2)
+np_final = np.expand_dims(np_image_data,axis=0)
 
 # Loads label file, strips off carriage return
 label_lines = [line.rstrip() for line
@@ -28,7 +32,7 @@ with tf.Session() as sess:
     softmax_tensor = sess.graph.get_tensor_by_name('final_result:0')
 
     predictions = sess.run(softmax_tensor, \
-             {'DecodeJpeg/contents:0': image_data})
+             {'Mul:0': np_final})
 
     # Sort to show labels of first prediction in order of confidence
     top_k = predictions[0].argsort()[-len(predictions[0]):][::-1]
