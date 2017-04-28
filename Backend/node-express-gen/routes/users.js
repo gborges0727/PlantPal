@@ -21,7 +21,7 @@ router.post('/upload/', function(req, res) {
     // Rename the uploaded file :D
     form.parse(req);
     form.on('fileBegin', function(name, file) {
-        file.path = '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.jpg';
+        file.path = '/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/' + newName + '.png';
     });
 
     form.on('file', function(field, file) {
@@ -53,7 +53,7 @@ router.post('/upload/', function(req, res) {
                 }, {
                     $push: {
                         "pictures": {
-                            location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".jpg", 
+                            location: "/var/www/plantpal.uconn.edu/ProjectFiles/Backend/node-express-gen/userImages/" + newName + ".png", 
                             plantType: plantsAndPercents[0], 
                             percentage: plantsAndPercents[1],
                             secondClosest: plantsAndPercents[2], 
@@ -69,7 +69,7 @@ router.post('/upload/', function(req, res) {
                     console.log("Image Saved successfully");
                 });
             var newPicture = new model.Picture({
-                fileName: newName + ".jpg",
+                fileName: newName + ".png",
                 plantName: plantsAndPercents[0], 
                 uploader: textValue
             });
